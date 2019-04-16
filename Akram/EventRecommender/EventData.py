@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr 15 13:43:26 2019
+Created on Tue April 16 2019
 
-@author: arko
+@author: Akram Azarm
 """
 
 import os
@@ -17,37 +16,39 @@ from surprise import Reader
 from collections import defaultdict
 import numpy as np
 
-class MovieLens:
+class EventData:
 
-    movieID_to_name = {}
-    name_to_movieID = {}
-    ratingsPath = '../ml-latest-small/ratings.csv'
-    moviesPath = '../ml-latest-small/movies.csv'
+    eventID_to_title = {}
+    title_to_eventID = {}
+    ratingsPath = './dataset/rating.csv'
+    eventsPath = './dataset/event.csv'
     
-    def loadMovieLensLatestSmall(self):
+    # Returns the ratings dataset
+    def loadEventData(self):
 
         # Look for files relative to the directory we are running from
         os.chdir(os.path.dirname(sys.argv[0]))
 
         ratingsDataset = 0
-        self.movieID_to_name = {}
-        self.name_to_movieID = {}
+        self.eventID_to_title = {}
+        self.title_to_eventID = {}
 
-        reader = Reader(line_format='user item rating timestamp', sep=',', skip_lines=1)
+        reader = Reader(line_format='user item rating', sep=',', skip_lines=1)
 
         ratingsDataset = Dataset.load_from_file(self.ratingsPath, reader=reader)
 
-        with open(self.moviesPath, newline='', encoding='ISO-8859-1') as csvfile:
-                movieReader = csv.reader(csvfile)
-                next(movieReader)  #Skip header line
-                for row in movieReader:
-                    movieID = int(row[0])
-                    movieName = row[1]
-                    self.movieID_to_name[movieID] = movieName
-                    self.name_to_movieID[movieName] = movieID
+        with open(self.eventsPath, newline='', encoding='ISO-8859-1') as csvfile:
+                eventReader = csv.reader(csvfile)
+                next(eventReader)  #Skip header line
+                for row in eventReader:
+                    eventID = int(row[0])
+                    eventName = row[1]
+                    self.eventID_to_title[eventID] = eventName
+                    self.title_to_eventID[eventName] = eventID
 
         return ratingsDataset
 
+    # Returns the list of event ids and the ratings given to each event by a user(user = userID)
     def getUserRatings(self, user):
         userRatings = []
         hitUser = False
@@ -57,15 +58,16 @@ class MovieLens:
             for row in ratingReader:
                 userID = int(row[0])
                 if (user == userID):
-                    movieID = int(row[1])
-                    rating = float(row[2])
-                    userRatings.append((movieID, rating))
+                    eventID = int(row[2])
+                    rating = float(row[4])
+                    userRatings.append((eventID, rating))
                     hitUser = True
                 if (hitUser and (user != userID)):
                     break
 
         return userRatings
 
+    # Returns the ranking for each event id based on the number of (ratings given not sure) and how many times it was rated(used for NOVELTY)
     def getPopularityRanks(self):
         ratings = defaultdict(int)
         rankings = defaultdict(int)
@@ -73,23 +75,24 @@ class MovieLens:
             ratingReader = csv.reader(csvfile)
             next(ratingReader)
             for row in ratingReader:
-                movieID = int(row[1])
-                ratings[movieID] += 1
+                eventID = int(row[2])
+                ratings[eventID] += 1
         rank = 1
-        for movieID, ratingCount in sorted(ratings.items(), key=lambda x: x[1], reverse=True):
-            rankings[movieID] = rank
+        for eventID, ratingCount in sorted(ratings.items(), key=lambda x: x[1], reverse=True):
+            rankings[eventID] = rank
             rank += 1
         return rankings
     
+    # Returns the all the genres after converting them to integer bitfileds 
     def getGenres(self):
         genres = defaultdict(list)
         genreIDs = {}
         maxGenreID = 0
-        with open(self.moviesPath, newline='', encoding='ISO-8859-1') as csvfile:
-            movieReader = csv.reader(csvfile)
-            next(movieReader)  #Skip header line
-            for row in movieReader:
-                movieID = int(row[0])
+        with open(self.eventsPath, newline='', encoding='ISO-8859-1') as csvfile:
+            eventReader = csv.reader(csvfile)
+            next(eventReader)  #Skip header line
+            for row in eventReader:
+                eventID = int(row[0])
                 genreList = row[2].split('|')
                 genreIDList = []
                 for genre in genreList:
@@ -100,16 +103,17 @@ class MovieLens:
                         genreIDs[genre] = genreID
                         maxGenreID += 1
                     genreIDList.append(genreID)
-                genres[movieID] = genreIDList
+                genres[eventID] = genreIDList
         # Convert integer-encoded genre lists to bitfields that we can treat as vectors
-        for (movieID, genreIDList) in genres.items():
+        for (eventID, genreIDList) in genres.items():
             bitfield = [0] * maxGenreID
             for genreID in genreIDList:
                 bitfield[genreID] = 1
-            genres[movieID] = bitfield            
+            genres[eventID] = bitfield            
         
         return genres
     
+    # NOT USED
     def getYears(self):
         p = re.compile(r"(?:\((\d{4})\))?\s*$")
         years = defaultdict(int)
@@ -125,6 +129,7 @@ class MovieLens:
                     years[movieID] = int(year)
         return years
     
+    # NOT USED
     def getMiseEnScene(self):
         mes = defaultdict(list)
         with open("LLVisualFeatures13K_Log.csv", newline='') as csvfile:
@@ -143,14 +148,14 @@ class MovieLens:
                    meanMotion, stddevMotion, meanLightingKey, numShots]
         return mes
     
-    def getMovieName(self, movieID):
-        if movieID in self.movieID_to_name:
-            return self.movieID_to_name[movieID]
+    def getEventTitle(self, eventID):
+        if eventID in self.eventID_to_title:
+            return self.eventID_to_title[eventID]
         else:
             return ""
         
-    def getMovieID(self, movieName):
-        if movieName in self.name_to_movieID:
-            return self.name_to_movieID[movieName]
+    def getEventID(self, eventName):
+        if eventName in self.title_to_eventID:
+            return self.title_to_eventID[eventName]
         else:
             return 0
