@@ -743,7 +743,7 @@ event-id,title,tags
 1741,"""MEC Open House & Community Health ExpoMEC Open House & Community Health Expo""",Festival|Health
 1742,"""Afro Caribbean Thursdays Afro Caribbean Thursdays""",Party|Music
 1743,"""Bethesda / Washington DC LGBTQ Wedding ExpoBethesda / Washington DC LGBTQ Wedding Expo""",Expo|Community
-1744,"""Ani DiFranco | NO WALLS AND THE RECURRING DREAMAni DiFranco | NO WALLS AND THE RECURRING DREAM""",Appearance|
+1744,"""Ani DiFranco | NO WALLS AND THE RECURRING DREAMAni DiFranco | NO WALLS AND THE RECURRING DREAM""",Appearance
 1745,"""United By Blue Cleanup - Washington DCUnited By Blue Cleanup - Washington DC""",Other|Charity|Cause
 1746,"""2019 SID-Washington Annual Conference INDIVIDUAL REGISTRATION2019 SID-Washington Annual Conference INDIVIDUAL REGISTRATION""",Conference|Business
 1747,"""SHY GIRLSSHY GIRLS""",Performance|Music
@@ -785,7 +785,7 @@ event-id,title,tags
 1783,"""ASCD Educational Leadership Presents Separate and Still Unequal: Race in America’s Schools 65 years after Brown v. Board of EducationASCD Educational Leadership Presents Separate and Still Unequal: Race in Am...""",Seminar|Family|Education
 1784,"""#FinCon19: Where Money & Media Meet#FinCon19: Where Money & Media Meet""",Expo|Business
 1785,"""AWVM Presents Happiness: The Game Changer AWVM Presents Happiness: The Game Changer""",Networking|Health
-1786,"""AVA Dance Company's Performance Series ShowcaseAVA Dance Company's Performance Series Showcase""",Performance|
+1786,"""AVA Dance Company's Performance Series ShowcaseAVA Dance Company's Performance Series Showcase""",Performance
 1787,"""2019 DBH Rock the Mic - Poetry Slam2019 DBH Rock the Mic - Poetry Slam""",Performance|Health
 1788,"""The 2019 NAMM Music Education Advocacy D.C. Fly-InThe 2019 NAMM Music Education Advocacy D.C. Fly-In""",Conference|Business
 1789,"""Freedom of Information Act for Attorneys and Access ProfessionalsFreedom of Information Act for Attorneys and Access Professionals""",Class
@@ -843,8 +843,8 @@ event-id,title,tags
 1841,"""Picture ThisPicture This""",Performance|Music
 1842,"""DC FEES Training: A Procedure for Evaluating Oropharyngeal Dysphagia DC FEES Training: A Procedure for Evaluating Oropharyngeal Dysphagia""",Class|Health
 1843,"""Hot SnakesHot Snakes""",Performance|Music
-1844,"""SIR Sundays at SAXSIR Sundays at SAX""",Party|
-1845,"""NEXT Exhibition and Opening NightNEXT Exhibition and Opening Night""",Party|
+1844,"""SIR Sundays at SAXSIR Sundays at SAX""",Party
+1845,"""NEXT Exhibition and Opening NightNEXT Exhibition and Opening Night""",Party
 1846,"""Ocean AlleyOcean Alley""",Performance|Music
 1847,"""Savor Bowie 2019 Food, Wine, and Music FestivalSavor Bowie 2019 Food, Wine, and Music Festival""",Festival|Music
 1848,"""Green Drinks DC April Happy Hour!Green Drinks DC April Happy Hour!""",Networking|Business
@@ -870,11 +870,11 @@ event-id,title,tags
 1868,"""SaturDAY at Gazuza | Hookah, Music, Food, Games!SaturDAY at Gazuza | Hookah, Music, Food, Games!""",Party|Food|Drink
 1869,"""HBCU CREW Alumni Field Day HBCU CREW Alumni Field Day""",Party|Community
 1870,"""ContraryCon 2019ContraryCon 2019""",Conference|Other
-1871,"""I Love Me: The Self Love Summit I Love Me: The Self Love Summit""",Seminar|
+1871,"""I Love Me: The Self Love Summit I Love Me: The Self Love Summit""",Seminar
 1872,"""2019 Maryland Crime Victims’ Rights Conference2019 Maryland Crime Victims’ Rights Conference""",Conference
 1873,"""DAYBREAKER DC // Disco at The WatergateDAYBREAKER DC // Disco at The Watergate""",Festival|Health
 1874,"""#OFFWHITEFRIDAYS #OFFWHITEFRIDAYS""",Party|Other
-1875,"""The Moving Print: An Evening of Print & PerformanceThe Moving Print: An Evening of Print & Performance""",Performance|
+1875,"""The Moving Print: An Evening of Print & PerformanceThe Moving Print: An Evening of Print & Performance""",Performance
 1876,"""Carpenter's Cook-Off 2019Carpenter's Cook-Off 2019""",Charity|Cause
 1877,"""Peppermill Youth Association 2018 BanquetPeppermill Youth Association 2018 Banquet""",Party|Sports|Fitness
 1878,"""BLACK||YARD||PARTYBLACK||YARD||PARTY""",Performance|Music
@@ -882,9 +882,9 @@ event-id,title,tags
 1880,"""The 3% MiniCon D.C.The 3% MiniCon D.C.""",Conference|Business
 1881,"""Wackersdorf (2018): Film Screening and DiscussionWackersdorf (2018): Film Screening and Discussion""",Screening|Film|Media
 1882,"""""The Italian Table"" dinner at The Fourth Estate Restaurant""The Italian Table"" dinner at The Fourth Estate Restaurant""",Gala|Food|Drink
-1883,"""Lecture by Dr. Lisa Tetrault at the National Portrait GalleryLecture by Dr. Lisa Tetrault at the National Portrait Gallery""",Seminar|
+1883,"""Lecture by Dr. Lisa Tetrault at the National Portrait GalleryLecture by Dr. Lisa Tetrault at the National Portrait Gallery""",Seminar
 1884,"""Secret Wednesdays Secret Wednesdays""",Party|Food|Drink
-1885,"""SOLD OUT: Melinda Gates | THE MOMENT OF LIFTSOLD OUT: Melinda Gates | THE MOMENT OF LIFT""",Seminar|
+1885,"""SOLD OUT: Melinda Gates | THE MOMENT OF LIFTSOLD OUT: Melinda Gates | THE MOMENT OF LIFT""",Seminar
 1886,"""Jean Marc Brocard at the Embassy of FranceJean Marc Brocard at the Embassy of France""",Gala|Food|Drink
 1887,"""Thamee Supper Club & Thingyan CelebrationThamee Supper Club & Thingyan Celebration""",Gala|Community
 1888,"""Family Day at the American University Museum Family Day at the American University Museum""",Attraction
@@ -896,7 +896,7 @@ event-id,title,tags
 1894,"""Songbyrd Presents: MogliSongbyrd Presents: Mogli""",Performance|Music
 1895,"""Spring Wreath WorkshopSpring Wreath Workshop""",Class|Hobbies
 1896,"""Songbyrd Presents: Junius MeyvantSongbyrd Presents: Junius Meyvant""",Performance|Music
-1897,"""The 39th Annual PEN/Faulkner Award Ceremony & ReceptionThe 39th Annual PEN/Faulkner Award Ceremony & Reception""",Gala|
+1897,"""The 39th Annual PEN/Faulkner Award Ceremony & ReceptionThe 39th Annual PEN/Faulkner Award Ceremony & Reception""",Gala
 1898,"""Circa WavesCirca Waves""",Performance|Music
 1899,"""CSA Federal SummitCSA Federal Summit""",Other|Business
 1900,"""SAINT THURSDAYS Presents ""ANGELS""SAINT THURSDAYS Presents ""ANGELS""""",Party|Other
@@ -965,14 +965,14 @@ event-id,title,tags
 1963,"""Men in Motion LIVE!  Male Revue Washington DC  Men in Motion LIVE!  Male Revue Washington DC""",Performance|Film|Media
 1964,"""José Andrés' Patio Opening Party at FishJosé Andrés' Patio Opening Party at Fish""",Party|Food|Drink
 1965,"""NCBW PWCC 7th Annual Sisterhood Brunch 2019NCBW PWCC 7th Annual Sisterhood Brunch 2019""",Other|Charity|Cause
-1966,"""Puff N Poetry Puff N Poetry""",Party|
-1967,"""Murder Mystery Dinner at Maggiano's DCMurder Mystery Dinner at Maggiano's DC""",Party|
+1966,"""Puff N Poetry Puff N Poetry""",Party
+1967,"""Murder Mystery Dinner at Maggiano's DCMurder Mystery Dinner at Maggiano's DC""",Party
 1968,"""Songbyrd Presents: The ChatsSongbyrd Presents: The Chats""",Performance|Music
 1969,"""Battle of the Sexes - A Singles Social MixerBattle of the Sexes - A Singles Social Mixer""",Party|Home|Lifestyle
 1970,"""Washington D.C. Job Fair May 2, 2019 - Hiring Events & Career Fairs in Washington D.C. Washington D.C. Job Fair May 2, 2019 - Hiring Events & Career Fairs in Wash...""",Festival|Business
 1971,"""USGBC NCR: DC United Stadium Tour & GameUSGBC NCR: DC United Stadium Tour & Game""",Tour|Business
 1972,"""DHIS 2 Symposium 2019 DHIS 2 Symposium 2019""",Conference
-1973,"""Underground Comedy Presents Underground Comedy Presents""",Performance|
+1973,"""Underground Comedy Presents Underground Comedy Presents""",Performance
 1974,"""Continuing Freedom of Information Act EducationContinuing Freedom of Information Act Education""",Class
 1975,"""2019 Burn Series - Free Workouts at Ballston Quarter 2019 Burn Series - Free Workouts at Ballston Quarter""",Class|Health
 1976,"""What The Brunch Sundays & Day Party At The Park At 14th || Full Buffet & Unlimited MimosasWhat The Brunch Sundays & Day Party At The Park At 14th || Full Buffet & Un...""",Party|Food|Drink
@@ -980,7 +980,7 @@ event-id,title,tags
 1978,"""PRESIDENT TRUMP BIRTHDAY BASH! - 3rd ANNUAL CELEBRATION by VIRGINIA WOMEN FOR TRUMP and other affiliated State groups.PRESIDENT TRUMP BIRTHDAY BASH! - 3rd ANNUAL CELEBRATION by VIRGINIA WOMEN F...""",Party|Government
 1979,"""HUD's 4th Annual HUBZone Small Business Conference (May 8, 2019)HUD's 4th Annual HUBZone Small Business Conference (May 8, 2019)""",Conference|Government
 1980,"""The Hip ""HOP"" - Old School Hip Hop Bar Crawl - Spring EditionThe Hip ""HOP"" - Old School Hip Hop Bar Crawl - Spring Edition""",Party|Music
-1981,"""David Brooks | THE SECOND MOUNTAINDavid Brooks | THE SECOND MOUNTAIN""",Seminar|
+1981,"""David Brooks | THE SECOND MOUNTAINDavid Brooks | THE SECOND MOUNTAIN""",Seminar
 1982,"""Four Pillars Conference & Donor Experience Workshop (DC)Four Pillars Conference & Donor Experience Workshop (DC)""",Conference|Business
 1983,"""MATE - Muslim Alliances in Texas EventMATE - Muslim Alliances in Texas Event""",Party|Community
 1984,"""Songbyrd Presents: The Bright Light Social HourSongbyrd Presents: The Bright Light Social Hour""",Performance|Music
@@ -995,7 +995,7 @@ event-id,title,tags
 1993,"""Washington, D.C.:Tillman Honor RunWashington, D.C.:Tillman Honor Run""",Other
 1994,"""Family Day at the NAS Building: DecisionTown in the World of GenomicsFamily Day at the NAS Building: DecisionTown in the World of Genomics""",Festival|Family|Education
 1995,"""BROCCOLI CITY #FITFEST 2019 BROCCOLI CITY #FITFEST 2019""",Race|Health
-1996,"""FREE - Ikebana Annual Exhibition - Sogetsu Demonstration FREE - Ikebana Annual Exhibition - Sogetsu Demonstration""",Seminar|
+1996,"""FREE - Ikebana Annual Exhibition - Sogetsu Demonstration FREE - Ikebana Annual Exhibition - Sogetsu Demonstration""",Seminar
 1997,"""Standards of Quality for Family Strengthening & Support Certification TrainingStandards of Quality for Family Strengthening & Support Certification Train...""",Class|Family|Education
 1998,"""AlabinaAlabina""",Performance|Music
 1999,"""Saint Yves Nightclub (Tuesday & Thursday)Saint Yves Nightclub (Tuesday & Thursday)""",Party|Music
@@ -1047,8 +1047,8 @@ event-id,title,tags
 2045,"""Mobility Making the PlaceMobility Making the Place""",Seminar|Community
 2046,"""Songbyrd Presents: PileSongbyrd Presents: Pile""",Performance|Music
 2047,"""Bourbiz MGM National Harbor Veteran/Milspouse Resource Event Bourbiz MGM National Harbor Veteran/Milspouse Resource Event""",Networking|Charity|Cause
-2048,"""Preet Bharara | DOING JUSTICEPreet Bharara | DOING JUSTICE""",Seminar|
-2049,"""Jill Biden | WHERE THE LIGHT ENTERSJill Biden | WHERE THE LIGHT ENTERS""",Appearance|
+2048,"""Preet Bharara | DOING JUSTICEPreet Bharara | DOING JUSTICE""",Seminar
+2049,"""Jill Biden | WHERE THE LIGHT ENTERSJill Biden | WHERE THE LIGHT ENTERS""",Appearance
 2050,"""Trinity Washington University Reunion Weekend 2019Trinity Washington University Reunion Weekend 2019""",Party|Other
 2051,"""Blockchain 2035: The Digital DNA of Internet 3.0Blockchain 2035: The Digital DNA of Internet 3.0""",Seminar|Government
 2052,"""7th Annual DC Web Fest7th Annual DC Web Fest""",Screening|Film|Media
@@ -1090,10 +1090,10 @@ event-id,title,tags
 2088,"""STADIUM THURSDAYS  STADIUM THURSDAYS""",Party|Music
 2089,"""La TraviataLa Traviata""",Performance
 2090,"""Crawl of Thrones | Washington, DCCrawl of Thrones | Washington, DC""",Festival|Food|Drink
-2091,"""By The People 2019By The People 2019""",Festival|
+2091,"""By The People 2019By The People 2019""",Festival
 2092,"""Ann MarieAnn Marie""",Performance|Music
 2093,"""Anna ClendeningAnna Clendening""",Performance|Music
-2094,"""Celeste Ng & Amor Towles in ConversationCeleste Ng & Amor Towles in Conversation""",Seminar|
+2094,"""Celeste Ng & Amor Towles in ConversationCeleste Ng & Amor Towles in Conversation""",Seminar
 2095,"""Concert | Yasmo feat. DC poets and rapper Concert | Yasmo feat. DC poets and rapper""",Performance|Music
 2096,"""420 Outdoor Party420 Outdoor Party""",Party|Other
 2097,"""2019 Catholic High School Fair 2019 Catholic High School Fair""",Festival|Family|Education
@@ -1144,7 +1144,7 @@ event-id,title,tags
 2142,"""9th Annual Family Fun Day""",Party|Charity|Cause
 2143,"""Utica College Physical Therapy Mini Student Conclave""",Conference|Health
 2144,"""SVPG Workshop - How To Create Products Customers Love - NYC - Sept 16-17, 2...""",Class|Business
-2145,"""iTango 2019 - Ithaca Tango Marathon""",Festival|
+2145,"""iTango 2019 - Ithaca Tango Marathon""",Festival
 2146,"""4th Annual AHI Easter Egg Hunt - SOLD OUT!""",Party|Holiday
 2147,"""Current Work | Barclay & Crousse: Other tropics""",Seminar|Community
 2148,"""12th Annual Drug-Free Heroes Awards Gala""",Gala|Community
@@ -1153,7 +1153,7 @@ event-id,title,tags
 2151,"""BOUND w/ Dax J, Fixmer/McCarthy (Live), Katie Rex, Minimal Violence (Live),...""",Music
 2152,"""NYC Crazy Rich Asians Gala""",Party|Community
 2153,"""The Vibes Are High 4/20 Boat Party NYC""",Party|Music
-2154,"""Janeane Garofalo Has Guests""",Performance|
+2154,"""Janeane Garofalo Has Guests""",Performance
 2155,"""Designer Pocket Book Bingo BRUNCH""",Charity|Cause
 2156,"""Dirty Thursday: Prince Tribute""",Party|Music
 2157,"""C.O.P.A. Authors in New York 2019""",Appearance
@@ -1179,13 +1179,13 @@ event-id,title,tags
 2177,"""NECHPI Annual Meeting""",Conference|Science|Tech
 2178,"""Bit By Bit: Breaking the Barrier for Girls in Tech""",Conference|Science|Tech
 2179,"""Ann Marie""",Performance|Music
-2180,"""Tinder Live! with Lane Moore""",Performance|
+2180,"""Tinder Live! with Lane Moore""",Performance
 2181,"""MajorStage Presents: Live Latin/Urban @ The Paper Box (Late Show)""",Performance|Music
 2182,"""Demystifying Management Workshop by Lara Hogan""",Class|Business
 2183,"""Gala 10º Aniversario CENY · Gala 10th Anniversary CENY Centro Español de NY""",Gala|Charity|Cause
 2184,"""Mindfulness for Busy Parents Workshop""",Seminar|Health
 2185,"""International Nanny Training Event-Brooklyn""",Class|Other
-2186,"""Golden Girls LIVE: On Stage! The Musical Parody""",Performance|
+2186,"""Golden Girls LIVE: On Stage! The Musical Parody""",Performance
 2187,"""Spring Wine Dinner: Anfora-Aged Wines from i Cacciagalli""",Gala|Food|Drink
 2188,"""CCF Spring Benefit: Celebrating Education & the Power of Books""",Other|Family|Education
 2189,"""The Freedom Party®""",Performance|Music
@@ -1212,7 +1212,7 @@ event-id,title,tags
 2210,"""Mother's Day at June Farms""",Party|Food|Drink
 2211,"""USA Wine, Spirits and Beer Ratings Winners Tasting""",Expo|Food|Drink
 2212,"""Muse With Grace Presents: The Ultimate Spring Sip & Shop""",Other|Fashion
-2213,"""The Poetry Society of New York Spring Gala""",Gala|
+2213,"""The Poetry Society of New York Spring Gala""",Gala
 2214,"""NYC SHOOT-A-THON 2019 THE LARGEST PHOTO SHARING NETWORKING EVENT IN NYC""",Networking|Fashion
 2215,"""Earth Day 5K Green Tour 2019""",Tour|Charity|Cause
 2216,"""Healthy NYC Expo | Brooklyn""",Festival|Health
@@ -1222,7 +1222,7 @@ event-id,title,tags
 2220,"""St. Francis Heart Valve Symposium: Update on Innovative Technologies""",Conference|Science|Tech
 2221,"""2019 NYCMER Conference: Yesterday, Today, and Tomorrow""",Conference|Business
 2222,"""UNTAMED: JUNGLE EDITION""",Party|Music
-2223,"""NYC Les Twins Workshop 2019""",Class|
+2223,"""NYC Les Twins Workshop 2019""",Class
 2224,"""BEA 2019 Adult Librarian Author Dinner""",Gala|Film|Media
 2225,"""The Milk Carton Kids' Sad Songs Summer Camp""",Class|Music
 2226,"""Techstars Startup Weekend New York: Financial Inclusion""",Class|Business
@@ -1241,7 +1241,7 @@ event-id,title,tags
 2239,"""43rd Annual Crystal Ball and Sales & Marketing Excellence Awards""",Gala|Charity|Cause
 2240,"""MajorStage Presents: Live Hip-Hop @ The Paper Box (Early Show)""",Performance|Music
 2241,"""PENCIL Ladders for Leaders Pre-Employment Training | May 28th-30th""",Class|Business
-2242,"""Hold Your Grit 2""",Performance|
+2242,"""Hold Your Grit 2""",Performance
 2243,"""The Magician, Aston Shuffle @ Elsewhere (Hall)""",Music
 2244,"""Pelican""",Performance|Music
 2245,"""Venture 19: Twenty Years of Design""",Conference|Business
@@ -1260,7 +1260,7 @@ event-id,title,tags
 2258,"""Earth Day Celebration in Prospect Park""",Festival|Holiday
 2259,"""Mazi Int'l Saturdays""",Party|Music
 2260,"""The Birth of Deceit Movie Premiere & Red Carpet Event (New York Private Sc...""",Screening|Film|Media
-2261,"""Story Pirates Flagship Show at the Upright Citizens Brigade Theatre April S...""",Performance|
+2261,"""Story Pirates Flagship Show at the Upright Citizens Brigade Theatre April S...""",Performance
 2262,"""Night of Light - Connecting to the Other Side with Laura Lynne Jackson""",Seminar|Spirituality
 2263,"""Off Wuk""",Party
 2264,"""Easter Bunny Breakfast ***SOLD OUT***""",Festival
@@ -1280,18 +1280,18 @@ event-id,title,tags
 2278,"""1st Annual Saratoga Pub Crawl""",Party|Food|Drink
 2279,"""Project X : After Party""",Party|Film|Media
 2280,"""MajorStage Presents: Kamron Bahani Live @ The Delancey""",Performance|Music
-2281,"""Drag Queen Divas Spring Awakening Brunch @ Kpacho""",Performance|
+2281,"""Drag Queen Divas Spring Awakening Brunch @ Kpacho""",Performance
 2282,"""PUMP-KINI ""THE BIKINI CRUISE""""",Party|Music
 2283,"""FULL OF HELL, Primitive Man, Genocide Pact, Elizabeth Colour Wheel & more""",Performance|Music
 2284,"""2019 Tunnel to Towers 5K Run,Walk - Buffalo, NY""",Race|Charity|Cause
 2285,"""Graduation Banquet - Class of 2019""",Gala|Food|Drink
 2286,"""2019 Lucille N. Austin Lecture on Care for Traumatized Immigrant Children""",Seminar|Health
-2287,"""Power Trip - brought to you by Ready Made""",Party|
+2287,"""Power Trip - brought to you by Ready Made""",Party
 2288,"""Rochester Super Saturday""",Health
-2289,"""TOTALLY FREE!!! FREE PIZZA! THURS Night Comedy Show! Hilarious Headliners!...""",Performance|
+2289,"""TOTALLY FREE!!! FREE PIZZA! THURS Night Comedy Show! Hilarious Headliners!...""",Performance
 2290,"""The Jazz of Mary Ramsey at the Hotel Henry Jazz Concert Series""",Performance|Music
 2291,"""DISCOVER KENMORE 2019""",Festival|Community
-2292,"""HabanaN'NewYork & CET present: Cimafunk en Concierto en NYC!""",Performance|
+2292,"""HabanaN'NewYork & CET present: Cimafunk en Concierto en NYC!""",Performance
 2293,"""AEIC PM Subcommittee Conference Spring '19 hosted by ConEd""",Conference|Business
 2294,"""FANDROSS: Bad Boy/Having a Party Birthday Celebration 2019""",Performance|Music
 2295,"""Reggae Fest Vs. Soca at Playstation Theater, Times Square *April 20th*""",Music
@@ -1304,7 +1304,7 @@ event-id,title,tags
 2302,"""Black Midi""",Performance|Music
 2303,"""The Response of the Nursing Profession to the Challenge of Adverse Childhoo...""",Conference|Health
 2304,"""The 50th Anniversary of ""69 CCNY Takeover""",Networking|Charity|Cause
-2305,"""Mary Poppins, Jr. Pelham Children's Theater's Saturday Evening""",Performance|
+2305,"""Mary Poppins, Jr. Pelham Children's Theater's Saturday Evening""",Performance
 2306,"""Animation Nights New York (ANNY) at The Gutter""",Screening|Film|Media
 2307,"""SLACKFEST: Three nights of the Slackers""",Performance|Music
 2308,"""10th annual NYC Multicultural Festival""",Festival|Community

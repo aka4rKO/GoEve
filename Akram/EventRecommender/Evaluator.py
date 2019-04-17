@@ -54,7 +54,7 @@ class Evaluator:
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
-    def SampleTopNRecs(self, event, testSubject=85, k=10):
+    def SampleTopNRecs(self, event, testSubject=3247, k=10):
         
         for algo in self.algorithms:
             print("\nUsing recommender ", algo.GetName())
