@@ -83,10 +83,11 @@ import React, {Component} from 'react';
       })
     }
 
-    render(){      
+    render(){
+            
         return this.state.events.map((event) => (
           <Container key={event.id}>
-          <Content >
+          <Content>
             <Card>
               <CardItem>
                 <Body>
