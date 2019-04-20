@@ -7,7 +7,7 @@ Created on Tue April 16 2019
 
 from surprise import AlgoBase
 from surprise import PredictionImpossible
-from EventData import EventData
+from Framework.EventData import EventData
 import math
 import numpy as np
 import heapq

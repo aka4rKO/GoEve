@@ -5,8 +5,8 @@ Created on Tue April 16 2019
 @author: Akram Azarm
 """
 
-from RecommenderMetrics import RecommenderMetrics
-from EvaluationData import EvaluationData
+from .RecommenderMetrics import RecommenderMetrics
+from .EvaluationData import EvaluationData
 
 class EvaluatedAlgorithm:
     

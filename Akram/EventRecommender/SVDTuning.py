@@ -5,10 +5,10 @@ Created on Fri April 19 2019
 @author: Akram Azarm
 """
 
-from EventData import EventData
+from Framework.EventData import EventData
 from surprise import SVD
 from surprise import NormalPredictor
-from Evaluator import Evaluator
+from Framework.Evaluator import Evaluator
 from surprise.model_selection import GridSearchCV
 
 import random

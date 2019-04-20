@@ -5,14 +5,14 @@ Created on Thu April 18 2019
 @author: Akram Azarm
 """
 
-from EventData import EventData
+from Framework.EventData import EventData
 from surprise import KNNBasic
 import heapq
 from collections import defaultdict
 from operator import itemgetter
 from surprise.model_selection import LeaveOneOut
-from RecommenderMetrics import RecommenderMetrics
-from EvaluationData import EvaluationData
+from Framework.RecommenderMetrics import RecommenderMetrics
+from Framework.EvaluationData import EvaluationData
 
 def LoadEventData():
     event = EventData()

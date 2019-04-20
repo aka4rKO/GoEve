@@ -5,8 +5,8 @@ Created on Tue April 16 2019
 @author: Akram Azarm
 """
 
-from EvaluationData import EvaluationData
-from EvaluatedAlgorithm import EvaluatedAlgorithm
+from .EvaluationData import EvaluationData
+from .EvaluatedAlgorithm import EvaluatedAlgorithm
 
 class Evaluator:
     
@@ -55,6 +55,7 @@ class Evaluator:
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
     def SampleTopNRecs(self, event, testSubject=3247, k=10):
+        print("User ID: "+str(testSubject))
         
         for algo in self.algorithms:
             print("\nUsing recommender ", algo.GetName())
