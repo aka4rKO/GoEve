@@ -57,13 +57,12 @@ class Evaluator:
     def SampleTopNRecs(self, event, algo, testSubject=3247, k=10):
         print("User ID: "+str(testSubject))
         
-        #for algo in self.algorithms:
-        print("\nUsing recommender ", algo.GetName())
+        print("\nUsing recommender ")
         
         print("Computing recommendations...")
         testSet = self.dataset.GetAntiTestSetForUser(testSubject)
     
-        predictions = algo.GetAlgorithm().test(testSet)
+        predictions = algo.test(testSet)
         
         recommendations = []
         

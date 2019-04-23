@@ -52,7 +52,7 @@ def svdAndSvdPp(userID, algo, isRecommend):
         
         (predictions, Svd) = surprise.dump.load('models/svd.pkl')
         evaluator.AddAlgorithm(Svd, "SVD")
-        return evaluator.SampleTopNRecs(event, userID)
+        return evaluator.SampleTopNRecs(event, Svd, userID)
     
     elif algo == 'svdpp' and not isRecommend:
         
@@ -72,4 +72,4 @@ def svdAndSvdPp(userID, algo, isRecommend):
         
         (predictions, SvdPlusPlus) = surprise.dump.load('models/svdpp.pkl')
         evaluator.AddAlgorithm(SvdPlusPlus, "SVD++")
-        return evaluator.SampleTopNRecs(event, userID)
+        return evaluator.SampleTopNRecs(event, SvdPlusPlus, userID)

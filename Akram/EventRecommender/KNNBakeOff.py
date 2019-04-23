@@ -54,4 +54,4 @@ def knn(userID, isRecommend):
         
         (predictions, UserKNN) = surprise.dump.load('models/userKnn.pkl')
         evaluator.AddAlgorithm(UserKNN, "User KNN")
-        return evaluator.SampleTopNRecs(event, userID)
+        return evaluator.SampleTopNRecs(event, UserKNN, userID)
