@@ -29,7 +29,8 @@ class RBMAlgorithm(AlgoBase):
         trainingMatrix = np.zeros([numUsers, numItems, 5], dtype=np.float32)
         
         for (uid, iid, rating) in trainset.all_ratings():
-            adjustedRating = int(float(rating)*2.0) - 1
+           # print(int(float(rating)*2.0) - 1)
+            adjustedRating = int(float(rating)) - 1
             trainingMatrix[int(uid), int(iid), adjustedRating] = 1
         
         # Flatten to a 2D array, with nodes for each possible rating type on each possible item, for every user.
