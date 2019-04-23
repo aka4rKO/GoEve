@@ -6,9 +6,11 @@ Created on Thu April 18 2019
 """
 
 from Framework.EventData import EventData
+from Framework.EvaluationData import EvaluationData
 from surprise import KNNBasic
 from surprise import NormalPredictor
 from Framework.Evaluator import Evaluator
+import surprise
 
 import random
 import numpy as np
@@ -25,26 +27,31 @@ np.random.seed(0)
 random.seed(0)
 
 
-def knn(userID):
+def knn(userID, isRecommend):
+    
     # Load up common data set for the recommender algorithms
     (event, evaluationData, rankings) = LoadEventData()
     
-    # Construct an Evaluator to, you know, evaluate them
+    # Construct an Evaluator to evaluate them
     evaluator = Evaluator(evaluationData, rankings)
     
-    # User-based KNN
-    UserKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': True})
-    evaluator.AddAlgorithm(UserKNN, "User KNN")
-    
-    # Item-based KNN
-    ItemKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': False})
-    evaluator.AddAlgorithm(ItemKNN, "Item KNN")
-    
-    # Just make random recommendations
-    Random = NormalPredictor()
-    evaluator.AddAlgorithm(Random, "Random")
-    
-    # Fight!
-    evaluator.Evaluate(False)
-    
-    evaluator.SampleTopNRecs(event, userID)
+    if not isRecommend:
+        
+        # User-based KNN
+        UserKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': True})
+        evaluator.AddAlgorithm(UserKNN, "User KNN")
+        
+        print("\nBuilding recommendation model...")
+        ed = EvaluationData(evaluationData, rankings)
+        trainSet = ed.GetFullTrainSet()
+        UserKNN.fit(trainSet)
+        
+        # Fight!
+        evaluator.Evaluate(False)
+        
+        surprise.dump.dump('models/userKnn.pkl', predictions=None, algo=UserKNN, verbose=0)
+    else:
+        
+        (predictions, UserKNN) = surprise.dump.load('models/userKnn.pkl')
+        evaluator.AddAlgorithm(UserKNN, "User KNN")
+        return evaluator.SampleTopNRecs(event, userID)

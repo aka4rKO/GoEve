@@ -54,32 +54,32 @@ class Evaluator:
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
-    def SampleTopNRecs(self, event, testSubject=3247, k=10):
+    def SampleTopNRecs(self, event, algo, testSubject=3247, k=10):
         print("User ID: "+str(testSubject))
         
-        for algo in self.algorithms:
-            print("\nUsing recommender ", algo.GetName())
-            
-            print("\nBuilding recommendation model...")
-            trainSet = self.dataset.GetFullTrainSet()
-            algo.GetAlgorithm().fit(trainSet)
-            
-            print("Computing recommendations...")
-            testSet = self.dataset.GetAntiTestSetForUser(testSubject)
+        #for algo in self.algorithms:
+        print("\nUsing recommender ", algo.GetName())
         
-            predictions = algo.GetAlgorithm().test(testSet)
-            
-            recommendations = []
-            
-            print ("\nWe recommend:")
-            for userID, eventID, actualRating, estimatedRating, _ in predictions:
-                intEventID = int(eventID)
-                recommendations.append((intEventID, estimatedRating))
-            
-            recommendations.sort(key=lambda x: x[1], reverse=True)
-            
-            for ratings in recommendations[:10]:
-                print(event.getEventTitle(ratings[0]), ratings[1])
+        print("Computing recommendations...")
+        testSet = self.dataset.GetAntiTestSetForUser(testSubject)
+    
+        predictions = algo.GetAlgorithm().test(testSet)
+        
+        recommendations = []
+        
+        print ("\nWe recommend:")
+        for userID, eventID, actualRating, estimatedRating, _ in predictions:
+            intEventID = int(eventID)
+            recommendations.append((intEventID, estimatedRating))
+        
+        recommendations.sort(key=lambda x: x[1], reverse=True)
+        
+        recsEventIds = []
+        for ratings in recommendations[:10]:
+            print(event.getEventTitle(ratings[0]), ratings[1])
+            recsEventIds.append(ratings[0])
+                
+        return recsEventIds
                 
 
             

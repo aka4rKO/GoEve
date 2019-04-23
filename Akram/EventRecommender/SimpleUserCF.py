@@ -15,7 +15,7 @@ import surprise
 
 def simpleUserCF():
     
-    # Load our data set and compute the user similarity matrix
+    # Load our data set 
     event = EventData()
     data = event.loadEventData()
     
@@ -32,6 +32,8 @@ def simpleUserCF():
     
     
 def SampleTopNRecs(userID, model):
+    
+    #compute the user similarity matrix
     simsMatrix = model.compute_similarities()
     
     event = EventData()
@@ -40,7 +42,6 @@ def SampleTopNRecs(userID, model):
     trainSet = data.build_full_trainset()
     
     # Get top N similar users to our test subject
-    # (Alternate approach would be to select users up to some similarity threshold - try it!)
     testUserInnerID = trainSet.to_inner_uid(userID)
     similarityRow = simsMatrix[testUserInnerID]
     
