@@ -14,14 +14,19 @@ class EvaluationData:
         
         #Build a full training set for evaluating overall properties
         self.fullTrainSet = data.build_full_trainset()
+#       build_full_trainset() - return a trainset as is, built from the whole dataset.
         self.fullAntiTestSet = self.fullTrainSet.build_anti_testset()
+#       build_anti_testset() - Return a list of ratings that can be used as a testset 
+#       No parameter so it takes the global mean
         
-        #Build a 75/25 train/test split for measuring accuracy
+        # Build a 75/25 train/test split for measuring accuracy
         self.trainSet, self.testSet = train_test_split(data, test_size=.25, random_state=1)
         
-        #Build a "leave one out" train/test split for evaluating top-N recommenders
-        #And build an anti-test-set for building predictions
+        # Build a "leave one out" train/test split for evaluating top-N recommenders
+        # And build an anti-test-set for building predictions
+        # splitting using leave one out for cross validation
         LOOCV = LeaveOneOut(n_splits=1, random_state=1)
+#        splits the data into training and testing with LOOCV stratergy
         for train, test in LOOCV.split(data):
             self.LOOCVTrain = train
             self.LOOCVTest = test
@@ -30,6 +35,7 @@ class EvaluationData:
         
         #Compute similarty matrix between items so we can measure diversity
         sim_options = {'name': 'cosine', 'user_based': False}
+        # user_based False - similarities between items are considered
         self.simsAlgo = KNNBaseline(sim_options=sim_options)
         self.simsAlgo.fit(self.fullTrainSet)
             
