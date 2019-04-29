@@ -20,28 +20,31 @@ def LoadEventData():
     # ranking reperesents the popularity ranking 
     return (ed, data, rankings)
 
-np.random.seed(0)
-random.seed(0)
+
+def TrainModel():
+    np.random.seed(0)
+    random.seed(0)
 
 # Load up common data set for the recommender algorithms
-(ed, evaluationData, rankings) = LoadEventData()
+    (ed, evaluationData, rankings) = LoadEventData()
 # ed - EventData object
 # evaluateData - rating dataset
 # ranking - Popularity ranking for each event
 
 # Construct an Evaluator to evaluate them
 # Initally creates training set and test set 
-evaluator = Evaluator(evaluationData, rankings)
+    evaluator = Evaluator(evaluationData, rankings)
 
-#RBM
-RBM = RBMAlgorithm(epochs=20)
-evaluator.AddAlgorithm(RBM, "RBM")
+# RBM
+# Just sets the epochs,hidden layer count,Batch Size and etc
+    RBM = RBMAlgorithm(epochs=20)
+    evaluator.AddAlgorithm(RBM, "RBM")
 
 # Just make random recommendations
-Random = NormalPredictor()
-evaluator.AddAlgorithm(Random, "Random")
+    Random = NormalPredictor()
+    evaluator.AddAlgorithm(Random, "Random")
 
 # Fight!
-evaluator.Evaluate(True)
-
-evaluator.SampleTopNRecs(ed)
+    evaluator.Evaluate(True)
+      
+    evaluator.SampleTopNRecs(ed)

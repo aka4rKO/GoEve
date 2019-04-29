@@ -21,14 +21,14 @@ class EventData:
 
     eventID_to_title = {}
     title_to_eventID = {}
-    ratingsPath = "./dataset/rating.csv"
-    eventsPath = "./dataset/event.csv"
+    ratingsPath = r"./dataset/rating.csv"
+    eventsPath = r"./dataset/event.csv"
     
     # Returns the ratings dataset
     def loadEventData(self):
 
         # Look for files relative to the directory we are running from
-        os.chdir(os.path.dirname(sys.argv[0]))
+#        os.chdir(os.path.dirname(sys.argv[0]))
 
         ratingsDataset = 0
         self.eventID_to_title = {}

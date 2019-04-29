@@ -19,7 +19,7 @@ class RBM(object):
         
                 
     def Train(self, X):
-
+        # X represent the dataset
         # Reseting the RBM incase if we have trainned in more than once
         ops.reset_default_graph()
 
@@ -51,7 +51,7 @@ class RBM(object):
 
     def MakeGraph(self):
 
-        tf.set_random_seed(0)  # just set to make consistant results
+        tf.set_random_seed(0)  # just set to make consistant results evry time trained
         
         # Createing placeholders(variables) for the graph, weights and biases
         self.X = tf.placeholder(tf.float32, [None, self.visibleDimensions], name="X")
@@ -68,7 +68,6 @@ class RBM(object):
         
         # Perform Gibbs Sampling for Contrastive Divergence, assuming k=1 instead of iterating over the 
         # forward pass multiple times.
-        
         # Forward pass
         # Sample hidden layer given visible...
         # Get tensor of hidden probabilities
