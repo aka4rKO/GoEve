@@ -10,6 +10,8 @@ class Evaluator:
     algorithms = []
     
     def __init__(self, dataset, rankings):
+        # dataset - Rating dataset 
+        # rankings- Popularity rankings
         evalD = EvaluationData(dataset, rankings)
         self.dataset = evalD
         
@@ -50,7 +52,7 @@ class Evaluator:
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
-    def SampleTopNRecs(self, ed, testSubject=3005, k=10):
+    def SampleTopNRecs(self, ed, testSubject=3151, k=10):
         
         for algo in self.algorithms:
             print("\nUsing recommender ", algo.GetName())
