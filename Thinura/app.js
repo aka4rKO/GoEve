@@ -13,7 +13,7 @@ const uri = "mongodb+srv://thinura:Thinura_1999@thinura-vxvn1.mongodb.net/test?r
 const client = new MongoClient(uri, {
     useNewUrlParser: true
 });
-const collection;
+var collection;
 client.connect(err => {
     collection = client.db("Goeve").collection("event-categories");
     // perform actions on the collection object
