@@ -1,8 +1,8 @@
 #!/bin/sh
 ssh laksara@35.186.155.252 <<EOF
   cd ~/GoEve/Thinura
-  git pull
-  npm install 
-  pm2 restart server
+#   git pull
+#   npm install 
+#   pm2 restart server
   exit
 EOF
