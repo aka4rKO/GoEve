@@ -34,10 +34,12 @@ class EventData:
         self.eventID_to_title = {}
         self.title_to_eventID = {}
 
+        # skip line= 1 specified to make reader to skip heading line in the csv file
         reader = Reader(line_format='user item rating', sep=',', skip_lines=1)
 
         ratingsDataset = Dataset.load_from_file(self.ratingsPath, reader=reader)
 
+       # filing the dictionary list in the classes
         with open(self.eventsPath, newline='', encoding='ISO-8859-1') as csvfile:
                 eventReader = csv.reader(csvfile)
                 next(eventReader)  #Skip header line
@@ -46,7 +48,7 @@ class EventData:
                     eventName = row[1]
                     self.eventID_to_title[eventID] = eventName
                     self.title_to_eventID[eventName] = eventID
-
+        # print("line 51 : ",ratingsDataset)
         return ratingsDataset
 
     # Returns the list of event ids and the ratings given to each event by a user(user = userID)
