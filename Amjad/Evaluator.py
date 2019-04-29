@@ -16,7 +16,9 @@ class Evaluator:
         self.dataset = evalD
         
     def AddAlgorithm(self, algorithm, name):
+        # creating the object of EvaluationAlgorithm 
         alg = EvaluatedAlgorithm(algorithm, name)
+        # adding to the list of algorithms
         self.algorithms.append(alg)
         
     def Evaluate(self, doTopN):
