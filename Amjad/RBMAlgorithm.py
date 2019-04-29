@@ -68,6 +68,8 @@ class RBMAlgorithm(AlgoBase):
                 # changed np.arrange(10) to 5
                 self.predictedRatings[uiid, itemID] = rating + 1
                 # rating changed from (rating + 1) * 0.5
+                # print("line 71 says", self.predictedRatings,type(self.predictedRatings))
+                
         
         return self
 

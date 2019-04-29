@@ -4,6 +4,7 @@
 """
 from EvaluationData import EvaluationData
 from EvaluatedAlgorithm import EvaluatedAlgorithm
+import surprise
 
 class Evaluator:
     
@@ -54,31 +55,50 @@ class Evaluator:
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
-    def SampleTopNRecs(self, ed, testSubject=3151, k=10):
         
+    def FitAndDump(self):
+             
         for algo in self.algorithms:
+                
             print("\nUsing recommender ", algo.GetName())
             
             print("\nBuilding recommendation model...")
             trainSet = self.dataset.GetFullTrainSet()
-            algo.GetAlgorithm().fit(trainSet)
+            modelName = 'models/' + algo.GetName() + '.pkl'
+            algo = algo.GetAlgorithm().fit(trainSet)
+            surprise.dump.dump(modelName, predictions=None, algo=algo, verbose=0)
             
-            print("Computing recommendations...")
-            testSet = self.dataset.GetAntiTestSetForUser(testSubject)
+      
+    def SampleTopNRecs(self, ed, algo, testSubject, k=10):
+        alg = ""
+        for algorithm in self.algorithms:
+            if(type(algorithm.GetAlgorithm()) == type(algo)):
+                alg = algorithm
         
-            predictions = algo.GetAlgorithm().test(testSet)
+        print("\nUsing recommender ", alg.GetName())
             
-            recommendations = []
+#            print("\nBuilding recommendation model...")
+#            trainSet = self.dataset.GetFullTrainSet()
+#            algo.GetAlgorithm().fit(trainSet)
             
-            print ("\nWe recommend:")
-            for userID,eventID, actualRating, estimatedRating, _ in predictions:
-                intEventID = int(eventID)
-                recommendations.append((intEventID, estimatedRating))
+        print("Computing recommendations...")
+        testSet = self.dataset.GetAntiTestSetForUser(testSubject)
+        
+        predictions = algo.test(testSet)
             
-            recommendations.sort(key=lambda x: x[1], reverse=True)
+        recommendations = []
+        recs = []
             
-            for ratings in recommendations[:10]:
-                print(ed.getEventTitle(ratings[0]), ratings[1])
+        print ("\nWe recommend:")
+        for userID,eventID, actualRating, estimatedRating, _ in predictions:
+            intEventID = int(eventID)
+            recommendations.append((intEventID, estimatedRating))
+            recs.append((intEventID, estimatedRating))
+                
+        recommendations.sort(key=lambda x: x[1], reverse=True)
+        recs.sort(key=lambda x: x[1], reverse=True)
+        return recs[:k]
+           
                 
 
             

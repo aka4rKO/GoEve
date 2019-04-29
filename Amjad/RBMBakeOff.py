@@ -46,5 +46,14 @@ def TrainModel():
 
 # Fight!
     evaluator.Evaluate(True)
-      
-    evaluator.SampleTopNRecs(ed)
+    evaluator.FitAndDump()
+    
+def TestModel(algo,testSubject):
+    (ed, evaluationData, rankings) = LoadEventData()
+    evaluator = Evaluator(evaluationData, rankings)
+    evaluator.AddAlgorithm(algo, "RBM")
+    evaluator.Evaluate(False)
+    recs = evaluator.SampleTopNRecs(ed,algo = algo, testSubject = testSubject)
+    return recs
+     
+   
