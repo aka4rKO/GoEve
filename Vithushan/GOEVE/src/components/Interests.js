@@ -1,112 +1,93 @@
-import React, { Component } from 'react'
-import InterestCards from './InterestsCards'
-import {
-    View,
-    StyleSheet,
-    FlatList
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Image, ImageBackground } from 'react-native';
+import CardView from 'react-native-cardview';
+import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
 
-        } from 'react-native';
-
-export class Interests extends Component {
-
-
-    // CheckBoxTest(){
-       
-
-    //     this.setState({
-            // check:!this.state.check,
-    //         status:!this.state.status   
-            
-    //     })
-    // }
-
-
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         eventType: [],
-    //         setState({
-    //             val.type.status
-    //         })
-    //     }
-    // }
-
+export default class Interests extends Component {
   render() {
-
-
-
-      
-    const eventType = [
-        {
-            type: {
-                id: 1,
-                name: 'Techology',
-                url: require('./pics/Science-512.png'),
-                status: false,
-            },
-        },
-        {
-            type: {
-                id: 2,
-                name: 'Dance',
-                url: require('./pics/startup.png'),
-                status: false
-            }
-        },
-        {
-            type: {
-                id: 3,
-                name: 'Music',
-                url: require('./pics/startup.png'),
-                status: false
-            }
-        },
-        {
-            type: {
-                id: 4,
-                name: 'Drama',
-                url: require('./pics/download.png'),
-                status: false
-        
-            }
-        }
-        // {
-        //     type: {
-        //         id: 5,
-        //         name: 'Motor',
-        //         url: require('./pics/download.png'),
-        //         status: false
-        //     }
-        // } 
-    ]
-
-    //  this.state.eventType.map((val,key) => {
-    //      return <InterestCards key={key} keyval={key} val={val}
-    //      CheckBoxTest={ ()=> this.setState(key) }
-    //  />
-//});
-
-
-
-
-
-
     return (
-
-        
-
-        
-      
-
-      <InterestCards types={eventType}/>
-
-
-      
-      
-
-
-    )
+      <SafeAreaView style={styles.safeAreaView}>
+        <View style={styles.container}>
+            <View flexDirection="row">
+                <CardView
+                    cardElevation={4}
+                    cardMaxElevation={4}
+                    cornerRadius={8}
+                    style={styles.card}
+                >
+                    <ImageBackground source={require('./pics/startup.png')} style={styles.containerImg} resizeMode={'cover'}>
+                    <View style={styles.check}>
+                    <CircleCheckBox
+                        checked={false}
+                        onToggle={(checked) => console.log('My state is: ', checked)}
+                        outerColor="#4169e1"
+                        filterColor="#dcdcdc"
+                        innerColor="#4169e1"
+                        outerSize={19}
+                        innerSize={10}
+                        filterSize={30}
+                    />
+                    </View>
+                    <Text style={styles.text}>Elevation 2</Text>
+                    </ImageBackground>
+                </CardView>
+                <CardView
+                    cardElevation={4}
+                    cardMaxElevation={4}
+                    cornerRadius={8}
+                    style={styles.card}
+                >
+                    <ImageBackground source={require('./pics/startup.png')} style={styles.containerImg} resizeMode={'cover'}>
+                    <View style={styles.check}>
+                    <CircleCheckBox
+                        checked={true}
+                        onToggle={(checked) => console.log('My state is: ', checked)}
+                        outerColor="#4169e1"
+                        filterColor="#dcdcdc"
+                        innerColor="#4169e1"
+                        outerSize={19}
+                        innerSize={10}
+                        filterSize={30}
+                    />
+                    </View>
+                    <Text style={styles.text}>Elevation 2</Text>
+                    </ImageBackground>
+                </CardView>
+            </View>
+        </View>
+      </SafeAreaView>
+    );
   }
 }
 
-export default Interests
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#eee',
+  },
+  containerImg: {
+    flex: 1,
+    backgroundColor: '#eee',
+  },
+  card: {
+    backgroundColor: 'white',
+    flex: 1,
+    margin: 5,
+    height: 110
+  },
+  text: {
+      color: "#fff",
+      textAlign: 'center',
+      textAlignVertical: "center",
+      marginTop: 17,
+      fontWeight: 'bold',
+      fontSize: 18
+  },
+  check: {
+      marginTop: 5,
+      marginLeft: 5
+  }
+});
