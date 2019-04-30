@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, FlatList, ImageBackground, CheckBox } from 'rea
 import CircleCheckBox from 'react-native-circle-checkbox';
 import CardView from 'react-native-cardview';
 
-
 const formatData = (data, numColumns) => {
     const numberOfFullRows = Math.floor(data.length / numColumns);
 
@@ -18,7 +17,27 @@ const formatData = (data, numColumns) => {
 
 const numColumns = 2;
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            data: [],
+        }
+        this.handleChange = this.handleChange.bind(this);
+      }
 
+      handleChange = (key,checked) => {
+            console.log("Key "+key+" Checked "+checked)
+          const newArray = [...this.state.data];
+          newArray[key].status = checked;
+          this.setState({data:newArray})
+          console.log("Length "+this.state.data.length)
+          this.state.data.map((item,key)=>{console.log(item.name+" "+item.status)})
+      }
+      
+      componentWillMount (){
+          this.setState({data:this.props.data})
+      }
     renderItem = ({ item, index }) => {
         if (item.empty === true) {
             return (
@@ -45,11 +64,8 @@ export default class App extends React.Component {
                 <ImageBackground source={item.url} style={styles.containerImg} resizeMode={'cover'}>
                     <View style={styles.check}>
                         <CircleCheckBox
-                            checked={false}
-                            onToggle={(checked) => {
-                                console.log('My state is: ', checked);
-                                checked = true;
-                            }}
+                            checked={item.status}
+                            onToggle={(checked)=>this.handleChange(index,checked)}
                             outerColor="#4169e1"
                             filterColor="#dcdcdc"
                             innerColor="#4169e1"
@@ -65,11 +81,9 @@ export default class App extends React.Component {
     };
 
     render() {
-        const { data } = this.props;
-        console.log(data);
         return (
             <FlatList
-                data={formatData(data, numColumns)}
+                data={formatData(this.state.data, numColumns)}
                 style={styles.container}
                 renderItem={this.renderItem}
                 numColumns={numColumns}

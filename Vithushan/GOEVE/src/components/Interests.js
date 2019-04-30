@@ -11,6 +11,7 @@ export default class Interests extends Component {
           name: 'Techology',
           url: require('./pics/Science-512.png'),
           status: false,
+        
       },
       {
           key: 2,
