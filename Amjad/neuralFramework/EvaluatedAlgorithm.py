@@ -2,8 +2,8 @@
 """
 @author: N.A.Amjad
 """
-from RecommenderMetrics import RecommenderMetrics
-from EvaluationData import EvaluationData
+from .RecommenderMetrics import RecommenderMetrics
+from .EvaluationData import EvaluationData
 
 class EvaluatedAlgorithm:
     

@@ -2,10 +2,10 @@
 """
 @author: N.A.Amjad
 """
-from EventData import EventData
+from neuralFramework.EventData import EventData
 from RBMAlgorithm import RBMAlgorithm
 from surprise import NormalPredictor
-from Evaluator import Evaluator
+from neuralFramework.Evaluator import Evaluator
 
 import random
 import numpy as np
@@ -52,7 +52,7 @@ def TestModel(algo,testSubject):
     (ed, evaluationData, rankings) = LoadEventData()
     evaluator = Evaluator(evaluationData, rankings)
     evaluator.AddAlgorithm(algo, "RBM")
-    evaluator.Evaluate(False)
+    # evaluator.Evaluate(False)
     recs = evaluator.SampleTopNRecs(ed,algo = algo, testSubject = testSubject)
     return recs
      

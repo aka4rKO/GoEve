@@ -2,8 +2,8 @@
 """
 @author: N.A.Amjad
 """
-from EvaluationData import EvaluationData
-from EvaluatedAlgorithm import EvaluatedAlgorithm
+from .EvaluationData import EvaluationData
+from .EvaluatedAlgorithm import EvaluatedAlgorithm
 import surprise
 
 class Evaluator:
@@ -97,7 +97,12 @@ class Evaluator:
                 
         recommendations.sort(key=lambda x: x[1], reverse=True)
         recs.sort(key=lambda x: x[1], reverse=True)
-        return recs[:k]
+        
+        rec = []
+        for r in recs:
+            rec.append(r[0])
+            
+        return rec[:k]
            
                 
 

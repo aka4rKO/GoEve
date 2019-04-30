@@ -3,10 +3,10 @@
 @author: N.A.Amjad
 """
 
-from EventData import EventData
+from neuralFramework.EventData import EventData
 from RBMAlgorithm import RBMAlgorithm
 from surprise import NormalPredictor
-from Evaluator import Evaluator
+from neuralFramework.Evaluator import Evaluator
 from surprise.model_selection import GridSearchCV
 
 import random

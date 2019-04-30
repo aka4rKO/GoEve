@@ -19,13 +19,13 @@ def home():
     return "Hello World"
 
 # train the model 
-@app.route("/train")
+@app.route("rbm/train")
 def train():
 #    TrainModel()
     RBMBakeOff.TrainModel()
     return "Done"
 
-@app.route("/recommend/<userID>")
+@app.route("/rbm/user/<userID>")
 def recommendation(userID):
     (predictions, algo) = surprise.dump.load('models/RBM.pkl')
     recs = RBMBakeOff.TestModel(algo,userID)
