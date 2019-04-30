@@ -1,3 +1,6 @@
+'''
+@authour - Amjad
+'''
 import numpy as np
 import tensorflow as tf
 from tensorflow.python.framework import ops
@@ -62,14 +65,14 @@ class AutoRec(object):
         # output layer for our predictions.
         self.outputLayer = tf.nn.sigmoid(tf.add(tf.matmul(hidden, self.decoderWeights['weights']), self.decoderBiases['biases']))
        
-        # Our "true" labels for training are copied from the input layer.
+        # "true" labels for training are copied from the input layer.
         self.labels = self.inputLayer
         
         # loss function and optimizer.
         loss = tf.losses.mean_squared_error(self.labels, self.outputLayer)
         optimizer = tf.train.RMSPropOptimizer(self.learningRate).minimize(loss)
         
-        # We evaluate each batch.
+        # evaluate each batch.
         self.update = [optimizer, loss]
 
         
