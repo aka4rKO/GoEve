@@ -19,24 +19,35 @@ def LoadEventData():
     rankings = ed.getPopularityRanks()
     return (ed, data, rankings)
 
-np.random.seed(0)
-random.seed(0)
+
+def TrainModel():
+    np.random.seed(0)
+    random.seed(0)
 
 # Load up common data set for the recommender algorithms
-(ed, evaluationData, rankings) = LoadEventData()
+    (ed, evaluationData, rankings) = LoadEventData()
 
 # Construct an Evaluator to, you know, evaluate them
-evaluator = Evaluator(evaluationData, rankings)
+    evaluator = Evaluator(evaluationData, rankings)
 
 #Autoencoder
-AutoRec = AutoRecAlgorithm()
-evaluator.AddAlgorithm(AutoRec, "AutoRec")
+    AutoRec = AutoRecAlgorithm()
+    evaluator.AddAlgorithm(AutoRec, "AutoRec")
 
 # Just make random recommendations
-Random = NormalPredictor()
-evaluator.AddAlgorithm(Random, "Random")
+    Random = NormalPredictor()
+    evaluator.AddAlgorithm(Random, "Random")
 
-# Fight!
-evaluator.Evaluate(True)
+# Fight! (evaluvate)
+    evaluator.Evaluate(True)
+    evaluator.FitAndDump()
 
-# evaluator.SampleTopNRecs(ed)
+def TestModel(algo,testSubject):
+    (ed, evaluationData, rankings) = LoadEventData()
+    evaluator = Evaluator(evaluationData, rankings)
+    evaluator.AddAlgorithm(algo, "AutoRec")
+    recs = evaluator.SampleTopNRecs(ed,algo = algo, testSubject = testSubject)
+    return recs
+
+
+
