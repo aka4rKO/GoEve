@@ -7,7 +7,8 @@ Created on Tue April 16 2019
 
 from surprise import AlgoBase
 from surprise import PredictionImpossible
-from EventData import EventData
+from Framework.EventData import EventData
+from Framework.EvaluationData import EvaluationData
 import math
 import numpy as np
 import heapq
@@ -17,6 +18,13 @@ class ContentKNNAlgorithm(AlgoBase):
     def __init__(self, k=40, sim_options={}):
         AlgoBase.__init__(self)
         self.k = k
+        event = EventData()
+        ed = EvaluationData(event.loadEventData(), event.getPopularityRanks())
+        self.dataset = ed
+        
+        print("\nBuilding recommendation model...")
+        trainSet = ed.GetFullTrainSet()
+        self.fit(trainSet)
 
     def fit(self, trainset):
         AlgoBase.fit(self, trainset)
@@ -78,6 +86,33 @@ class ContentKNNAlgorithm(AlgoBase):
             return shotLengthDiff * colorVarianceDiff * motionDiff * lightingDiff * numShotsDiff
         else:
             return 0
+        
+    def SampleTopNRecs(self, event, testSubject=3247, k=10):
+        print("User ID: "+str(testSubject))
+        
+        #for algo in self.algorithms:
+        print("\nUsing recommender ContentKNN")
+        
+        print("Computing recommendations...")
+        testSet = self.dataset.GetAntiTestSetForUser(testSubject)
+    
+        predictions = self.test(testSet)
+        
+        recommendations = []
+        
+        print ("\nWe recommend:")
+        for userID, eventID, actualRating, estimatedRating, _ in predictions:
+            intEventID = int(eventID)
+            recommendations.append((intEventID, estimatedRating))
+        
+        recommendations.sort(key=lambda x: x[1], reverse=True)
+        recsEventIds = []
+        for ratings in recommendations[:10]:
+            print(event.getEventTitle(ratings[0]), ratings[1])
+            recsEventIds.append(ratings[0])
+            
+        return recsEventIds
+        
 
     def estimate(self, u, i):
 

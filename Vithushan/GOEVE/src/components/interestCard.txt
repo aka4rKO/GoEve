@@ -1,0 +1,179 @@
+import React, { Component } from 'react';
+import { View, Text, SafeAreaView, FlatList, ScrollView, StyleSheet, Touchable, Header, Button, TouchableOpacity, ImageBackground } from 'react-native';
+import CardView from 'react-native-cardview';
+import CircleCheckBox, {LABEL_POSITION} from 'react-native-circle-checkbox';
+
+    
+export class InterestsCards extends Component {
+
+      render() {
+        const {types} = this.props;
+        let typesList = [];
+
+        types.forEach((typeInfo,i) => {
+    
+            const typeArray = (
+                
+                <View key={`type${i}`} flexDirection="row">
+
+                    <CardView
+                        cardElevation={4}
+                        cardMaxElevation={4}
+                        cornerRadius={8}
+                        style={styles.card}
+                    >
+                        <ImageBackground source={typeInfo.type.url} style={styles.containerImg} resizeMode={'cover'}>
+                        <View style={styles.check}>
+                        <CircleCheckBox
+                            checked={false}
+                            onToggle={(checked) => console.log('My state is: ', checked)}
+                            outerColor="#4169e1"
+                            filterColor="#dcdcdc"
+                            innerColor="#4169e1"
+                            outerSize={19}
+                            innerSize={10}
+                            filterSize={30}
+                        />
+                        </View>
+                        <Text style={styles.text}>{typeInfo.type.name}</Text>
+                        </ImageBackground>
+                    </CardView>
+
+                    
+                    <CardView
+                        cardElevation={4}
+                        cardMaxElevation={4}
+                        cornerRadius={8}
+                        style={styles.card}
+                    >
+                        <ImageBackground source={typeInfo.type.url} style={styles.containerImg} resizeMode={'cover'}>
+                        <View style={styles.check}>
+                        <CircleCheckBox
+                            checked={true}
+                            onToggle={(checked) => console.log('My state is: ', checked)}
+                            outerColor="#4169e1"
+                            filterColor="#dcdcdc"
+                            innerColor="#4169e1"
+                            outerSize={19}
+                            innerSize={10}
+                            filterSize={30}
+                        />
+                        </View>
+                        <Text style={styles.text}>{typeInfo.type.name}</Text>
+                        </ImageBackground>
+                    </CardView>
+                </View>              
+
+            )
+
+            typesList.push(   
+                typeArray
+            )
+
+        });
+
+
+        if(typesList.length > 0){
+            return (
+                
+                <ScrollView>
+                    <SafeAreaView style={styles.safeAreaView}>
+                        <View   style={styles.header} >
+                        <Text style={styles.headerText}>Choose Interest</Text>
+                        
+                        <View style = {styles.btn} >
+                        <Button
+                        
+                            title="DONE"
+                        />
+                        </View>
+                        </View>
+
+                        <View>
+                            <Text style={styles.headerText}> Choose at least 3 topics to setup your feed</Text>
+                        </View>
+                        
+                        <View style={styles.container}>
+                            {typesList}
+                        </View>
+                    </SafeAreaView>
+                </ScrollView>
+
+            )
+        }
+
+        return(   
+            <Text>Empty</Text>
+        )      
+    }
+}
+
+
+const styles = StyleSheet.create({
+        
+    header: {
+        backgroundColor: '#FF4500',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 60
+    },
+    headerText: {
+        color:'black',
+        fontSize: 20,
+        padding: 26,
+        fontWeight: 'bold',
+        alignItems: 'center'
+    },
+    btn: {    
+        position: 'absolute',
+        right: 10,
+        top: 15,
+        backgroundColor: '#FF4500',        
+        color: 'red'
+    },
+    cb: {
+        height: 100,
+        width: 200,
+        position: 'absolute',
+    },
+    userStyle:{
+        fontSize:18,
+        color:'black',
+        fontWeight:'bold',
+        textAlign: 'center',
+        position: 'absolute' 
+    },
+    safeAreaView: {
+        flex: 1
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#eee',
+    },
+    containerImg: {
+        flex: 1,
+        backgroundColor: '#eee',
+    },
+    card: {
+        backgroundColor: 'white',
+        flex: 1,
+        margin: 5,
+        height: 110
+    },
+    text: {
+        color: "#000",
+        textAlign: 'center',
+        textAlignVertical: "center",
+        marginTop: 17,
+        fontWeight: 'bold',
+        fontSize: 18
+    },
+    check: {
+        marginTop: 5,
+        marginLeft: 5
+    }
+
+});
+
+export default InterestsCards;
+
