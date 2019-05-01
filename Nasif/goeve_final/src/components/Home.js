@@ -96,62 +96,6 @@ class Home extends Component {
     return (
       <HomeSub eventsPush={events}/>
     )
-
-<<<<<<< HEAD
-=======
-    render(){
-            
-        return this.state.events.map((event) => (
-          <Container key={event.id}>
-          <Content>
-            <Card>
-              <CardItem>
-                <Body>
-                  {/* <Thumbnail style={{width:375, height:150, borderRadius : 10}} source={{uri: event.url}}/> */}               
-                  <Text style={{fontSize:20, fontWeight: 'bold'}}>                    
-                     {event.title}
-                  </Text>
-                  <Text style={{color:'red', fontSize:13, fontWeight: 'bold'}}>
-                    {event.month} 
-                    <Text>
-                    {'\t'}{event.day}
-                    </Text>
-                  </Text>
-                  <Text style={{fontSize:13}}>
-                    {event.time}
-                  </Text>
-                  <Text style={{fontSize:13}}>
-                    {event.price}
-                  </Text>
-                </Body>
-                <Button transparent warning  button onPress={this.onNotInterested.bind(this, event.id)}>
-                  <Text uppercase={false} style={{fontSize:10, fontWeight: 'bold'}}>Not Interested</Text>
-                </Button> 
-              </CardItem>
-            </Card>
-          </Content>
-        </Container>
-        )
-        // (
-        //   <Container>
-        //   <Content >
-        //     <Card >
-        //       <CardItem>
-        //         <Thumbnail style={{flex:1, height:150, borderRadius : 10}} source={{uri: 'http://betacrash.com/wp-content/uploads/2018/05/io-social-banner.png'}}/>
-        //       </CardItem>
-        //       <CardItem button onPress={() => alert("This is Card Body")}>
-        //         <Body>
-        //           <Text>
-        //              Hi
-        //           </Text>
-        //         </Body>
-        //       </CardItem>
-        //     </Card>
-        //   </Content>
-        // </Container>
-        );
-    }
->>>>>>> c9a0c8b52c851efa6e64d540bdbf7c5af1b2bbd4
   }
 }
 
