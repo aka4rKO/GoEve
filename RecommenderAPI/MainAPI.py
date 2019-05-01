@@ -14,6 +14,7 @@ import SimpleItemCF
 import KNNBakeOff
 import SVDBakeOff
 import RBMBakeOff
+import AutoRecBakeOff
 import BuildModels
 
 
@@ -93,17 +94,32 @@ def trainColl():
    return "Done"
 
 # train the model 
-@app.route("/rbm/train")
-def train():
-#    TrainModel()
+# trainning rbm
+@app.route("/rbm/train", methods=['GET'])
+def trainRbm():
     RBMBakeOff.TrainModel()
     return "Done"
 
-@app.route("/rbm/user/<userID>")
-def recommendation(userID):
+# rbm testing   
+@app.route("/rbm/user/<userID>", methods=['GET'])
+def RbmRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/RBM.pkl')
-    recs = RBMBakeOff.TestModel(algo,userID)
+    recs = RBMBakeOff.TestModel(algo, userID)
     return jsonify({'eventIds': recs})
+
+# trainning auto rec
+@app.route("/autorec/train", methods=['GET'])
+def trainAutoRec():
+    AutoRecBakeOff.TrainModel()
+    return "Done"
+
+# auto rec testing
+@app.route("/autorec/user/<userID>", methods=['GET'])
+def AutoRecRecommendation(userID):
+    (predictions, algo) = surprise.dump.load('models/AutoRec.pkl')
+    recs = AutoRecBakeOff.TestModel(algo, userID) 
+    return jsonify({'eventIds': recs})
+
 
 # Running the server in localhost:5000    
 if __name__ == '__main__':
