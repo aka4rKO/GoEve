@@ -16,6 +16,7 @@ import SVDBakeOff
 import RBMBakeOff
 import AutoRecBakeOff
 from dataset.AddRating import addRate
+from dataset.AddRating import addManyRate
 import BuildModels
 
 
@@ -130,6 +131,16 @@ def addRating():
     print(userId," ",eventId," ",rating)
     addRate(userId, eventId, rating)
     
+    return "done"
+
+# adding rating multiple row to dataset
+@app.route("/rating/add/multiple",methods=['POST'])
+def addManyRating():
+    eventIds = request.form['eventIds'] 
+    userIds = request.form['userIds']
+    ratings = request.form['ratings']
+    print(userIds," ",eventIds," ",ratings)
+    addManyRate(userIds, eventIds, ratings)
     return "done"
 
 
