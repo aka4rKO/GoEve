@@ -7,7 +7,7 @@ Created on Sat April 20 2019
 
 import surprise
 from Framework.EventData import EventData
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 
 import SimpleUserCF
 import SimpleItemCF
@@ -15,6 +15,7 @@ import KNNBakeOff
 import SVDBakeOff
 import RBMBakeOff
 import AutoRecBakeOff
+from dataset.AddRating import addRate
 import BuildModels
 
 
@@ -119,6 +120,17 @@ def AutoRecRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/AutoRec.pkl')
     recs = AutoRecBakeOff.TestModel(algo, userID) 
     return jsonify({'eventIds': recs})
+
+# adding a single rating row to dataset
+@app.route("/rating/add",methods=['POST'])
+def addRating():
+    eventId = request.form['eventId'] 
+    userId = request.form['userId']
+    rating = request.form['rating']
+    print(userId," ",eventId," ",rating)
+    addRate(userId, eventId, rating)
+    
+    return "done"
 
 
 # Running the server in localhost:5000    
