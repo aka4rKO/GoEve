@@ -24,7 +24,6 @@ def LoadEventData():
 def TrainModel():
     np.random.seed(0)
     random.seed(0)
-
 # Load up common data set for the recommender algorithms
     (ed, evaluationData, rankings) = LoadEventData()
 # ed - EventData object
