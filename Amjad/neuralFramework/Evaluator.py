@@ -5,6 +5,7 @@
 from .EvaluationData import EvaluationData
 from .EvaluatedAlgorithm import EvaluatedAlgorithm
 import surprise
+import pickle
 
 class Evaluator:
     
@@ -55,6 +56,26 @@ class Evaluator:
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
+        self.matrics = metrics
+    
+    def isBetterModel(self, newMatrics,name) :
+        isBetter = False
+        filePath = './scores/'+ name + 'Scores.txt'
+       
+        try:
+            with open(filePath, 'rb') as file:
+                oldMatrics = pickle.load(file)
+        except FileNotFoundError : 
+            print("no previous scores")
+            return True
+        print("Old Matrics ",name," (",oldMatrics['RMSE'],', ',oldMatrics['MAE'],')')
+        if(oldMatrics['RMSE'] > newMatrics['MAE'] and oldMatrics['RMSE'] > newMatrics['MAE'] ):
+            print("better rmse and mae")
+            isBetter = True
+        else:    
+            print("not better rmse and mae ")
+        
+        return isBetter
         
     def FitAndDump(self):
              
@@ -62,13 +83,22 @@ class Evaluator:
                 
             print("\nUsing recommender ", algo.GetName())
             
-            print("\nBuilding recommendation model...")
-            trainSet = self.dataset.GetFullTrainSet()
-            modelName = 'models/' + algo.GetName() + '.pkl'
-            algo = algo.GetAlgorithm().fit(trainSet)
-            surprise.dump.dump(modelName, predictions=None, algo=algo, verbose=0)
-            
-      
+            if(self.isBetterModel(self.matrics,algo.GetName())):
+                
+                # storing all performance scores in a txt file
+                filePath = './scores/'+ algo.GetName() + 'Scores.txt'
+                
+                with open(filePath, 'wb') as file:
+                    pickle.dump(self.matrics, file)
+                
+                print("\nBuilding recommendation model...")
+                trainSet = self.dataset.GetFullTrainSet()
+                modelName = 'models/' + algo.GetName() + '.pkl'
+                algo = algo.GetAlgorithm().fit(trainSet)
+                surprise.dump.dump(modelName, predictions=None, algo=algo, verbose=0)
+            else:
+                print("model not replaced")
+    
     def SampleTopNRecs(self, ed, algo, testSubject, k=10):
         alg = ""
         for algorithm in self.algorithms:
