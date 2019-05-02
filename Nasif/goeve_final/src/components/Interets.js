@@ -1,32 +1,47 @@
-import React, {Component} from 'react';
-  import {View, Text, ScrollView, StyleSheet} from "react-native";  
-  
-  class Interets extends Component{
-    render(){
-        return(
-            <View style={styles.container}>
-                <Text>Interests</Text>
-            </View>
-        );
-    }
+import React, { Component } from 'react';
+import InterestsCards from './InterestsCards';
+
+export default class Interests extends Component {
+  render() {
+
+    const eventType = [
+      {
+        key: 1,
+        name: 'Techology',
+        url: require('../assets/interests/Science-512.png'),
+        status: false,
+
+      },
+      {
+        key: 2,
+        name: 'Dance',
+        url: require('../assets/interests/startup.png'),
+        status: true
+      },
+      {
+        key: 3,
+        name: 'Drama',
+        url: require('../assets/interests/download.png'),
+        status: false
+
+      },
+      {
+        key: 4,
+        name: 'Fun',
+        url: require('../assets/interests/download.png'),
+        status: false
+
+      },
+      {
+        key: 5,
+        name: 'Party',
+        url: require('../assets/interests/startup.png'),
+        status: false
+      }
+    ]
+
+    return (
+      <InterestsCards data={eventType} />
+    );
   }
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-    },
-    instructions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5,
-    },
-  });
-  export default Interets;
+}

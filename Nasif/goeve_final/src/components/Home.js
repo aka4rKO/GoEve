@@ -7,6 +7,7 @@
 }
 import React, { Component } from 'react';
 import HomeSub from './HomeSub';
+import { StatusBar } from 'react-native';
 
 
 
@@ -94,6 +95,7 @@ class Home extends Component {
     ]
 
     return (
+      
       <HomeSub eventsPush={events}/>
     )
   }
