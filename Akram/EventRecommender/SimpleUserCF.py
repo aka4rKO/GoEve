@@ -6,11 +6,14 @@ Created on Wed April 17 2019
 """
 
 from Framework.EventData import EventData
+from Framework.Evaluator import Evaluator
 from surprise import KNNBasic
 import heapq
 from collections import defaultdict
 from operator import itemgetter
 import surprise
+import pickle
+import Util
 
 
 def simpleUserCF():
@@ -18,6 +21,8 @@ def simpleUserCF():
     # Load our data set 
     event = EventData()
     data = event.loadEventData()
+    
+    (ed, evaluationData, rankings) = Util.LoadEventData()
     
     trainSet = data.build_full_trainset()
     
@@ -28,7 +33,31 @@ def simpleUserCF():
     model = KNNBasic(sim_options=sim_options)
     model.fit(trainSet)
     
-    surprise.dump.dump('models/userCf.pkl', predictions=None, algo=model, verbose=0)
+    evaluator = Evaluator(evaluationData, rankings)
+    evaluator.AddAlgorithm(model, "UserCF")
+    
+    # Evaluating the algorithm to get the metrices
+    evaluator.Evaluate(False)
+    newMatrices = evaluator.evaluatedMetrics 
+    print(newMatrices)
+    
+    filePath = 'scores/UserCFScores.txt'
+    modelPath = 'models/userCf.pkl'
+    
+    if(Util.readFromFile(filePath, modelPath, model, newMatrices) == "File not found and model dumped"):
+        return "File not found and model dumped"
+    
+    oldMatrices = Util.readFromFile(filePath, modelPath, model, newMatrices)
+
+    if(oldMatrices['RMSE'] > newMatrices['RMSE'] and oldMatrices['MAE'] > newMatrices['MAE'] ):
+        surprise.dump.dump(modelPath, predictions=None, algo=model, verbose=0)
+        
+        # Saving the new scores to a file
+        Util.writeToFile(filePath, newMatrices)
+        
+        print("New model is better... Dumped the new model")
+    else:
+        print("Old model is better")
     
     
 def SampleTopNRecs(userID, model):

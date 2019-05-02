@@ -131,7 +131,7 @@ def addRating():
     print(userId," ",eventId," ",rating)
     addRate(userId, eventId, rating)
     
-    return "done"
+    return "Done"
 
 # adding rating multiple row to dataset
 @app.route("/rating/add/multiple",methods=['POST'])
@@ -141,7 +141,7 @@ def addManyRating():
     ratings = request.form['ratings']
     print(userIds," ",eventIds," ",ratings)
     addManyRate(userIds, eventIds, ratings)
-    return "done"
+    return "Done"
 
 
 # Running the server in localhost:5000    
