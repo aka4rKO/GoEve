@@ -30,13 +30,13 @@ def TrainModel():
 # Construct an Evaluator to, you know, evaluate them
     evaluator = Evaluator(evaluationData, rankings)
 
-#Autoencoder
-    AutoRec = AutoRecAlgorithm()
-    evaluator.AddAlgorithm(AutoRec, "AutoRec")
-
 # Just make random recommendations
     Random = NormalPredictor()
     evaluator.AddAlgorithm(Random, "Random")
+    
+#Autoencoder
+    AutoRec = AutoRecAlgorithm()
+    evaluator.AddAlgorithm(AutoRec, "AutoRec")
 
 # Fight! (evaluvate)
     evaluator.Evaluate(True)
