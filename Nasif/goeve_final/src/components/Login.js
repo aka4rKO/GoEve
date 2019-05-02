@@ -32,6 +32,7 @@ export default class Login extends Component {
           // console.log('Login success with permissions: ' + result.grantedPermissions.toString())
           AccessToken.getCurrentAccessToken().then((data) => {
             this.setState({ accessToken: data.accessToken })
+            navigate('Home');
           }).catch(error => {
             console.log(error)
             initUser(accessToken)
