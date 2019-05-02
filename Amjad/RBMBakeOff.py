@@ -34,14 +34,15 @@ def TrainModel():
 # Initally creates training set and test set 
     evaluator = Evaluator(evaluationData, rankings)
 
+# Just make random recommendations
+    Random = NormalPredictor()
+    evaluator.AddAlgorithm(Random, "Random")
+
 # RBM
 # Just sets the epochs,hidden layer count,Batch Size and etc
     RBM = RBMAlgorithm(epochs=20)
     evaluator.AddAlgorithm(RBM, "RBM")
 
-# Just make random recommendations
-    Random = NormalPredictor()
-    evaluator.AddAlgorithm(Random, "Random")
 
 # Fight!
     evaluator.Evaluate(True)
