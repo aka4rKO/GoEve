@@ -48,7 +48,7 @@ class HomeSub extends Component {
                                         // showRating
                                         ratingCount={5}
                                         imageSize={20}
-                                        onFinishRating={this.ratingCompleted}
+                                        onFinishRating={(rating)=>{console.log(rating)}}
                                     />
                                     <View></View>
                                     </View>
