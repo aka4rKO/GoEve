@@ -7,13 +7,16 @@ Created on Sat April 20 2019
 
 import surprise
 from Framework.EventData import EventData
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 
 import SimpleUserCF
 import SimpleItemCF
 import KNNBakeOff
 import SVDBakeOff
 import RBMBakeOff
+import AutoRecBakeOff
+from dataset.AddRating import addRate
+from dataset.AddRating import addManyRate
 import BuildModels
 
 
@@ -93,17 +96,53 @@ def trainColl():
    return "Done"
 
 # train the model 
-@app.route("/rbm/train")
-def train():
-#    TrainModel()
+# trainning rbm
+@app.route("/rbm/train", methods=['GET'])
+def trainRbm():
     RBMBakeOff.TrainModel()
     return "Done"
 
-@app.route("/rbm/user/<userID>")
-def recommendation(userID):
+# rbm testing   
+@app.route("/rbm/user/<userID>", methods=['GET'])
+def RbmRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/RBM.pkl')
-    recs = RBMBakeOff.TestModel(algo,userID)
+    recs = RBMBakeOff.TestModel(algo, userID)
     return jsonify({'eventIds': recs})
+
+# trainning auto rec
+@app.route("/autorec/train", methods=['GET'])
+def trainAutoRec():
+    AutoRecBakeOff.TrainModel()
+    return "Done"
+
+# auto rec testing
+@app.route("/autorec/user/<userID>", methods=['GET'])
+def AutoRecRecommendation(userID):
+    (predictions, algo) = surprise.dump.load('models/AutoRec.pkl')
+    recs = AutoRecBakeOff.TestModel(algo, userID) 
+    return jsonify({'eventIds': recs})
+
+# adding a single rating row to dataset
+@app.route("/rating/add",methods=['POST'])
+def addRating():
+    eventId = request.form['eventId'] 
+    userId = request.form['userId']
+    rating = request.form['rating']
+    print(userId," ",eventId," ",rating)
+    addRate(userId, eventId, rating)
+    
+    return "done"
+
+# adding rating multiple row to dataset
+@app.route("/rating/add/multiple",methods=['POST'])
+def addManyRating():
+    eventIds = request.form['eventIds'] 
+    userIds = request.form['userIds']
+    ratings = request.form['ratings']
+    print(userIds," ",eventIds," ",ratings)
+    addManyRate(userIds, eventIds, ratings)
+    return "done"
+
 
 # Running the server in localhost:5000    
 if __name__ == '__main__':

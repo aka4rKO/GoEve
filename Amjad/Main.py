@@ -10,6 +10,7 @@ import RBMBakeOff
 import AutoRecBakeOff
 import surprise
 from dataset.AddRating import addRate
+from dataset.AddRating import addManyRate
 #from RBMBakeOff import TrainModel
 
 app = Flask(__name__)
@@ -51,7 +52,7 @@ def AutoRecRecommendation(userID):
     recs = AutoRecBakeOff.TestModel(algo, userID) 
     return jsonify({'eventIds': recs})
 
-# adding rating row to dataset
+# adding rating single  row to dataset
 @app.route("/rating/add",methods=['POST'])
 def addRating():
     eventId = request.form['eventId'] 
@@ -59,8 +60,18 @@ def addRating():
     rating = request.form['rating']
     print(userId," ",eventId," ",rating)
     addRate(userId, eventId, rating)
-    
     return "done"
+
+# adding rating multiple row to dataset
+@app.route("/rating/add/multiple",methods=['POST'])
+def addManyRating():
+    eventIds = request.form['eventIds'] 
+    userIds = request.form['userIds']
+    ratings = request.form['ratings']
+    print(userIds," ",eventIds," ",ratings)
+    addManyRate(userIds, eventIds, ratings)
+    return "done"
+
     
 # Running the server in localhost:5000    
 if __name__ == '__main__':
