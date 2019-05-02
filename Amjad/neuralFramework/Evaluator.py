@@ -89,8 +89,7 @@ class Evaluator:
                 
                 # storing all performance scores in a txt file
                 filePath = './scores/'+ algo.GetName() + 'Scores.txt'
-                # deleting the file 
-                os.remove(filePath)
+                
                 with open(filePath, 'wb') as file:
                     pickle.dump(self.metrics, file)
                 
