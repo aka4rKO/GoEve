@@ -17,26 +17,40 @@ const DATABASE_NAME = "Goeve";
 var app = Express();
 
 app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended: true }));
+app.use(BodyParser.urlencoded({
+    extended: true
+}));
 
-var database, collection;
+var database, collection_event, collection_user;
 
 app.listen(3000, () => {
-    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
-        if(error) {
+    MongoClient.connect(CONNECTION_URL, {
+        useNewUrlParser: true
+    }, (error, client) => {
+        if (error) {
             throw error;
         }
         database = client.db(DATABASE_NAME);
-        collection = database.collection("event-categories");
+        collection_event = database.collection("event-categories");
+        collection_user = database.collection('');
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
 });
 
 app.get("/categories", (request, response) => {
-    collection.find({}).toArray((error, result) => {
-        if(error) {
+    collection_event.find({}).toArray((error, result) => {
+        if (error) {
             return response.status(500).send(error);
         }
         response.send(result);
+    });
+});
+
+app.post("/user", (request, response) => {
+    collection_user.insert(request.body, (error, result) => {
+        if (error) {
+            return response.status(500).send(error);
+        }
+        response.send(result.result);
     });
 });
