@@ -13,12 +13,15 @@ import { Container, Content, Text, List, ListItem, Body } from "native-base";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk';
 
 import Home from './components/Home';
 import Interets from './components/Interets'
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import Login from './components/Login';
 
 const { width: widthDim } = Dimensions.get('window');
+
 
 const CustomDrawerComponent = (props) => (
     <SafeAreaView style={{ flex: 1 }}>
@@ -67,6 +70,7 @@ const CustomDrawerComponent = (props) => (
                     <MaterialCommunityIcons.Button color='#000000' name='logout' size={25}
                         style={{ backgroundColor: 'white' }}
                         onPress={() => { props.navigation.navigate('Home') }}>
+                        <LoginButton onLogoutFinished={() => props.navigation.navigate('Login')} />
                         <Text style={{ color: '#000000' }}>Logout</Text>
                     </MaterialCommunityIcons.Button>
                 </Content>
@@ -125,11 +129,21 @@ const DrawerNavigator = createDrawerNavigator({
         drawerWidth: (widthDim / (4 / 3))
     });
 
+const LoginStack = createStackNavigator({
+    Login: {
+        screen: Login,
+        
+    }
+})
 const MainContainer = createSwitchNavigator({
     App: {
         screen: DrawerNavigator,
     },
+    Auth: {
+        screen: LoginStack,
+    },
 }, {
         showIcon: true,
+        initialRouteName: 'Auth'
     });
 export const Main = createAppContainer(MainContainer);

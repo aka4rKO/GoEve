@@ -12,8 +12,9 @@ import { StatusBar } from 'react-native';
 
 
 class Home extends Component {
-
+  
   render(){
+    console.disableYellowBox = true;
     const events = [
       {
         event :{
