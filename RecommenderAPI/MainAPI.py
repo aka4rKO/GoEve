@@ -90,7 +90,7 @@ def getSVDpp(userID):
     # Based on other user who have been to similar events
 
 # train arko models
-@app.route("/other/train")
+@app.route("/other/train", methods=['GET'])
 def trainColl():
    BuildModels.buildModels()
    return "Done"

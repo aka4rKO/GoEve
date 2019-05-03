@@ -13,6 +13,7 @@ import SimpleUserCF
 import SimpleItemCF
 import KNNBakeOff
 import SVDBakeOff
+import BuildModels
 
 
 
@@ -69,6 +70,12 @@ def getSVDpp(userID):
     recs = SVDBakeOff.svdAndSvdPp(userID, 'svdpp', True)
     print(recs) 
     return jsonify({'eventIds': recs})
+
+# train arko models
+@app.route("/other/train", methods=['GET'])
+def trainColl():
+   BuildModels.buildModels()
+   return "Done"
 
 # Running the server in localhost:5000    
 if __name__ == '__main__':
