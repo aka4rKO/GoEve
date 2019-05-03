@@ -7,21 +7,25 @@
 }
 
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Linking, WebView } from "react-native";
-import { Container, Header, Content, Card, CardItem, Body, Text, Thumbnail, Button, Right, StyleProvider } from 'native-base';
-import { Rating, AirbnbRating } from 'react-native-ratings';
-
-
+import { View, ScrollView, Linking } from "react-native";
+import { Content, Card, CardItem, Body, Text, Button, Right } from 'native-base';
+import { Rating } from 'react-native-ratings';
+import axios from 'axios';
 
 class HomeSub extends Component {
 
-    urlOpen(url){
-        return(
-            <WebView
-            source={{uri: url}}
-          />
-        )    
+    state = {
+        persons: [],
     }
+
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/users')
+            .then(res => {
+                console.log(res.data[0].name);
+                this.setState({ persons: res.data });
+            })
+    }
+
     render() {
 
         const { eventsPush } = this.props;
@@ -34,34 +38,32 @@ class HomeSub extends Component {
                         <CardItem>
                             <Body style={{ flex: 1, flexDirection: 'row' }}>
                                 <View>
-                                {/* onPress={ ()=> Linking.openURL(eventData.event.url) } */}
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }} onPress={ () => this.urlOpen(eventData.event.url) }>
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }} onPress={() => Linking.openURL(eventData.event.url)}>
                                         {eventData.event.title}
                                     </Text>
-                                    <Text style={{ color: 'red', fontSize: 13, fontWeight: 'bold' }}>
+                                    <Text style={{ color: 'red', fontSize: 13, fontWeight: 'bold' }} onPress={() => Linking.openURL(eventData.event.url)}>
                                         {eventData.event.month}
                                         <Text>
                                             {'\t'}{eventData.event.day}
                                         </Text>
                                     </Text>
-                                    <Text style={{ fontSize: 13 }}>
+                                    <Text style={{ fontSize: 13 }} onPress={() => Linking.openURL(eventData.event.url)}>
                                         {eventData.event.time}
                                     </Text>
-                                    <Text style={{ fontSize: 13 }}>
+                                    <Text style={{ fontSize: 13 }} onPress={() => Linking.openURL(eventData.event.url)}>
                                         {eventData.event.price}
                                     </Text>
                                     <View>
-                                        <Text> </Text>
-                                    <Rating
-                                        type='star'
-                                        startingValue={0}
-                                        minValue={0}
-                                        // showRating
-                                        ratingCount={5}
-                                        imageSize={20}
-                                        onFinishRating={(rating)=>{console.log( eventData.event.id, rating)}}
-                                    />
-                                    <View></View>
+                                        <Text onPress={() => Linking.openURL(eventData.event.url)}> </Text>
+                                        <Rating
+                                            type='star'
+                                            startingValue={0}
+                                            minValue={0}
+                                            ratingCount={5}
+                                            imageSize={20}
+                                            onFinishRating={(rating) => { console.log(eventData.event.id, rating) }}
+                                        />
+                                        <View></View>
                                     </View>
                                 </View>
                                 <Right>
