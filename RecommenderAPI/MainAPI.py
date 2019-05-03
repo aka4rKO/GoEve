@@ -115,7 +115,7 @@ def trainAll():
 @app.route("/rbm/user/<userID>", methods=['GET'])
 def RbmRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/RBM.pkl')
-    recs = RBMBakeOff.TestModel(algo, userID)
+    recs = BakeOff.TestRBMModel(algo, userID)
     return jsonify({'eventIds': recs})
 
 # trainning auto rec
@@ -128,7 +128,7 @@ def trainAutoRec():
 @app.route("/autorec/user/<userID>", methods=['GET'])
 def AutoRecRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/AutoRec.pkl')
-    recs = AutoRecBakeOff.TestModel(algo, userID) 
+    recs = BakeOff.TestAutoRecModel(algo, userID) 
     return jsonify({'eventIds': recs})
 
 # adding a single rating row to dataset
