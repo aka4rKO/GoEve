@@ -1,19 +1,21 @@
+{
+  /* 
+   * Author : M. Nasif Nuha
+   * Date : 16/04/2019
+   * Description : Code for the Login screen.
+   */
+}
+
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, ImageBackground } from "react-native";
-import { Container, Header, Content, Card, CardItem, Body, Text, Thumbnail, Right, StyleProvider, Button } from 'native-base';
+import { View, ImageBackground, Image } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Home from './Home';
-
-
-import { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk';
-
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 
 export default class Login extends Component {
 
   constructor(props) {
     super(props);
     this.state = { accessToken: null };
-    // this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
   }
 
   initUser(token) {
@@ -38,14 +40,16 @@ export default class Login extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      // require('../assets/login/location_point.png')
-      <ImageBackground source={require('../assets/login/orange_bj.png')} style={{ width: '100%', height: '100%' }}>
+      <ImageBackground source={require('../assets/login/location_point_with_bg.jpg')} style={{ width: '100%', height: '100%' }}>
+        <View style={{ alignItems: 'center', marginVertical: '50%' }}>
+          <Image source={require('../assets/login/goeve_logo.png')} style={{ width: 310, height: 100, }} />
+        </View>
 
         <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
           <FontAwesome.Button
-            style={{ backgroundColor: '#4267B2', justifyContent: 'center', alignItems: 'center' }}>
-
+            style={{
+              backgroundColor: '#4267B2'
+            }}>
             <LoginButton
               readPermissions={['public_profile']}
               onLoginFinished={
@@ -65,13 +69,11 @@ export default class Login extends Component {
               }
             />
           </FontAwesome.Button>
-          {console.log(this.state.accessToken)}
-          <Text>{this.state.accessToken}</Text>
+          {/* {console.log(this.state.accessToken)} */}
         </View>
       </ImageBackground>
     );
   }
 }
-// onLogoutFinished={() => alert("User logged out")}
 
 module.exports = Login;

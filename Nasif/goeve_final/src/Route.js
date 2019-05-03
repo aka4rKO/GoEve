@@ -9,23 +9,20 @@
 import React, { Component } from 'react';
 import { createAppContainer, createDrawerNavigator, createStackNavigator, createSwitchNavigator } from "react-navigation";
 import { View, Dimensions, ScrollView, SafeAreaView, Image } from 'react-native';
-import { Container, Content, Text, List, ListItem, Body } from "native-base";
+import { Container, Content, Text, Body } from "native-base";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk';
+import { LoginButton } from 'react-native-fbsdk';
 
 import Home from './components/Home';
 import Interets from './components/Interets'
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import Login from './components/Login';
 
 const { width: widthDim } = Dimensions.get('window');
 
-
 const CustomDrawerComponent = (props) => (
     <SafeAreaView style={{ flex: 1 }}>
-
         <ScrollView >
             <Container>
                 <Content>
@@ -43,41 +40,47 @@ const CustomDrawerComponent = (props) => (
                                     alignItems: 'center',
                                     borderRadius: 45,
                                     overflow: 'hidden'
-                                }}
-                            />
+                                }} />
                         </View>
-                        <View style={{
-                            alignSelf: 'stretch',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                        >
+                        <View
+                            style={{
+                                alignSelf: 'stretch',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Mohamed Nasif Nuha</Text>
                             <Text style={{ fontSize: 13 }}>nasifnuh@gmail.com</Text>
                         </View>
                     </Body>
+
+                    {/* Text tag for spacing; Don't remove */}
                     <Text> </Text>
-                    <Icon.Button color='#000000' name='home' size={25}
+
+                    {/* Home Button */}
+                    <Icon.Button
+                        color='#000000'
+                        name='home'
+                        size={25}
                         style={{ backgroundColor: 'white' }}
                         onPress={() => { props.navigation.navigate('Home') }}>
                         <Text style={{ color: '#000000' }}>Home</Text>
                     </Icon.Button>
-                    <FontAwesome.Button color='#000000' name='heart' size={20}
+
+                    {/* Interests Button */}
+                    <FontAwesome.Button
+                        color='#000000'
+                        name='heart'
+                        size={20}
                         style={{ backgroundColor: 'white' }}
                         onPress={() => { props.navigation.navigate('Interets') }}>
                         <Text style={{ color: '#000000' }}>Interests</Text>
                     </FontAwesome.Button>
-                    {/* <MaterialCommunityIcons.Button color='#000000' name='logout' size={25}
-                        style={{ backgroundColor: 'white' }}
-                        onPress={() => { props.navigation.navigate('Home') }}>
-                        <Text style={{ color: '#000000' }}>Logout</Text>
-                    </MaterialCommunityIcons.Button> */}
+
+                    {/* Logout Button */}
                     <MaterialCommunityIcons.Button
+                        style={{ backgroundColor: '#4267B2' }}
                         onPress={() => { props.navigation.navigate('Login') }}>
                         <LoginButton onLogoutFinished={() => props.navigation.navigate('Login')} />
-                        {/* LoginManager.logout((data) => {
-                            props.navigation.navigate('Login')
-                        }) */}
                     </MaterialCommunityIcons.Button>
                 </Content>
             </Container>
@@ -140,7 +143,7 @@ const LoginStack = createStackNavigator({
         screen: Login,
         navigationOptions: {
             header: null,
-          },
+        },
     }
 })
 const MainContainer = createSwitchNavigator({
@@ -148,8 +151,7 @@ const MainContainer = createSwitchNavigator({
         screen: DrawerNavigator,
     },
     Auth: {
-        // screen: LoginStack,
-        screen: HomeStack
+        screen: LoginStack
     },
 }, {
         showIcon: true,
