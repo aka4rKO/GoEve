@@ -23,7 +23,7 @@ def buildModels():
     KNNBakeOff.knn('0', False)
     
     # Just an evaluator
-    RecsBakeOff.recsBakeOffEval()
+    #RecsBakeOff.recsBakeOffEval()
     
     SVDBakeOff.svdAndSvdPp('0', 'svd', False)
     

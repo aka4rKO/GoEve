@@ -11,17 +11,10 @@ from surprise import KNNBasic
 from surprise import NormalPredictor
 from Framework.Evaluator import Evaluator
 import surprise
+import Util
 
 import random
 import numpy as np
-
-def LoadEventData():
-    event = EventData()
-    print("Loading event ratings...")
-    data = event.loadEventData()
-    print("\nComputing event popularity ranks so we can measure novelty later...")
-    rankings = event.getPopularityRanks()
-    return (event, data, rankings)
 
 np.random.seed(0)
 random.seed(0)
@@ -30,7 +23,7 @@ random.seed(0)
 def knn(userID, isRecommend):
     
     # Load up common data set for the recommender algorithms
-    (event, evaluationData, rankings) = LoadEventData()
+    (event, evaluationData, rankings) = Util.LoadEventData()
     
     # Construct an Evaluator to evaluate them
     evaluator = Evaluator(evaluationData, rankings)
@@ -46,10 +39,28 @@ def knn(userID, isRecommend):
         trainSet = ed.GetFullTrainSet()
         UserKNN.fit(trainSet)
         
-        # Fight!
+        # Evaluating the algorithm to get the metrices
         evaluator.Evaluate(False)
+        newMatrices = evaluator.evaluatedMetrics 
+        print(newMatrices)
         
-        surprise.dump.dump('models/userKnn.pkl', predictions=None, algo=UserKNN, verbose=0)
+        filePath = 'scores/UserRecsKNNScores.txt'
+        modelPath = 'models/userKnn.pkl'
+        
+        if(Util.readFromFile(filePath, modelPath, UserKNN, newMatrices) == "File not found and model dumped"):
+            return "File not found and model dumped"
+        
+        oldMatrices = Util.readFromFile(filePath, modelPath, UserKNN, newMatrices)
+    
+        if(oldMatrices['RMSE'] > newMatrices['RMSE'] and oldMatrices['MAE'] > newMatrices['MAE'] ):
+            surprise.dump.dump(modelPath, predictions=None, algo=UserKNN, verbose=0)
+            
+            # Saving the new scores to a file
+            Util.writeToFile(filePath, newMatrices)
+            
+            print("New model is better... Dumped the new model")
+        else:
+            print("Old model is better")
     else:
         
         (predictions, UserKNN) = surprise.dump.load('models/userKnn.pkl')
