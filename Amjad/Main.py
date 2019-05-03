@@ -8,6 +8,7 @@ Created on Mon Apr 29 17:58:33 2019
 from flask import Flask, request, jsonify
 import RBMBakeOff
 import AutoRecBakeOff
+import BakeOff
 import surprise
 from dataset.AddRating import addRate
 from dataset.AddRating import addManyRate
@@ -36,20 +37,26 @@ def trainAutoRec():
     AutoRecBakeOff.TrainModel()
     return "Done"
 
+@app.route("/train/all", methods=['GET'])
+def trainAll():
+    BakeOff.TrainModel()
+    return "Done"
+
+
 # test model
     
 # rbm testing   
 @app.route("/rbm/user/<userID>", methods=['GET'])
 def RbmRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/RBM.pkl')
-    recs = RBMBakeOff.TestModel(algo, userID)
+    recs = BakeOff.TestRBMModel(algo, userID)
     return jsonify({'eventIds': recs})
 
 # auto rec testing
 @app.route("/autorec/user/<userID>", methods=['GET'])
 def AutoRecRecommendation(userID):
     (predictions, algo) = surprise.dump.load('models/AutoRec.pkl')
-    recs = AutoRecBakeOff.TestModel(algo, userID) 
+    recs = BakeOff.TestAutoRecModel(algo, userID) 
     return jsonify({'eventIds': recs})
 
 # adding rating single  row to dataset
