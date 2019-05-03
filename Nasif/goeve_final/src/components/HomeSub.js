@@ -7,11 +7,21 @@
 }
 
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet, Linking, WebView } from "react-native";
 import { Container, Header, Content, Card, CardItem, Body, Text, Thumbnail, Button, Right, StyleProvider } from 'native-base';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 
+
+
 class HomeSub extends Component {
+
+    urlOpen(url){
+        return(
+            <WebView
+            source={{uri: url}}
+          />
+        )    
+    }
     render() {
 
         const { eventsPush } = this.props;
@@ -24,7 +34,8 @@ class HomeSub extends Component {
                         <CardItem>
                             <Body style={{ flex: 1, flexDirection: 'row' }}>
                                 <View>
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                                {/* onPress={ ()=> Linking.openURL(eventData.event.url) } */}
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }} onPress={ () => this.urlOpen(eventData.event.url) }>
                                         {eventData.event.title}
                                     </Text>
                                     <Text style={{ color: 'red', fontSize: 13, fontWeight: 'bold' }}>
@@ -48,7 +59,7 @@ class HomeSub extends Component {
                                         // showRating
                                         ratingCount={5}
                                         imageSize={20}
-                                        onFinishRating={(rating)=>{console.log(rating)}}
+                                        onFinishRating={(rating)=>{console.log( eventData.event.id, rating)}}
                                     />
                                     <View></View>
                                     </View>

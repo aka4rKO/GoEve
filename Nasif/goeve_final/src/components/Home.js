@@ -19,7 +19,7 @@ class Home extends Component {
       {
         event :{
           id: 1,
-          url: 'http://betacrash.com/wp-content/uploads/2018/05/io-social-banner.png',
+          url: 'https://www.apple.com/',
           title: 'Google I/O',
           month: 'JAN',
           day: '28',

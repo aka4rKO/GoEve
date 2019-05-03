@@ -148,7 +148,8 @@ const MainContainer = createSwitchNavigator({
         screen: DrawerNavigator,
     },
     Auth: {
-        screen: LoginStack,
+        // screen: LoginStack,
+        screen: HomeStack
     },
 }, {
         showIcon: true,

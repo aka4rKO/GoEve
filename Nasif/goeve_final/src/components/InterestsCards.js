@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, FlatList, ImageBackground, CheckBox } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ImageBackground, CheckBox, Button } from 'react-native';
 import CircleCheckBox from 'react-native-circle-checkbox';
 import CardView from 'react-native-cardview';
 
@@ -83,12 +83,15 @@ export default class App extends Component {
 
     render() {
         return (
+        
             <FlatList
                 data={formatData(this.state.data, numColumns)}
                 style={styles.container}
                 renderItem={this.renderItem}
                 numColumns={numColumns}
             />
+        
+            
         );
     }
 }

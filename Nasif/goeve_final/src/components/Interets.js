@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import InterestsCards from './InterestsCards';
+import { Button } from 'react-native-elements';
+import { View } from 'native-base';
 
 export default class Interests extends Component {
   render() {
@@ -41,7 +43,7 @@ export default class Interests extends Component {
     ]
 
     return (
-      <InterestsCards data={eventType} />
+        <InterestsCards data={eventType} />
     );
   }
 }
