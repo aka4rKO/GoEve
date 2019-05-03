@@ -2,7 +2,7 @@
 """
 Created on Sat April 20 2019
 
-@author: Akram Azarm
+@author: Akram Azarm and Amjad
 """
 
 import surprise
@@ -15,6 +15,7 @@ import KNNBakeOff
 import SVDBakeOff
 import RBMBakeOff
 import AutoRecBakeOff
+import BakeOff
 from dataset.AddRating import addRate
 from dataset.AddRating import addManyRate
 import BuildModels
@@ -102,6 +103,12 @@ def trainRbm():
     RBMBakeOff.TrainModel()
     return "Done"
 
+# train all autorec and rbm
+@app.route("/train/all", methods=['GET'])
+def trainAll():
+    BakeOff.TrainModel()
+    return "Done"
+    
 # rbm testing   
 @app.route("/rbm/user/<userID>", methods=['GET'])
 def RbmRecommendation(userID):

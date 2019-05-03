@@ -5,6 +5,8 @@
 from .EvaluationData import EvaluationData
 from .EvaluatedAlgorithm import EvaluatedAlgorithm
 import surprise
+import pickle
+import os
 
 class Evaluator:
     
@@ -15,6 +17,7 @@ class Evaluator:
         # rankings- Popularity rankings
         evalD = EvaluationData(dataset, rankings)
         self.dataset = evalD
+        self.metricsList = {}
         
     def AddAlgorithm(self, algorithm, name):
         # creating the object of EvaluationAlgorithm 
@@ -35,14 +38,16 @@ class Evaluator:
             print("{:<10} {:<10} {:<10} {:<10} {:<10} {:<10} {:<10} {:<10} {:<10}".format(
                     "Algorithm", "RMSE", "MAE", "HR", "cHR", "ARHR", "Coverage", "Diversity", "Novelty"))
             for (name, metrics) in results.items():
+                self.metricsList[name] = metrics
                 print("{:<10} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f}".format(
                         name, metrics["RMSE"], metrics["MAE"], metrics["HR"], metrics["cHR"], metrics["ARHR"],
                                       metrics["Coverage"], metrics["Diversity"], metrics["Novelty"]))
         else:
             print("{:<10} {:<10} {:<10}".format("Algorithm", "RMSE", "MAE"))
             for (name, metrics) in results.items():
+                self.metricsList[name] = metrics
                 print("{:<10} {:<10.4f} {:<10.4f}".format(name, metrics["RMSE"], metrics["MAE"]))
-                
+               
         print("\nLegend:\n")
         print("RMSE:      Root Mean Squared Error. Lower values mean better accuracy.")
         print("MAE:       Mean Absolute Error. Lower values mean better accuracy.")
@@ -55,6 +60,27 @@ class Evaluator:
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
         
+       
+    
+    def isBetterModel(self, newMatrics,name) :
+        isBetter = False
+        filePath = './scores/'+ name + 'Scores.txt'
+       
+        try:
+            with open(filePath, 'rb') as file:
+                oldMatrics = pickle.load(file)
+        except FileNotFoundError : 
+            print("no previous scores")
+            return True
+        print("Old Matrics ",name," (",oldMatrics['RMSE'],', ',oldMatrics['MAE'],')')
+        if(oldMatrics['RMSE'] > newMatrics['RMSE'] and oldMatrics['MAE'] > newMatrics['MAE'] ):
+            print("better rmse and mae")
+            isBetter = True
+        else:    
+            print("not better rmse and mae ")
+            isBetter = False
+        
+        return isBetter
         
     def FitAndDump(self):
              
@@ -62,13 +88,22 @@ class Evaluator:
                 
             print("\nUsing recommender ", algo.GetName())
             
-            print("\nBuilding recommendation model...")
-            trainSet = self.dataset.GetFullTrainSet()
-            modelName = 'models/' + algo.GetName() + '.pkl'
-            algo = algo.GetAlgorithm().fit(trainSet)
-            surprise.dump.dump(modelName, predictions=None, algo=algo, verbose=0)
-            
-      
+            if(self.isBetterModel(self.metricsList[algo.GetName()],algo.GetName())):
+                
+                # storing all performance scores in a txt file
+                filePath = './scores/'+ algo.GetName() + 'Scores.txt'
+                
+                with open(filePath, 'wb') as file:
+                    pickle.dump(self.metricsList[algo.GetName()], file)
+                
+                print("\nBuilding recommendation model...")
+                trainSet = self.dataset.GetFullTrainSet()
+                modelName = 'models/' + algo.GetName() + '.pkl'
+                algo = algo.GetAlgorithm().fit(trainSet)
+                surprise.dump.dump(modelName, predictions=None, algo=algo, verbose=0)
+            else:
+                print("model not replaced")
+    
     def SampleTopNRecs(self, ed, algo, testSubject, k=10):
         alg = ""
         for algorithm in self.algorithms:
