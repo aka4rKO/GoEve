@@ -67,11 +67,17 @@ const CustomDrawerComponent = (props) => (
                         onPress={() => { props.navigation.navigate('Interets') }}>
                         <Text style={{ color: '#000000' }}>Interests</Text>
                     </FontAwesome.Button>
-                    <MaterialCommunityIcons.Button color='#000000' name='logout' size={25}
+                    {/* <MaterialCommunityIcons.Button color='#000000' name='logout' size={25}
                         style={{ backgroundColor: 'white' }}
                         onPress={() => { props.navigation.navigate('Home') }}>
-                        <LoginButton onLogoutFinished={() => props.navigation.navigate('Login')} />
                         <Text style={{ color: '#000000' }}>Logout</Text>
+                    </MaterialCommunityIcons.Button> */}
+                    <MaterialCommunityIcons.Button
+                        onPress={() => { props.navigation.navigate('Login') }}>
+                        <LoginButton onLogoutFinished={() => props.navigation.navigate('Login')} />
+                        {/* LoginManager.logout((data) => {
+                            props.navigation.navigate('Login')
+                        }) */}
                     </MaterialCommunityIcons.Button>
                 </Content>
             </Container>
@@ -132,7 +138,9 @@ const DrawerNavigator = createDrawerNavigator({
 const LoginStack = createStackNavigator({
     Login: {
         screen: Login,
-        
+        navigationOptions: {
+            header: null,
+          },
     }
 })
 const MainContainer = createSwitchNavigator({
