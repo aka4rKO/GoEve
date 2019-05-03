@@ -27,7 +27,7 @@ class EventData:
     def loadEventData(self):
 
         # Look for files relative to the directory we are running from
-        os.chdir(os.path.dirname(sys.argv[0]))
+        #os.chdir(os.path.dirname(sys.argv[0]))
 
         ratingsDataset = 0
         self.eventID_to_title = {}

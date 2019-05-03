@@ -61,13 +61,19 @@ def simpleItemCF():
     
 def SampleTopNRecs(userID, model):
     
+    # Training on the spot (FAST matrix)
+    event = EventData()
+    data = event.loadEventData()
+    trainSet = data.build_full_trainset()
+    model.fit(trainSet)
+    
     #compute the user similarity matrix
     simsMatrix = model.compute_similarities()
     
-    event = EventData()
-    data = event.loadEventData()
+    #event = EventData()
+    #data = event.loadEventData()
     
-    trainSet = data.build_full_trainset()
+    #trainSet = data.build_full_trainset()
     
     # Get top N similar users to our test subject
     testUserInnerID = trainSet.to_inner_uid(userID)

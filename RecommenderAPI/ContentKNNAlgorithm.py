@@ -88,6 +88,10 @@ class ContentKNNAlgorithm(AlgoBase):
             return 0
         
     def SampleTopNRecs(self, event, testSubject=3247, k=10):
+        
+        ed = EvaluationData(event.loadEventData(), event.getPopularityRanks())
+        self.dataset = ed
+        
         print("User ID: "+str(testSubject))
         
         #for algo in self.algorithms:

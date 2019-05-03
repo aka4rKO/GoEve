@@ -7,6 +7,7 @@ Created on Sat April 20 2019
 
 import surprise
 from Framework.EventData import EventData
+from Framework.Evaluator import Evaluator
 from flask import Flask, request, jsonify
 
 import SimpleUserCF
@@ -77,8 +78,8 @@ def getSVDpp(userID):
     return jsonify({'eventIds': recs})
 
 # TODO
-    # make a common call to train the models /train method POST 
-    # append the ratings to the ratings.csv file -> train and build models
+    # DELETE THE DATA (LAST 3 ROWS)
+    # TIME BASED TRAINING (ASK THINURA)
     # after training the models evaluate them and compare those scores before dumping 
     # for top recommended combine all and see the best result after evaluating and send
     
