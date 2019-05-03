@@ -21,6 +21,8 @@ class Evaluator:
         self.algorithms.append(alg)
         
     def Evaluate(self, doTopN):
+        self.evaluatedMetrics = {}
+        
         results = {}
         for algorithm in self.algorithms:
             print("Evaluating ", algorithm.GetName(), "...")
@@ -41,6 +43,7 @@ class Evaluator:
             print("{:<10} {:<10} {:<10}".format("Algorithm", "RMSE", "MAE"))
             for (name, metrics) in results.items():
                 print("{:<10} {:<10.4f} {:<10.4f}".format(name, metrics["RMSE"], metrics["MAE"]))
+                self.evaluatedMetrics = {"RMSE": metrics["RMSE"], "MAE": metrics["MAE"]}
                 
         print("\nLegend:\n")
         print("RMSE:      Root Mean Squared Error. Lower values mean better accuracy.")
@@ -53,6 +56,7 @@ class Evaluator:
             print("Diversity: 1-S, where S is the average similarity score between every possible pair of recommendations")
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
+        
         
     def SampleTopNRecs(self, event, algo, testSubject=3247, k=10):
         print("User ID: "+str(testSubject))

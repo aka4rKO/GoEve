@@ -6,6 +6,7 @@ from .EvaluationData import EvaluationData
 from .EvaluatedAlgorithm import EvaluatedAlgorithm
 import surprise
 import pickle
+import os
 
 class Evaluator:
     
@@ -55,8 +56,8 @@ class Evaluator:
             print("Diversity: 1-S, where S is the average similarity score between every possible pair of recommendations")
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
-        
-        self.matrics = metrics
+        print("line 58 says ",metrics)
+        self.metrics = metrics
     
     def isBetterModel(self, newMatrics,name) :
         isBetter = False
@@ -69,11 +70,12 @@ class Evaluator:
             print("no previous scores")
             return True
         print("Old Matrics ",name," (",oldMatrics['RMSE'],', ',oldMatrics['MAE'],')')
-        if(oldMatrics['RMSE'] > newMatrics['MAE'] and oldMatrics['RMSE'] > newMatrics['MAE'] ):
+        if(oldMatrics['RMSE'] > newMatrics['RMSE'] and oldMatrics['MAE'] > newMatrics['MAE'] ):
             print("better rmse and mae")
             isBetter = True
         else:    
             print("not better rmse and mae ")
+            isBetter = False
         
         return isBetter
         
@@ -83,13 +85,13 @@ class Evaluator:
                 
             print("\nUsing recommender ", algo.GetName())
             
-            if(self.isBetterModel(self.matrics,algo.GetName())):
+            if(self.isBetterModel(self.metrics,algo.GetName())):
                 
                 # storing all performance scores in a txt file
                 filePath = './scores/'+ algo.GetName() + 'Scores.txt'
                 
                 with open(filePath, 'wb') as file:
-                    pickle.dump(self.matrics, file)
+                    pickle.dump(self.metrics, file)
                 
                 print("\nBuilding recommendation model...")
                 trainSet = self.dataset.GetFullTrainSet()

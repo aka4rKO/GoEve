@@ -11,17 +11,10 @@ from ContentKNNAlgorithm import ContentKNNAlgorithm
 from Framework.Evaluator import Evaluator
 from surprise import NormalPredictor
 import surprise
+import Util
 
 import random
 import numpy as np
-
-def LoadEventData():
-    event = EventData()
-    print("Loading event ratings...")
-    data = event.loadEventData()
-    print("\nComputing event popularity ranks so we can measure novelty later...")
-    rankings = event.getPopularityRanks()
-    return (event, data, rankings)
 
 np.random.seed(0)
 random.seed(0)
@@ -29,7 +22,7 @@ random.seed(0)
 
 def contentRecs():
     # Load up common data set for the recommender algorithms
-    (event, evaluationData, rankings) = LoadEventData()
+    (event, evaluationData, rankings) = Util.LoadEventData()
     
     # Construct an Evaluator to, you know, evaluate them
     evaluator = Evaluator(evaluationData, rankings)
@@ -37,8 +30,28 @@ def contentRecs():
     contentKNN = ContentKNNAlgorithm()
     
     evaluator.AddAlgorithm(contentKNN, "ContentKNN")
-    evaluator.Evaluate(False)
     
-    surprise.dump.dump('models/contentKnn.pkl', predictions=None, algo=contentKNN, verbose=0)
+    # Evaluating the algorithm to get the metrices
+    evaluator.Evaluate(False)
+    newMatrices = evaluator.evaluatedMetrics 
+    print(newMatrices)
+    
+    filePath = 'scores/ContentRecsKNNScores.txt'
+    modelPath = 'models/contentKnn.pkl'
+    
+    if(Util.readFromFile(filePath, modelPath, contentKNN, newMatrices) == "File not found and model dumped"):
+        return "File not found and model dumped"
+    
+    oldMatrices = Util.readFromFile(filePath, modelPath, contentKNN, newMatrices)
+
+    if(oldMatrices['RMSE'] > newMatrices['RMSE'] and oldMatrices['MAE'] > newMatrices['MAE'] ):
+        surprise.dump.dump(modelPath, predictions=None, algo=contentKNN, verbose=0)
+        
+        # Saving the new scores to a file
+        Util.writeToFile(filePath, newMatrices)
+        
+        print("New model is better... Dumped the new model")
+    else:
+        print("Old model is better")
 
 
