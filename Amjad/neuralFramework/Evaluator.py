@@ -17,6 +17,7 @@ class Evaluator:
         # rankings- Popularity rankings
         evalD = EvaluationData(dataset, rankings)
         self.dataset = evalD
+        self.metricsList = {}
         
     def AddAlgorithm(self, algorithm, name):
         # creating the object of EvaluationAlgorithm 
@@ -37,14 +38,16 @@ class Evaluator:
             print("{:<10} {:<10} {:<10} {:<10} {:<10} {:<10} {:<10} {:<10} {:<10}".format(
                     "Algorithm", "RMSE", "MAE", "HR", "cHR", "ARHR", "Coverage", "Diversity", "Novelty"))
             for (name, metrics) in results.items():
+                self.metricsList[name] = metrics
                 print("{:<10} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f} {:<10.4f}".format(
                         name, metrics["RMSE"], metrics["MAE"], metrics["HR"], metrics["cHR"], metrics["ARHR"],
                                       metrics["Coverage"], metrics["Diversity"], metrics["Novelty"]))
         else:
             print("{:<10} {:<10} {:<10}".format("Algorithm", "RMSE", "MAE"))
             for (name, metrics) in results.items():
+                self.metricsList[name] = metrics
                 print("{:<10} {:<10.4f} {:<10.4f}".format(name, metrics["RMSE"], metrics["MAE"]))
-                
+               
         print("\nLegend:\n")
         print("RMSE:      Root Mean Squared Error. Lower values mean better accuracy.")
         print("MAE:       Mean Absolute Error. Lower values mean better accuracy.")
@@ -56,8 +59,8 @@ class Evaluator:
             print("Diversity: 1-S, where S is the average similarity score between every possible pair of recommendations")
             print("           for a given user. Higher means more diverse.")
             print("Novelty:   Average popularity rank of recommended items. Higher means more novel.")
-        print("line 58 says ",metrics)
-        self.metrics = metrics
+        
+       
     
     def isBetterModel(self, newMatrics,name) :
         isBetter = False
@@ -85,13 +88,13 @@ class Evaluator:
                 
             print("\nUsing recommender ", algo.GetName())
             
-            if(self.isBetterModel(self.metrics,algo.GetName())):
+            if(self.isBetterModel(self.metricsList[algo.GetName()],algo.GetName())):
                 
                 # storing all performance scores in a txt file
                 filePath = './scores/'+ algo.GetName() + 'Scores.txt'
                 
                 with open(filePath, 'wb') as file:
-                    pickle.dump(self.metrics, file)
+                    pickle.dump(self.metricsList[algo.GetName()], file)
                 
                 print("\nBuilding recommendation model...")
                 trainSet = self.dataset.GetFullTrainSet()
