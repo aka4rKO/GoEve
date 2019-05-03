@@ -77,19 +77,6 @@ def getSVDpp(userID):
     print(recs) 
     return jsonify({'eventIds': recs})
 
-# TODO
-    # DELETE THE DATA (LAST 3 ROWS)
-    # TIME BASED TRAINING (ASK THINURA)
-    # after training the models evaluate them and compare those scores before dumping 
-    # for top recommended combine all and see the best result after evaluating and send
-    
-    # make new Algo for new users /newuser/data method POST
-    # database must have a field called first time and rated
-    
-    
-    # Recommended
-    # Based on your interest
-    # Based on other user who have been to similar events
 
 # train arko models
 @app.route("/other/train", methods=['GET'])

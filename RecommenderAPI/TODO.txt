@@ -1,0 +1,13 @@
+#TODO
+# TIME BASED TRAINING (ASK THINURA)
+#     CREATE DOCKER IMAGE AND HOST
+    # GIVE THINURA THE API CALLS (END POINTS)
+    
+    
+    # make new Algo for new users /newuser/data method POST
+    # database must have a field called first time and rated
+    
+    
+    # Recommended
+    # Based on your interest
+    # Based on other user who have been to similar events
