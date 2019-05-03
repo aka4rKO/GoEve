@@ -151,11 +151,11 @@ class RecommenderMetrics:
         for userID in topNPredicted.keys():
             for rating in topNPredicted[userID]:
                 eventID = rating[0]
-                print("line 106: ",eventID)
+#                print("line 106: ",eventID)
                 rank = rankings[eventID]
-                print("rank: ",rank)
+#                print("rank: ",rank)
                 total += rank
                 n += 1
-        print("line 107: ", total)
-        print("line 108:", n)        
+#        print("line 107: ", total)
+#        print("line 108:", n)        
         return total / n

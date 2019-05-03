@@ -6,16 +6,17 @@ from .EvaluationData import EvaluationData
 from .EvaluatedAlgorithm import EvaluatedAlgorithm
 import surprise
 import pickle
-import os
+
 
 class Evaluator:
     
-    algorithms = []
+    # algorithms = []
     
     def __init__(self, dataset, rankings):
         # dataset - Rating dataset 
         # rankings- Popularity rankings
         evalD = EvaluationData(dataset, rankings)
+        self.algorithms = []
         self.dataset = evalD
         self.metricsList = {}
         
