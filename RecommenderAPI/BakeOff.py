@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+@author: Amjad 
+"""
+
+# -*- coding: utf-8 -*-
+"""
 @author: N.A.Amjad
 """
 from neuralFramework.EventData import EventData
 from RBMAlgorithm import RBMAlgorithm
 from surprise import NormalPredictor
+from AutoRecAlgorithm import AutoRecAlgorithm
 from neuralFramework.Evaluator import Evaluator
 
 import random
@@ -42,18 +48,30 @@ def TrainModel():
 # Just sets the epochs,hidden layer count,Batch Size and etc
     RBM = RBMAlgorithm(epochs=20)
     evaluator.AddAlgorithm(RBM, "RBM")
-
-
+    
+# AutoRec
+    AutoRec = AutoRecAlgorithm()
+    evaluator.AddAlgorithm(AutoRec, "AutoRec")
+    
 # Fight!
     evaluator.Evaluate(True)
     evaluator.FitAndDump()
     
-def TestModel(algo,testSubject):
+def TestRBMModel(algo,testSubject):
     (ed, evaluationData, rankings) = LoadEventData()
     evaluator = Evaluator(evaluationData, rankings)
     evaluator.AddAlgorithm(algo, "RBM")
     # evaluator.Evaluate(False)
     recs = evaluator.SampleTopNRecs(ed,algo = algo, testSubject = testSubject)
     return recs
+
+def TestAutoRecModel(algo,testSubject):
+    (ed, evaluationData, rankings) = LoadEventData()
+    evaluator = Evaluator(evaluationData, rankings)
+    evaluator.AddAlgorithm(algo, "AutoRec")
+    recs = evaluator.SampleTopNRecs(ed,algo = algo, testSubject = testSubject)
+    return recs
+
+
      
    

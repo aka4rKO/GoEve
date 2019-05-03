@@ -21,7 +21,7 @@ class EventData:
 
     eventID_to_title = {}
     title_to_eventID = {}
-    ratingsPath = r"./dataset/rating.csv"
+    ratingsPath = r"./dataset/rating-neuro.csv"
     eventsPath = r"./dataset/event.csv"
     
     # Returns the ratings dataset

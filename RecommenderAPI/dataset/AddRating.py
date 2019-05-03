@@ -3,7 +3,7 @@ import pandas as pd
 def addRate(userId,eventId,rating):
 # Creating the first Dataframe using dictionary 
   df1 = pd.read_csv('./dataset/rating.csv')
-  
+  df3 = pd.read_csv('./dataset/rating-neuro.csv')
 # Creating the Second Dataframe using dictionary 
   df2 = pd.DataFrame({"user-id":[userId], 
                     "event-id":[eventId],  
@@ -11,12 +11,13 @@ def addRate(userId,eventId,rating):
   
 # for appending df2 at the end of df1 
   df = df1.append(df2, ignore_index = True) 
-
+  dff = df3.append(df2, ignore_index = True)
 # print the merged dataframe
   print(df)
 
 # converting to a csv file with index = false
   df.to_csv(r'./dataset/rating.csv', index = False) 
+  dff.to_csv(r'./dataset/rating-neuro.csv', index = False)
   print("done")
   
 def addManyRate(userIds,eventIds,ratings):
@@ -28,7 +29,7 @@ def addManyRate(userIds,eventIds,ratings):
      print(len(userIds))
   # Creating the first Dataframe using dictionary 
   df1 = pd.read_csv('./dataset/rating.csv')
-  
+  df3 = pd.read_csv('./dataset/rating-neuro.csv')
   # titles of the csv files
   col_titles = ('user-id', 'event-id','rating')
   
@@ -48,12 +49,14 @@ def addManyRate(userIds,eventIds,ratings):
   
   # for appending df2 at the end of df1 
   df = df1.append(df2, ignore_index = True)
+  dff = df3.append(df2, ignore_index = True)
   
   # print the merged dataframe
   print(df)
 
 # converting to a csv file with index = false
-  df.to_csv(r'./dataset/rating.csv', index = False) 
+  df.to_csv(r'./dataset/rating.csv', index = False)
+  dff.to_csv(r'./dataset/rating-neuro.csv', index = False) 
   print("done")
 
   
