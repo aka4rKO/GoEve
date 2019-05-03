@@ -10,14 +10,13 @@ from .EvaluatedAlgorithm import EvaluatedAlgorithm
 
 class Evaluator:
     
-    algorithms = []
-    
     def __init__(self, dataset, rankings):
         ed = EvaluationData(dataset, rankings)
         self.dataset = ed
         
     def AddAlgorithm(self, algorithm, name):
         alg = EvaluatedAlgorithm(algorithm, name)
+        self.algorithms = []
         self.algorithms.append(alg)
         
     def Evaluate(self, doTopN):

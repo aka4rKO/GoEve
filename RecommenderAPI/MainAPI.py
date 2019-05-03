@@ -106,6 +106,7 @@ def trainRbm():
 # train all autorec and rbm
 @app.route("/train/all", methods=['GET'])
 def trainAll():
+    trainColl()
     BakeOff.TrainModel()
     return "Done"
     
