@@ -18,11 +18,11 @@ RUN apt-get update -y
 COPY . /RecommenderAPI
 WORKDIR /RecommenderAPI
 # #RUN pip install -r requirements.txt
-RUN pip install numpy
-RUN pip install pandas
-RUN pip install surprise
-RUN pip install --upgrade tensorflow
-RUN pip install Flask
+RUN pip3 install numpy
+RUN pip3 install pandas
+RUN pip3 install surprise
+RUN pip3 install --upgrade tensorflow
+RUN pip3 install Flask
 EXPOSE 5000
-ENTRYPOINT ["python"]
+ENTRYPOINT ["python3"]
 CMD ["MainAPI.py"]
