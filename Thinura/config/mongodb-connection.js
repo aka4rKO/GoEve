@@ -1,6 +1,8 @@
 const MongoClient = require("mongodb").MongoClient;
 const keys = require('./keys');
 
+require('./../server.js')
+
 var _db;
 
 module.exports = {
