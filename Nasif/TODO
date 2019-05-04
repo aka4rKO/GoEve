@@ -1,6 +1,0 @@
-1. Handle 'Not Interested' button for each event in Home.js
-2. Receive and display events, event types
-3. Display user profile pic, name and email address in the side nav
-4. Send login access token, event rating and selected interest categories to the backend
-5. Add 'Text' (refer interests.jpg in the Visual Design folder) and 'Done' button to Interests.js
-6. Validate 'Done' button in point no. 5 for the user to select minimum 3 events
