@@ -1,0 +1,20 @@
+When the user logins for the first time OR has not rated at all
+    POST http://35.186.155.252:5000/newuser                                         DATA categories = "Music|Party|Performance" (Request body)
+
+When the user rates OR clicks not interested. *If not interested rating always 1*
+    POST http://35.186.155.252:5000/rating/add                                      DATA eventId: 2000, userId: 3000, rating: 4 (Request body) 
+
+Must call every half-an-hour to train all the models
+    GET http://35.186.155.252:5000/train/all
+
+Top recommendations
+    GET http://35.186.155.252:5000/rbm/user/3000
+
+Based on your past ratings
+    GET http://35.186.155.252:5000/contentrecs/user/3000
+
+Based on users with similar interests
+    GET http://35.186.155.252:5000/userknn/user/3000
+
+
+
