@@ -17,6 +17,7 @@ import SVDBakeOff
 import RBMBakeOff
 import AutoRecBakeOff
 import BakeOff
+import CateRec
 from dataset.AddRating import addRate
 from dataset.AddRating import addManyRate
 import BuildModels
@@ -139,6 +140,15 @@ def addManyRating():
     addManyRate(userIds, eventIds, ratings)
     return "Done"
 
+@app.route("/newuser",methods=['POST'])
+def newUser():
+    categories = request.form['categories']   
+    catList = categories.split('|')
+    
+    recs = CateRec.SampleTopNRecs(catList)
+    print(recs)
+    return jsonify({'eventIds': recs})
+    
 
 # Running the server in localhost:5000    
 if __name__ == '__main__':

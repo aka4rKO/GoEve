@@ -4,7 +4,7 @@
     # GIVE THINURA THE API CALLS (END POINTS)
     
     
-    # make new Algo for new users /newuser/data method POST
+    
     # database must have a field called first time and rated
     
     
