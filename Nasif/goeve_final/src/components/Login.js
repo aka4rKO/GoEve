@@ -59,7 +59,7 @@ export default class Login extends Component {
                   } else if (result.isCancelled) {
                     console.log('login is cancelled.')
                   } else {
-                    AccessToken.getCurrentAccessToken().then((data) => { this.setState({ accessToken: data.accessToken }) }).catch(error => {
+                    AccessToken.getCurrentAccessToken().then((data) => { this.setState({ accessToken: data.accessToken }),console.log("User id: ",data.userID),console.log("User id: ",data.accessToken) }).catch(error => {
                       console.log(error)
                       initUser(accessToken)
                     })
