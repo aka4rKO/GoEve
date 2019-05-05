@@ -3,24 +3,24 @@ const router = express.Router();
 
 //creating event details
 router.post('/', (req, res, next) => {
-    const eventId = req.body.eventId;
-    const eventURL = req.body.eventURL;
-    const eventTitle = req.body.eventTitle;
-    const eventDate = req.body.eventDate;
-    const eventTime = req.body.eventTime;
-    const eventPrice = req.body.eventPrice;
-    const eventTags = req.body.eventTags;
-    const eventLocation = req.body.eventLocation;
+    const event_id = req.body.event_id;
+    const url = req.body.url;
+    const title = req.body.title;
+    const date = req.body.date;
+    const time = req.body.time;
+    const price = req.body.price;
+    const tags = req.body.tags;
+    const state_city = req.body.state_city;
 
     const event = {
-        eventId: eventId,
-        eventURL: eventURL,
-        eventTitle: eventTitle,
-        eventDate: eventDate,
-        eventTime: eventTime,
-        eventPrice: eventPrice,
-        eventTags: eventTags,
-        eventLocation: eventLocation
+        event_id: event_id,
+        url: url,
+        title: title,
+        date: date,
+        time: time,
+        price: price,
+        tags: tags,
+        state_city: state_city
     };
 
     res.status(201).json({
@@ -31,9 +31,34 @@ router.post('/', (req, res, next) => {
 
 //getting all event details
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling GET event routes'
-    });
+    Category.find()
+        .select("_id event_id url title date time price tags state_city")
+        .exec()
+        .then((docs) => {
+            const response = {
+                count: docs.length,
+                events: docs.map((doc) => {
+                    return {
+                        event_id: doc.event_id,
+                        url: doc.url,
+                        title: doc.title,
+                        date: doc.date,
+                        time: doc.time,
+                        price: doc.price,
+                        tags: doc.tags,
+                        state_city: doc.state_city
+                    }
+                })
+            }
+            res.status(200).json(response);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+
 });
 
 //getting an event details

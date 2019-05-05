@@ -1,70 +1,100 @@
 const express = require('express');
 const router = express.Router();
+const fetch = require('node-fetch');
+const User = require('../models/user');
+const mongoose = require('mongoose');
+
+//get user by id
+router.get('/:fbId', (req, res, next) => {
+    const usedId = req.params.fbId;
+    User.findOne({
+            facebookId: usedId
+        })
+        .exec()
+        .then((result)=>{
+            console.log(result);
+            res.status(201).json({
+                message: "handling POST user routes",
+                createdEvent: result
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 
 //getting access token
 router.post('/', (req, res, next) => {
+    const fbId = req.body.fbId;
     const accessToken = req.body.accessToken;
+    const url = `https://graph.facebook.com/${fbId}?fields=email,name,friends&access_token=${accessToken}`;
+    const getData = async url => {
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            console.log(json);
 
-    // you need permission for most of these fields
-    const userFieldSet = 'id, name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
-
-    const options = {
-        method: 'GET',
-        uri: `https://graph.facebook.com/v2.5/me?`,
-        qs: {
-            fields: userFieldSet,
-            access_token: accessToken
-        }
-    };
-
-    request(options)
-        .then(fbRes => {
-            res.status(200).json({
-                fbRes: fbRes
+            const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                facebookId: json.id,
+                name: json.name,
+                tags: null
             });
-        })
-        .catch(() => {
-            res.status(400).json({
-                message: 'ERROR GETTING DATA FROM FACEBOOK'
-            })
-        })
 
-    // res.status(201).json({
-    //     message: "Handling POST requests to /user",
-    //     accessToken: accessToken
-    // });
+            user
+                .save()
+                .then(result => {
+                    console.log(result);
+                    res.status(201).json({
+                        message: "Handling POST requests to /user",
+                        details: result
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                    res.status(500).json({
+                        error: error
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        };
+    }
+    getData(url);
 });
 
 //getting user tags
-router.get('/tags', (req, res, next) => {
-    const usedId = req.body.userId;
-    const tags = req.body.tags;
+router.patch('/:fbId', (req, res, next) => {
 
-    const userTags = {
-        userId: usedId,
-        tags: tags
-    };
+    const usedId = req.params.fbId;
 
-    res.status(200).json({
-        message: "Handling GET requests to /user",
-        userTags: userTags
-    });
-});
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
 
-//update tags
-router.patch('/', (req, res, next) => {
-    const userId = req.body.userId;
-    const tags = req.body.tags;
-
-    const updateUserTags = {
-        userId: userId,
-        tags: tags
-    };
-
-    res.status(200).json({
-        message: "Handling GET requests to /user",
-        updateUserTags: updateUserTags
-    });
+    User.update({
+            facebookId: usedId
+        }, {
+            $set: updateOps
+        })
+        .exec()
+        .then((result) => {
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
 });
 
 //delete an user
