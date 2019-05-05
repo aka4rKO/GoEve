@@ -7,6 +7,8 @@ RUN pip install pandas
 RUN pip install surprise
 RUN pip install --upgrade tensorflow
 RUN pip install Flask
+RUN pip install -U flask-cors
+RUN pip install apscheduler
 EXPOSE 5000
 CMD python3 MainAPI.py
 
