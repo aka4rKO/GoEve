@@ -12,15 +12,29 @@ import BakeOff
 import surprise
 from dataset.AddRating import addRate
 from dataset.AddRating import addManyRate
+from apscheduler.schedulers.background import BackgroundScheduler
 #from RBMBakeOff import TrainModel
 
 app = Flask(__name__)
 print(app)
 
-# test api
-@app.route("/")
+
+
+
 def home():
     return "Hello World"
+
+def trainNow():
+     # print("Hello")
+     BakeOff.TrainModel()
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(trainNow,'interval',seconds=600)
+sched.start()
+# minutes=60
+# hours=1
+# test api
+
 
 # train the model 
 # TrainModel()
@@ -82,8 +96,10 @@ def addManyRating():
     
 # Running the server in localhost:5000    
 if __name__ == '__main__':
-    app.run(debug=True)
+   app.run(debug=True)
     
+   
+
     
     
 
