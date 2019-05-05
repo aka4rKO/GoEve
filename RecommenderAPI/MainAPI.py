@@ -21,11 +21,22 @@ import CateRec
 from dataset.AddRating import addRate
 from dataset.AddRating import addManyRate
 import BuildModels
+from flask_cors import CORS
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 
 app = Flask(__name__)
+CORS(app)
 
+
+def trainNow():
+     trainColl()
+     BakeOff.TrainModel()
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(trainNow,'interval',seconds=86400)
+sched.start()
 
 def LoadEventData():
     event = EventData()
