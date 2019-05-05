@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const fetch = require('node-fetch');
+const Category =  require('../models/categories');
 
 //creating event details
 router.post('/', (req, res, next) => {
@@ -31,6 +33,7 @@ router.post('/', (req, res, next) => {
 
 //getting all event details
 router.get('/', (req, res, next) => {
+    
     Category.find()
         .select("_id event_id url title date time price tags state_city")
         .exec()

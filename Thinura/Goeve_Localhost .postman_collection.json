@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "9f17e110-7293-46f7-8d10-420e32e50c1c",
+		"name": "Goeve_Localhost ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Creating a user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"fbId\":\"103988834156696\",\n\t\"accessToken\":\"EAAPTz9GmFT4BAMK6DhfbVdECXsQbZA4KuzpqzC6622e2Se7ZBRICzqb3jNGXwEjDFZCdRwU9A2GMPF1rZCoboZAuEj24NUv9ebvBsU6oW7hfiNQMocGHzlSSKHZAhtcXW5KNWgj7fVhFnYfS2t0t92pz7HSjMCGsPIRWa65ZBG3pUdZC6Fe2KXNZCnQ0FUbyJu0az1KZBM41Iz5utc9YzgwHc8\"\n}"
+				},
+				"url": {
+					"raw": "localhost:4000/user/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating user tags",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\"propName\":\"tags\",\"value\":\"Admission|Sport\"}\n]"
+				},
+				"url": {
+					"raw": "localhost:4000/user/103988834156696",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"103988834156696"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting users by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/user/12",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating categories",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "category",
+							"value": "Admission",
+							"type": "text"
+						},
+						{
+							"key": "imageURL",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/categories/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting all categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/categories/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting user by facebook id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/user/103988834156696",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"103988834156696"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
