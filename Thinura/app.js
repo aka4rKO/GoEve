@@ -10,7 +10,7 @@ const categoriesRoutes = require('./api/routes/categories');
 const eventRoutes = require('./api/routes/event');
 
 //connecting to mongodb
-mongoose.connect(process.env.DB_URI, {useNewUrlParser: true});
+// mongoose.connect(process.env.DB_URI, {useNewUrlParser: true});
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({

@@ -5,19 +5,28 @@ const router = express.Router();
 router.post('/', (req, res, next) => {
     const accessToken = req.body.accessToken;
 
+    // you need permission for most of these fields
     const userFieldSet = 'id, name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
 
     const options = {
         method: 'GET',
-        uri: `https://graph.facebook.com/v2.8/${accessToken}`,
+        uri: `https://graph.facebook.com/v2.5/me?`,
         qs: {
-          access_token: user_access_token,
-          fields: userFieldSet
+            fields: userFieldSet,
+            access_token: accessToken
         }
-      };
-      request(options)
+    };
+
+    request(options)
         .then(fbRes => {
-          res.json(fbRes);
+            res.status(200).json({
+                fbRes: fbRes
+            });
+        })
+        .catch(() => {
+            res.status(400).json({
+                message: 'ERROR GETTING DATA FROM FACEBOOK'
+            })
         })
 
     // res.status(201).json({
@@ -64,7 +73,7 @@ router.delete('/:userId', (req, res, next) => {
 
     res.status(200).json({
         message: 'handling DELETE event routes',
-        userId:userId
+        userId: userId
     });
 });
 
