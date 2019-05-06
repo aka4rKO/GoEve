@@ -2,21 +2,82 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const User = require('../models/user');
+const Event = require('../models/event');
 const mongoose = require('mongoose');
+const {
+    URLSearchParams
+} = require('url');
+const params = new URLSearchParams();
 
-//get user by id
-router.get('/:fbId', (req, res, next) => {
+//Adding ratings 
+router.get('/ratings', (req, res, next) => {
+    const event_id = req.body.event_id;
+    const user_id = req.body.user_id;
+    const rating = req.body.rating;
+    console.log(event_id, user_id, rating);
+    const url = `http://35.197.184.241:5000/rating/add`;
+    const getData = async url => {
+        try {
+            params.append('eventId', event_id);
+            params.append('userId', user_id);
+            params.append('rating', rating);
+            console.log("Params ",params);
+
+            const response = await fetch(url, {
+                method: 'POST',
+                body: params
+            });
+            const json = await response.json();
+            res.status(200).json(json);
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        };
+    };
+    getData(url);
+});
+
+//get users' events according to tags
+router.get('/newUser/:fbId', (req, res, next) => {
     const usedId = req.params.fbId;
+    console.log(usedId);
+    const url = `http://35.197.184.241:5000/newuser`;
     User.findOne({
             facebookId: usedId
         })
         .exec()
-        .then((result)=>{
-            console.log(result);
-            res.status(201).json({
-                message: "handling POST user routes",
-                createdEvent: result
-            });
+        .then((result) => {
+            let arrayRes = [];
+            const getData = async url => {
+                try {
+                    params.append('categories', result.tags);
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        body: params
+                    });
+                    const json = await response.json();
+                    json.eventIds.map((doc) => {
+                        Event.findOne({
+                                event_id: doc
+                            })
+                            .select("_id event_id url title date time price tags state_city")
+                            .exec()
+                            .then((result) => {
+                                arrayRes.push(result);
+                                if (arrayRes.length == 10)
+                                    res.status(200).json(arrayRes);
+                            })
+                    })
+                } catch (error) {
+                    console.log(error);
+                    res.status(500).json({
+                        error: error
+                    });
+                };
+            };
+            getData(url);
         })
         .catch(error => {
             console.log(error);
@@ -107,4 +168,25 @@ router.delete('/:userId', (req, res, next) => {
     });
 });
 
+//get user by id
+router.get('/:fbId', (req, res, next) => {
+    const usedId = req.params.fbId;
+    User.findOne({
+            facebookId: usedId
+        })
+        .exec()
+        .then((result) => {
+            console.log(result);
+            res.status(201).json({
+                message: "handling POST user routes",
+                createdEvent: result
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 module.exports = router;

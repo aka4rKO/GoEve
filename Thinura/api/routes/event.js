@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
-const Category =  require('../models/categories');
+const Event = require('../models/event');
 
 //creating event details
 router.post('/', (req, res, next) => {
@@ -33,8 +33,7 @@ router.post('/', (req, res, next) => {
 
 //getting all event details
 router.get('/', (req, res, next) => {
-    
-    Category.find()
+    Event.find()
         .select("_id event_id url title date time price tags state_city")
         .exec()
         .then((docs) => {
@@ -62,6 +61,99 @@ router.get('/', (req, res, next) => {
             });
         });
 
+});
+
+//getting top recommendations for a user
+router.get('/top/:fbId', (req, res, next) => {
+    const fbId = req.params.fbId;
+    const url = `http://35.197.184.241:5000/rbm/user/${fbId}`;
+    let arrayRes = [];
+    const getData = async url => {
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            json.eventIds.map((doc) => {
+                Event.findOne({
+                        event_id: doc
+                    })
+                    .select("_id event_id url title date time price tags state_city")
+                    .exec()
+                    .then((result) => {
+                        arrayRes.push(result);
+                        if (arrayRes.length == 10)
+                            res.status(200).json(arrayRes);
+                    })
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        };
+    }
+    getData(url);
+});
+
+//getting events based on users past ratings
+router.get('/ratings/:fbId', (req, res, next) => {
+    const fbId = req.params.fbId;
+    const url = `http://35.197.184.241:5000/contentrecs/user/${fbId}`;
+    let arrayRes = [];
+    const getData = async url => {
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            json.eventIds.map((doc) => {
+                Event.findOne({
+                        event_id: doc
+                    })
+                    .select("_id event_id url title date time price tags state_city")
+                    .exec()
+                    .then((result) => {
+                        arrayRes.push(result);
+                        if (arrayRes.length == 10)
+                            res.status(200).json(arrayRes);
+                    })
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        };
+    }
+    getData(url);
+});
+
+//getting events based on users past ratings
+router.get('/interests/:fbId', (req, res, next) => {
+    const fbId = req.params.fbId;
+    const url = `http://35.197.184.241:5000/svd/user/${fbId}`;
+    let arrayRes = [];
+    const getData = async url => {
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            json.eventIds.map((doc) => {
+                Event.findOne({
+                        event_id: doc
+                    })
+                    .select("_id event_id url title date time price tags state_city")
+                    .exec()
+                    .then((result) => {
+                        arrayRes.push(result);
+                        if (arrayRes.length == 10)
+                            res.status(200).json(arrayRes);
+                    })
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        };
+    }
+    getData(url);
 });
 
 //getting an event details

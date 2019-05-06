@@ -24,7 +24,8 @@ router.post('/', upload.single('imageURL'), (req, res, next) => {
     const category = new Category({
         _id: new mongoose.Types.ObjectId(),
         category: req.body.category,
-        imageURL: req.file.path
+        imageURL: req.file.path,
+        status: false
     });
 
     category
@@ -47,7 +48,7 @@ router.post('/', upload.single('imageURL'), (req, res, next) => {
 //get categories
 router.get('/', (req, res, next) => {
     Category.find()
-        .select("_id category imageURL")
+        .select("_id category imageURL status")
         .exec()
         .then((docs) => {
             const response = {
@@ -55,7 +56,8 @@ router.get('/', (req, res, next) => {
                 categories: docs.map((doc) => {
                     return {
                         category: doc.category,
-                        imageURL: process.env.NODE_IP + doc.imageURL
+                        imageURL: process.env.NODE_IP + doc.imageURL,
+                        status: doc.status
                     }
                 })
             }

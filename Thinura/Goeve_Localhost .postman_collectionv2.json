@@ -89,7 +89,7 @@
 			"response": []
 		},
 		{
-			"name": "Creating categories",
+			"name": "Creating a category",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -172,6 +172,127 @@
 						"103988834156696"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting all event details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/event/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"event",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting all categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/categories/",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"categories",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting top recommendation system",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/event/top/3000",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"event",
+						"top",
+						"3000"
+					]
+				},
+				"description": "Only if user has rated an event."
+			},
+			"response": []
+		},
+		{
+			"name": "Getting events based on users' past ratings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/event/interests/3000",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"event",
+						"interests",
+						"3000"
+					]
+				},
+				"description": "Only if user has rated an event."
+			},
+			"response": []
+		},
+		{
+			"name": "Getting users' events according to tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/user/newUser/103988834156696",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user",
+						"newUser",
+						"103988834156696"
+					]
+				},
+				"description": "This api request is for users' that have not rated and new users"
 			},
 			"response": []
 		}

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    facebookId: String,
+    facebookId: Number,
     name: String,
     tags: String
 });

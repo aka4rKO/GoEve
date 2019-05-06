@@ -7,6 +7,9 @@ const categoriesSchema = mongoose.Schema({
     },
     imageURL: {
         type: String
+    },
+    status: {
+        type: Boolean
     }
 });
 
