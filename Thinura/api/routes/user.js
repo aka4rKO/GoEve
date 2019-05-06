@@ -7,10 +7,10 @@ const mongoose = require('mongoose');
 const {
     URLSearchParams
 } = require('url');
-const params = new URLSearchParams();
 
 //Adding ratings 
 router.get('/ratings', (req, res, next) => {
+    const params = new URLSearchParams();
     const event_id = req.body.event_id;
     const user_id = req.body.user_id;
     const rating = req.body.rating;
@@ -21,14 +21,13 @@ router.get('/ratings', (req, res, next) => {
             params.append('eventId', event_id);
             params.append('userId', user_id);
             params.append('rating', rating);
-
+            console.log("Params ",params)
             const response = await fetch(url, {
                 method: 'POST',
                 body: params
             });
             const json = await response.json();
             res.status(200).json(json);
-
         } catch (error) {
             console.log(error);
             res.status(500).json({
