@@ -2,31 +2,50 @@ import pandas as pd
   
 def addRate(userId,eventId,rating):
 # Creating the first Dataframe using dictionary 
-  isThere = False
+  isThere1 = False
+  isThere2 = False
+  isList = []
 # Creating the first Dataframe using dictionary 
   df1 = pd.read_csv('./dataset/rating.csv')
   df3 = pd.read_csv('./dataset/rating-neuro.csv')
   
   for index, row in df3.iterrows(): 
-    print(row['event-id'], row['user-id']) 
-    if row['event-id'] == eventId and row['user-id'] == userId:
-        isThere = True
+      print(row['event-id'], row['user-id']) 
+      if str(row['event-id']) == str(eventId) and str(row['user-id']) == str(userId):
+          row['rating'] = rating
+          isThere1 = True
+          isList.insert(1,"updated")
+  for index, row in df1.iterrows(): 
+      print(row['event-id'], row['user-id']) 
+      if str(row['event-id']) == str(eventId) and str(row['user-id']) == str(userId):
+          row['rating'] = rating
+          isThere2 = True
+          isList.insert(0,"updated")
 # Creating the Second Dataframe using dictionary 
         
-  if isThere == True:       
+  if isThere1 != True: 
+     isList.insert(1,"added")        
+     df2 = pd.DataFrame({"user-id":[userId], 
+                          "event-id":[eventId],  
+                          "rating":[rating]})  
+     
+     dff = df3.append(df2, ignore_index = True)
+     dff.to_csv(r'./dataset/rating-neuro.csv', index = False)
+  else:
+     df3.to_csv(r'./dataset/rating-neuro.csv', index = False) 
+     
+  
+  if isThere2 != True:
      df2 = pd.DataFrame({"user-id":[userId], 
                           "event-id":[eventId],  
                           "rating":[rating]}) 
-  
-# for appending df2 at the end of df1 
-     df = df1.append(df2, ignore_index = True) 
-     dff = df3.append(df2, ignore_index = True)
-# print the merged dataframe
-     print(df)
-     return "Done"
+     isList.insert(0,"added")
+     df = df1.append(df2, ignore_index = True)
+     df.to_csv(r'./dataset/rating.csv', index = False)
   else:
-     return "Not Done"
-  
+     df1.to_csv(r'./dataset/rating.csv', index = False)
+  return tuple(isList)
+    
 def addManyRate(userIds,eventIds,ratings):
   # converting the string recieved by the json to a list by splitting 
   if isinstance(userIds, str) or isinstance(eventIds, str) or isinstance(ratings, str):

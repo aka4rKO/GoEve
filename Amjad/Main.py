@@ -29,7 +29,7 @@ def trainNow():
      BakeOff.TrainModel()
 
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(trainNow,'interval',seconds=600)
+sched.add_job(trainNow,'interval',seconds=86400)
 sched.start()
 # minutes=60
 # hours=1
@@ -81,7 +81,7 @@ def addRating():
     rating = request.form['rating']
     print(userId," ",eventId," ",rating)
     status = addRate(userId, eventId, rating)
-    return status
+    return jsonify({'status': status})
 
 # adding rating multiple row to dataset
 @app.route("/rating/add/multiple",methods=['POST'])
