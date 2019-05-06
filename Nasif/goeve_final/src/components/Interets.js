@@ -2,9 +2,21 @@ import React, { Component } from 'react';
 import InterestsCards from './InterestsCards';
 import { Button } from 'react-native-elements';
 import { View } from 'native-base';
+import axios from 'axios';
 
 export default class Interests extends Component {
+  constructor() {
+    super();
+    this.state = { data: [] };
+  }
+  componentDidMount() {
+    fetch(`http://35.186.155.252:4000/categories/`)
+      .then(res => res.json())
+      .then(json => this.setState({ data: json }));
+  }
+
   render() {
+
 
     const eventType = [
       {
@@ -43,7 +55,7 @@ export default class Interests extends Component {
     ]
 
     return (
-        <InterestsCards data={eventType} />
+        <InterestsCards data={this.state.data} />
     );
   }
 }
