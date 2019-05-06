@@ -80,8 +80,8 @@ def addRating():
     userId = request.form['userId']
     rating = request.form['rating']
     print(userId," ",eventId," ",rating)
-    addRate(userId, eventId, rating)
-    return "done"
+    status = addRate(userId, eventId, rating)
+    return status
 
 # adding rating multiple row to dataset
 @app.route("/rating/add/multiple",methods=['POST'])

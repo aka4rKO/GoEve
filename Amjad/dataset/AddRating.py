@@ -2,23 +2,30 @@ import pandas as pd
   
 def addRate(userId,eventId,rating):
 # Creating the first Dataframe using dictionary 
+  isThere = False
+# Creating the first Dataframe using dictionary 
   df1 = pd.read_csv('./dataset/rating.csv')
   df3 = pd.read_csv('./dataset/rating-neuro.csv')
+  
+  for index, row in df3.iterrows(): 
+    print(row['event-id'], row['user-id']) 
+    if row['event-id'] == eventId and row['user-id'] == userId:
+        isThere = True
 # Creating the Second Dataframe using dictionary 
-  df2 = pd.DataFrame({"user-id":[userId], 
-                    "event-id":[eventId],  
-                    "rating":[rating]}) 
+        
+  if isThere == True:       
+     df2 = pd.DataFrame({"user-id":[userId], 
+                          "event-id":[eventId],  
+                          "rating":[rating]}) 
   
 # for appending df2 at the end of df1 
-  df = df1.append(df2, ignore_index = True) 
-  dff = df3.append(df2, ignore_index = True)
+     df = df1.append(df2, ignore_index = True) 
+     dff = df3.append(df2, ignore_index = True)
 # print the merged dataframe
-  print(df)
-
-# converting to a csv file with index = false
-  df.to_csv(r'./dataset/rating.csv', index = False) 
-  dff.to_csv(r'./dataset/rating-neuro.csv', index = False)
-  print("done")
+     print(df)
+     return "Done"
+  else:
+     return "Not Done"
   
 def addManyRate(userIds,eventIds,ratings):
   # converting the string recieved by the json to a list by splitting 
