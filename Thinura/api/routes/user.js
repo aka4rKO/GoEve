@@ -40,6 +40,7 @@ router.get('/ratings', (req, res, next) => {
 
 //get users' events according to tags
 router.get('/newUser/:fbId', (req, res, next) => {
+    const params = new URLSearchParams();
     const usedId = req.params.fbId;
     console.log(usedId);
     const url = `http://35.197.184.241:5000/newuser`;
@@ -49,6 +50,8 @@ router.get('/newUser/:fbId', (req, res, next) => {
         .exec()
         .then((result) => {
             let arrayRes = [];
+            console.log(result);
+
             const getData = async url => {
                 try {
                     params.append('categories', result.tags);
