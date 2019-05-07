@@ -17,6 +17,7 @@ import { LoginButton } from 'react-native-fbsdk';
 
 import Home from './components/Home';
 import Interets from './components/Interets'
+import InterestsCards from './components/InterestsCards'
 import Login from './components/Login';
 
 const { width: widthDim } = Dimensions.get('window');
@@ -108,7 +109,7 @@ const HomeStack = createStackNavigator({
 
 const InterestsStack = createStackNavigator({
     Interets: {
-        screen: Interets,
+        screen: InterestsCards,
         navigationOptions: ({ navigation }) => ({
             headerStyle: { backgroundColor: '#FB6600' },
             headerTitleStyle: {
