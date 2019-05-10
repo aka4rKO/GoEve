@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { createAppContainer, createDrawerNavigator, createStackNavigator, createSwitchNavigator } from "react-navigation";
-import { View, Dimensions, ScrollView, SafeAreaView, Image } from 'react-native';
+import { View, Dimensions, ScrollView, SafeAreaView, Image, TouchableOpacity  } from 'react-native';
 import { Container, Content, Text, Body } from "native-base";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LoginButton } from 'react-native-fbsdk';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Home from './components/Home';
 import Interets from './components/Interets'
+
 import Login from './components/Login';
 
 const { width: widthDim } = Dimensions.get('window');
@@ -71,8 +73,8 @@ const CustomDrawerComponent = (props) => (
                     {/* Logout Button */}
                     <MaterialCommunityIcons.Button
                         style={{ backgroundColor: '#4267B2' }}
-                        onPress={() => { AsyncStorage.removeItem('FBAccessToken'),props.navigation.navigate('Login') }}>
-                        <LoginButton onLogoutFinished={() => {props.navigation.navigate('Login')}} />
+                        onPress={() => {}}>
+                        <LoginButton onLogoutFinished={() => {AsyncStorage.clear(),props.navigation.navigate('Login')}} />
                     </MaterialCommunityIcons.Button>
                 </Content>
             </Container>
@@ -110,9 +112,9 @@ const InterestsStack = createStackNavigator({
             headerLeft: (
                 <Icon name='menu' size={25} onPress={() => { navigation.openDrawer() }} style={{ padding: 10 }} />
             ),
-
+            
         }),
-    }
+    },
 }, {
         showIcon: true,
     });
@@ -122,6 +124,7 @@ const DrawerNavigator = createDrawerNavigator({
         screen: HomeStack
     },
     Interets: {
+
         screen: InterestsStack
     }
 }, {

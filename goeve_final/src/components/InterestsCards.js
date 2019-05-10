@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, FlatList, ImageBackground, CheckBox, Button } from 'react-native';
+import { StyleSheet, Text, FlatList, ImageBackground } from 'react-native';
 import CircleCheckBox from 'react-native-circle-checkbox';
 import CardView from 'react-native-cardview';
+import { View, Container, Content, Spinner } from 'native-base';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const formatData = (data, numColumns) => {
     const numberOfFullRows = Math.floor(data.length / numColumns);
@@ -11,62 +14,103 @@ const formatData = (data, numColumns) => {
         data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
         numberOfElementsLastRow++;
     }
-
     return data;
 };
 
 const numColumns = 2;
 
-export default class App extends Component {
+export default class InterestsCards extends Component {
+    
+    static pramsCat = "";
+
     constructor(props) {
         super(props);
     
         this.state = {
             data: [],
-            isLoading: false
+            isLoading: false,
+            selectedList:[]
         }
         this.handleChange = this.handleChange.bind(this);
+        this.submitButton = this.submitButton.bind(this);
     }
 
-      handleChange = (key,checked) => {
-            console.log("Key "+key+" Checked "+checked)
-          const newArray = [...this.state.data];
-          newArray[key].status = checked;
-          this.setState({data:newArray})
-          console.log("Length "+this.state.data.length)
-          this.state.data.map((item,key)=>{console.log(item.name+" "+item.status)})
-      }
-      
-        componentDidMount(){
-            this.setState({data:this.props.data,isLoading:true})
+    submitButton = (Submit) =>{
+        if(Submit){
+            let id = -1;
+            AsyncStorage.getItem('FBAccessUserID')
+            .then((value)=>{
+                console.log("Token ",value);
+                id=value;
+                axios.patch(`http://35.186.155.252:4000/user/${id}`,[
+                {"propName":"tags","value":pramsCat}
+                ]).then((res)=>{
+                    console.log("Doneee value",pramsCat);
+                    console.log("Res ",res);
+                })
+            });
+            
+
+        }else{
+            console.log("Count of selected items: ",this.state.selectedList)
+            this.state.selectedList.map((item,index)=>{
+                if(index==0){
+                    pramsCat=item.category;
+                }else{
+                    pramsCat=pramsCat+"|"+item.category
+                }
+            })
+            console.log(pramsCat);
         }
         
+    }
+    
+
+    handleChange = (key,checked) => {
+
+        console.log("Key "+key+" Checked "+checked);
+        let newArray = [...this.state.data];
+
+        newArray[key].status = checked;
+
+        let tempSelectedArray = [...this.state.selectedList];
+        tempSelectedArray[this.state.selectedList.length] = newArray[key];
+        
+        this.setState({data:newArray,selectedList:tempSelectedArray},()=>{this.submitButton(false)});
+        console.log("Checked item ",newArray[key]);
+      
+    }
+      
+    componentDidMount(){
+        this.setState({data:this.props.data,isLoading:true})
+    }
+        
     renderItem = ({ item, index }) => {
-        console.log("Item ",item.imageURL)
 
         if (item.empty === true) {
             return (
-                <CardView
-                    cardElevation={0}
-                    cardMaxElevation={0}
-                    cornerRadius={0}
-                    style={styles.itemInvisible}
-                >
-                    <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'}>
-                        <View style={styles.check}>
-                        </View>
-                        <Text style={styles.text}>{item.name}</Text>
-                    </ImageBackground>
-                </CardView>);
+                    <CardView
+                        cardElevation={0}
+                        cardMaxElevation={0}
+                        cornerRadius={0}
+                        style={styles.itemInvisible}>
+                        <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'}>
+                            <View style={styles.check}>
+                            </View>
+                            <Text style={styles.text}>{item.category}</Text>
+                        </ImageBackground>
+                    </CardView>
+                );
         }
+
         return (
             <CardView
                 cardElevation={4}
                 cardMaxElevation={4}
                 cornerRadius={8}
                 style={styles.card}
-            >
-                <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'}>
+                >
+                <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'} >
                     <View style={styles.check}>
                         <CircleCheckBox
                             checked={item.status}
@@ -76,8 +120,7 @@ export default class App extends Component {
                             innerColor="#4169e1"
                             outerSize={19}
                             innerSize={10}
-                            filterSize={30}
-                        />
+                            filterSize={30}/>
                     </View>
                     <Text style={styles.text}>{item.category}</Text>
                 </ImageBackground>
@@ -86,25 +129,23 @@ export default class App extends Component {
     };
 
     render() {
-        console.log("Data cards",this.props.data)
-console.log("isLoading ",this.state)
 		if(this.state.isLoading){
+            return (
+                    <FlatList
+                        data={formatData(this.state.data, numColumns)}
+                        style={styles.container}
+                        renderItem={this.renderItem}
+                        numColumns={numColumns}
+                        keyExtractor={(item, index) => index.toString()}/>
+                );
+            }
 
         return (
-        
-            <FlatList
-                data={formatData(this.state.data, numColumns)}
-                style={styles.container}
-                renderItem={this.renderItem}
-                numColumns={numColumns}
-                keyExtractor={(item, index) => index.toString()}
-            />
-        
-            
-        );
-        }
-        return (
-			<Text>Loading</Text>
+			<Container>
+                <Content>
+                    <Spinner color='orange' />
+                </Content>
+            </Container>
 		)
     }
 }

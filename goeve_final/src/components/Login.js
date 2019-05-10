@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, Image, AsyncStorage } from "react-native";
+import { View, ImageBackground, Image } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LoginButton, AccessToken, } from 'react-native-fbsdk';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Login extends Component {
 
@@ -11,9 +12,11 @@ export default class Login extends Component {
   }
 
   componentWillMount(){
-    const token = AsyncStorage.getItem('FBAccessToken');
-    console.log("Token ",token)
-    this.setState({accessToken:token})
+    AsyncStorage.getItem('FBAccessToken')
+    .then((value)=>{
+        console.log("Token ",value);
+        this.setState({accessToken:value});
+    });
   }
 
   initUser(token) {
@@ -43,41 +46,32 @@ export default class Login extends Component {
           <View style={{ alignItems: 'center', marginVertical: '50%' }}>
             <Image source={require('../assets/login/goeve_logo.png')} style={{ width: 310, height: 100, }} />
           </View>
-
           <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <FontAwesome.Button
-              style={{
-                backgroundColor: '#4267B2'
-              }}>
+              style={{backgroundColor: '#4267B2'}}>
               <LoginButton
                 readPermissions={['public_profile']}
-                onLoginFinished={
-                  (error, result) => {
+                onLoginFinished={(error, result) => {
                     if (error) {
                       console.log('login has error: ', result.error)
                     } else if (result.isCancelled) {
                       console.log('login is cancelled.')
                     } else {
                       AccessToken.getCurrentAccessToken().then((data) => {
-                        async () => {
-                          try {
-                            await AsyncStorage.setItem('FBAccessToken', data.accessToken);
-                          } catch (error) {
-                            console.log(error);
-                            // Error saving data
-                          }
-                        } 
-                        this.setState({ accessToken: data.accessToken }),
-                        console.log("User id: ",data.userID),
-                        console.log("User access token: ",data.accessToken) })
-                        .catch(error => {
-                          console.log(error)
-                          initUser(accessToken)
-                      })
-                      navigate('Home');
-                    }
+                        console.log("Data ",data)
+                        AsyncStorage.setItem('FBAccessToken', data.accessToken)
+                            .then((res)=>{
+                              console.log("AccessToken "+res)
+                              this.setState({ accessToken: data.accessToken });
+                        })
+                        AsyncStorage.setItem('FBAccessUserID',data.userID)
+                            .then((res)=>{
+                              console.log("ID "+res)
+                        })
+                        navigate('Home');
+                    })
                   }
-                }
+                }}
               />
             </FontAwesome.Button>
             {/* {console.log(this.state.accessToken)} */}
