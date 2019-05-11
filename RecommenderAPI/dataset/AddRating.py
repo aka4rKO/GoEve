@@ -9,6 +9,17 @@ def addRate(userId,eventId,rating):
   df1 = pd.read_csv('./dataset/rating.csv')
   df3 = pd.read_csv('./dataset/rating-neuro.csv')
   
+  try:
+      userInt = int(userId)
+      eventInt = int(eventId)
+      ratingInt = int(rating)
+      print(userInt,eventInt,ratingInt)
+      
+  except ValueError:
+      isList.insert(0,"error")
+      isList.insert(1,"error")
+      return tuple(isList)
+      
   for index, row in df3.iterrows(): 
       print(row['event-id'], row['user-id']) 
       if str(row['event-id']) == str(eventId) and str(row['user-id']) == str(userId):
