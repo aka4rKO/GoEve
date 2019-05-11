@@ -91,37 +91,62 @@ router.get('/newUser/:fbId', (req, res, next) => {
 
 //getting access token
 router.post('/', (req, res, next) => {
-    const fbId = req.body.fbId;
     const accessToken = req.body.accessToken;
-    const url = `https://graph.facebook.com/${fbId}?fields=email,name,friends&access_token=${accessToken}`;
+
+    const url = `https://graph.facebook.com/me?access_token=${accessToken}&fields=id,email,name,picture.type(small)`;
     const getData = async url => {
         try {
             const response = await fetch(url);
             const json = await response.json();
-            console.log(json);
+            console.log("Results ",json);
 
-            const user = new User({
-                _id: new mongoose.Types.ObjectId(),
-                facebookId: json.id,
-                name: json.name,
-                tags: null
-            });
+            User.findOne({
+                facebookId: json.id
+            })
+            .exec()
+            .then((result) => {
+                console.log(result);
+                if (result == null) {
 
-            user
-                .save()
-                .then(result => {
-                    console.log(result);
-                    res.status(201).json({
-                        message: "Handling POST requests to /user",
-                        details: result
+                    const user = new User({
+                        _id: new mongoose.Types.ObjectId(),
+                        facebookId: json.id,
+                        name: json.name,
+                        email: json.email,
+                        profileImgURL: json.picture.data.url,
+                        tags: null
                     });
-                })
-                .catch(error => {
-                    console.log(error);
-                    res.status(500).json({
-                        error: error
-                    });
+        
+        
+                    user.save()
+                        .then(result => {
+                            console.log(result);
+                            res.status(201).json({
+                                message: "User created",
+                                details: result
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            res.status(500).json({
+                                error: error
+                            });
+                        });
+
+                }
+                
+                res.status(200).json({
+                    message: "User already in use",
+                    createdEvent: result
                 });
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({
+                    error: error
+                });
+            });
+            
         } catch (error) {
             console.log(error);
             res.status(500).json({
@@ -133,7 +158,7 @@ router.post('/', (req, res, next) => {
 });
 
 //getting user tags
-router.patch('/:fbId', (req, res, next) => {
+router.patch('/:fb', (req, res, next) => {
 
     const usedId = req.params.fbId;
 

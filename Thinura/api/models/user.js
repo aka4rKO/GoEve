@@ -4,6 +4,8 @@ const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     facebookId: Number,
     name: String,
+    email: String,
+    profileImgURL:String,
     tags: String
 });
 
