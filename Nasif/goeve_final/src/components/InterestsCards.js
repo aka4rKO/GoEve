@@ -27,18 +27,24 @@ export default class App extends Component {
         this.handleChange = this.handleChange.bind(this);
       }
 
+      componentDidMount() {
+        fetch(`http://35.186.155.252:4000/categories/`)
+          .then(res => res.json())
+          .then(json => this.setState({ data: json.categories }));
+      }
+
       handleChange = (key,checked) => {
             console.log("Key "+key+" Checked "+checked)
           const newArray = [...this.state.data];
           newArray[key].status = checked;
           this.setState({data:newArray})
           console.log("Length "+this.state.data.length)
-          this.state.data.map((item,key)=>{console.log(item.name+" "+item.status)})
+          this.state.data.map((item,key)=>{console.log(item.category+" "+item.status)})
       }
       
-      componentWillMount (){
+      /* componentWillMount (){
           this.setState({data:this.props.data})
-      }
+      } */
     renderItem = ({ item, index }) => {
         if (item.empty === true) {
             return (
@@ -48,10 +54,10 @@ export default class App extends Component {
                     cornerRadius={0}
                     style={styles.itemInvisible}
                 >
-                    <ImageBackground source={item.url} style={styles.containerImg} resizeMode={'cover'}>
+                    <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'}>
                         <View style={styles.check}>
                         </View>
-                        <Text style={styles.text}>{item.name}</Text>
+                        <Text style={styles.text}>{item.category}</Text>
                     </ImageBackground>
                 </CardView>);
         }
@@ -62,7 +68,7 @@ export default class App extends Component {
                 cornerRadius={8}
                 style={styles.card}
             >
-                <ImageBackground source={item.url} style={styles.containerImg} resizeMode={'cover'}>
+                <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'}>
                     <View style={styles.check}>
                         <CircleCheckBox
                             checked={item.status}
@@ -75,7 +81,7 @@ export default class App extends Component {
                             filterSize={30}
                         />
                     </View>
-                    <Text style={styles.text}>{item.name}</Text>
+                    <Text style={styles.text}>{item.category}</Text>
                 </ImageBackground>
             </CardView>
         );
@@ -148,7 +154,7 @@ const styles = StyleSheet.create({
         height: 110
     },
     text: {
-        color: "#000",
+        color: "#fff",
         textAlign: 'center',
         textAlignVertical: "center",
         marginTop: 17,
