@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, FlatList, ImageBackground } from 'react-native';
 import CircleCheckBox from 'react-native-circle-checkbox';
 import CardView from 'react-native-cardview';
@@ -20,87 +20,87 @@ const formatData = (data, numColumns) => {
 const numColumns = 2;
 
 export default class InterestsCards extends Component {
-    
+
     static pramsCat = "";
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
             data: [],
             isLoading: false,
-            selectedList:[]
+            selectedList: []
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitButton = this.submitButton.bind(this);
     }
 
-    submitButton = (Submit) =>{
-        if(Submit){
+    submitButton = (Submit) => {
+        if (Submit) {
             let id = -1;
             AsyncStorage.getItem('FBAccessUserID')
-            .then((value)=>{
-                console.log("Token ",value);
-                id=value;
-                axios.patch(`http://35.186.155.252:4000/user/${id}`,[
-                {"propName":"tags","value":pramsCat}
-                ]).then((res)=>{
-                    console.log("Doneee value",pramsCat);
-                    console.log("Res ",res);
-                })
-            });
-            
+                .then((value) => {
+                    console.log("Token ", value);
+                    id = value;
+                    axios.patch(`http://35.186.155.252:4000/user/${id}`, [
+                        { "propName": "tags", "value": pramsCat }
+                    ]).then((res) => {
+                        console.log("Doneee value", pramsCat);
+                        console.log("Res ", res);
+                    })
+                });
 
-        }else{
-            console.log("Count of selected items: ",this.state.selectedList)
-            this.state.selectedList.map((item,index)=>{
-                if(index==0){
-                    pramsCat=item.category;
-                }else{
-                    pramsCat=pramsCat+"|"+item.category
+
+        } else {
+            console.log("Count of selected items: ", this.state.selectedList)
+            this.state.selectedList.map((item, index) => {
+                if (index == 0) {
+                    pramsCat = item.category;
+                } else {
+                    pramsCat = pramsCat + "|" + item.category
                 }
             })
             console.log(pramsCat);
         }
-        
+
     }
-    
 
-    handleChange = (key,checked) => {
 
-        console.log("Key "+key+" Checked "+checked);
+    handleChange = (key, checked) => {
+
+        console.log("Key " + key + " Checked " + checked);
         let newArray = [...this.state.data];
 
         newArray[key].status = checked;
 
         let tempSelectedArray = [...this.state.selectedList];
         tempSelectedArray[this.state.selectedList.length] = newArray[key];
-        
-        this.setState({data:newArray,selectedList:tempSelectedArray},()=>{this.submitButton(false)});
-        console.log("Checked item ",newArray[key]);
-      
+
+        this.setState({ data: newArray, selectedList: tempSelectedArray }, () => { this.submitButton(false) });
+        console.log("Checked item ", newArray[key]);
+
     }
-      
-    componentDidMount(){
-        this.setState({data:this.props.data,isLoading:true})
+
+    componentDidMount() {
+        this.setState({ data: this.props.data, isLoading: true })
     }
-        
+
     renderItem = ({ item, index }) => {
 
         if (item.empty === true) {
             return (
-                    <CardView
-                        cardElevation={0}
-                        cardMaxElevation={0}
-                        cornerRadius={0}
-                        style={styles.itemInvisible}>
-                        <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'}>
-                            <View style={styles.check}>
-                            </View>
-                            <Text style={styles.text}>{item.category}</Text>
-                        </ImageBackground>
-                    </CardView>
-                );
+                <CardView
+                    cardElevation={0}
+                    cardMaxElevation={0}
+                    cornerRadius={0}
+                    style={styles.itemInvisible}>
+                    <ImageBackground source={{ uri: item.imageURL }} style={styles.containerImg} resizeMode={'cover'}>
+                        <View style={styles.check}>
+                        </View>
+                        <Text style={styles.text}>{item.category}</Text>
+                    </ImageBackground>
+                </CardView>
+            );
         }
 
         return (
@@ -109,18 +109,18 @@ export default class InterestsCards extends Component {
                 cardMaxElevation={4}
                 cornerRadius={8}
                 style={styles.card}
-                >
-                <ImageBackground source={{uri:item.imageURL}} style={styles.containerImg} resizeMode={'cover'} >
+            >
+                <ImageBackground source={{ uri: item.imageURL }} style={styles.containerImg} resizeMode={'cover'} >
                     <View style={styles.check}>
                         <CircleCheckBox
                             checked={item.status}
-                            onToggle={(checked)=>this.handleChange(index,checked)}
+                            onToggle={(checked) => this.handleChange(index, checked)}
                             outerColor="#4169e1"
                             filterColor="#dcdcdc"
                             innerColor="#4169e1"
                             outerSize={19}
                             innerSize={10}
-                            filterSize={30}/>
+                            filterSize={30} />
                     </View>
                     <Text style={styles.text}>{item.category}</Text>
                 </ImageBackground>
@@ -129,24 +129,24 @@ export default class InterestsCards extends Component {
     };
 
     render() {
-		if(this.state.isLoading){
+        if (this.state.isLoading) {
             return (
-                    <FlatList
-                        data={formatData(this.state.data, numColumns)}
-                        style={styles.container}
-                        renderItem={this.renderItem}
-                        numColumns={numColumns}
-                        keyExtractor={(item, index) => index.toString()}/>
-                );
-            }
+                <FlatList
+                    data={formatData(this.state.data, numColumns)}
+                    style={styles.container}
+                    renderItem={this.renderItem}
+                    numColumns={numColumns}
+                    keyExtractor={(item, index) => index.toString()} />
+            );
+        }
 
         return (
-			<Container>
+            <Container>
                 <Content>
                     <Spinner color='orange' />
                 </Content>
             </Container>
-		)
+        )
     }
 }
 
@@ -189,20 +189,20 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#eee',
+        backgroundColor: '#f8f8f8',
     },
     containerImg: {
         flex: 1,
         backgroundColor: '#eee',
     },
     card: {
-        backgroundColor: 'white',
+        backgroundColor: '#f8f8f8',
         flex: 1,
         margin: 5,
         height: 110
     },
     text: {
-        color: "#000",
+        color: "#fff",
         textAlign: 'center',
         textAlignVertical: "center",
         marginTop: 17,

@@ -11,12 +11,12 @@ export default class Login extends Component {
     this.state = { accessToken: null };
   }
 
-  componentWillMount(){
+  componentWillMount() {
     AsyncStorage.getItem('FBAccessToken')
-    .then((value)=>{
-        console.log("Token ",value);
-        this.setState({accessToken:value});
-    });
+      .then((value) => {
+        console.log("Token ", value);
+        this.setState({ accessToken: value });
+      });
   }
 
   initUser(token) {
@@ -40,7 +40,7 @@ export default class Login extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    if(this.state.accessToken==null){
+    if (this.state.accessToken == null) {
       return (
         <ImageBackground source={require('../assets/login/location_point_with_bg.jpg')} style={{ width: '100%', height: '100%' }}>
           <View style={{ alignItems: 'center', marginVertical: '50%' }}>
@@ -48,27 +48,27 @@ export default class Login extends Component {
           </View>
           <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <FontAwesome.Button
-              style={{backgroundColor: '#4267B2'}}>
+              style={{ backgroundColor: '#4267B2' }}>
               <LoginButton
                 readPermissions={['public_profile']}
                 onLoginFinished={(error, result) => {
-                    if (error) {
-                      console.log('login has error: ', result.error)
-                    } else if (result.isCancelled) {
-                      console.log('login is cancelled.')
-                    } else {
-                      AccessToken.getCurrentAccessToken().then((data) => {
-                        console.log("Data ",data)
-                        AsyncStorage.setItem('FBAccessToken', data.accessToken)
-                            .then((res)=>{
-                              console.log("AccessToken "+res)
-                              this.setState({ accessToken: data.accessToken });
+                  if (error) {
+                    console.log('login has error: ', result.error)
+                  } else if (result.isCancelled) {
+                    console.log('login is cancelled.')
+                  } else {
+                    AccessToken.getCurrentAccessToken().then((data) => {
+                      console.log("Data ", data)
+                      AsyncStorage.setItem('FBAccessToken', data.accessToken)
+                        .then((res) => {
+                          console.log("AccessToken " + res)
+                          this.setState({ accessToken: data.accessToken });
                         })
-                        AsyncStorage.setItem('FBAccessUserID',data.userID)
-                            .then((res)=>{
-                              console.log("ID "+res)
+                      AsyncStorage.setItem('FBAccessUserID', data.userID)
+                        .then((res) => {
+                          console.log("ID " + res)
                         })
-                        navigate('Home');
+                      navigate('Home');
                     })
                   }
                 }}
@@ -78,8 +78,8 @@ export default class Login extends Component {
           </View>
         </ImageBackground>
       );
-    }else{
-        return(navigate('Home'));
+    } else {
+      return (navigate('Home'));
     }
   }
 }
