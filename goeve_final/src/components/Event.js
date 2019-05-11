@@ -33,7 +33,16 @@ class Event extends Component {
         this.setState({ data: this.props.data, isLoading: true })
     }
 
-    renderItem = ({ item }) => {
+
+
+    deleteItemById = index => {
+        const filteredData = this.state.data.filter(item => item.event_id !== index);
+        this.setState({ data: filteredData });
+        // TODO: give rating 1 when deleted
+        
+    }
+
+    renderItem = ({ item, index }) => {
 
         if (item.empty === true) {
             return (
@@ -46,7 +55,12 @@ class Event extends Component {
                                         <Text numberOfLines={2} style={{ fontSize: 20, fontWeight: 'bold', width: '90%' }} onPress={() => Linking.openURL(item.url)}>
                                             {item.title}
                                         </Text>
-                                        <Entypo.Button name="cross" color='red' size={20} style={{ backgroundColor: 'white', height: 60, alignSelf: 'flex-end' }} />
+                                        <Entypo.Button 
+                                        name="cross" 
+                                        color='red' 
+                                        size={20} 
+                                        style={{ backgroundColor: 'white', height: 60, alignSelf: 'flex-end' }} 
+                                        onPress={() => this.deleteItemById(item.event_id)}/>
 
                                     </View>
                                     <Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }} onPress={() => Linking.openURL(item.url)}>
@@ -94,7 +108,12 @@ class Event extends Component {
                                     <Text numberOfLines={2} style={{ fontSize: 18, fontWeight: 'bold', width: '90%' }} onPress={() => Linking.openURL(item.url)}>
                                         {item.title}
                                     </Text>
-                                    <Entypo.Button name="cross" color='red' size={20} style={{ backgroundColor: 'white', height: 60, alignSelf: 'flex-end' }} />
+                                    <Entypo.Button 
+                                    name="cross" 
+                                    color='red' 
+                                    size={20} 
+                                    style={{ backgroundColor: 'white', height: 60, alignSelf: 'flex-end' }} 
+                                    onPress={() => this.deleteItemById(item.event_id)}/>
 
                                 </View>
                                 <Text style={{ color: 'red', fontSize: 15, fontWeight: 'bold' }} onPress={() => Linking.openURL(item.url)}>
