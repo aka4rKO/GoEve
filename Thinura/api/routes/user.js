@@ -9,7 +9,7 @@ const {
 } = require('url');
 
 //Adding ratings 
-router.get('/ratings', (req, res, next) => {
+router.post('/ratings', (req, res, next) => {
     const params = new URLSearchParams();
     const event_id = req.body.event_id;
     const user_id = req.body.user_id;
