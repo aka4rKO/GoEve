@@ -28,7 +28,7 @@ export default class Home extends Component {
             );
         } return (
             <ScrollView style={{ flex: 1 }}>
-                <EventType eventType={'newUser'} title={'Events according to selected tags'} />
+                <EventType eventType={'newUser'} title={'Events based on your interests'} />
             </ScrollView>
         );
     }

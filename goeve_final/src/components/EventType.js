@@ -63,7 +63,7 @@ class EventType extends Component {
     if (this.state.isLoading) {
       console.log("Is screen loading: ", this.state.isLoading)
       return (
-        <View style={{ backgroundColor: "#f8f8f8" }}>
+        <View style={{ backgroundColor: "#f8f8f8" }}> 
           <Text style={{ textAlign: "center", fontWeight: 'bold', color: '#ff802b', fontSize: 18, marginTop: 10, marginBottom: 10 }}>{this.props.title}</Text>
           <ScrollView>
             <Event data={this.state.data} />
