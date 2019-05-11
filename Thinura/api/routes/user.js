@@ -165,7 +165,7 @@ router.delete('/:userId', (req, res, next) => {
     const userId = req.params.userId;
 
     res.status(200).json({
-        message: 'handling DELETE event routes',
+        message: 'handling DELETE event route',
         userId: userId
     });
 });
