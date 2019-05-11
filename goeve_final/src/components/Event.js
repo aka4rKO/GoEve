@@ -78,13 +78,22 @@ class Event extends Component {
                                                 AsyncStorage.setItem('IsRated', true);
                                                 AsyncStorage.getItem('FBAccessUserID')
                                                     .then((value) => {
+
                                                         axios.get(`http://35.186.155.252:4000/user/ratings`,
                                                             {
                                                                 "event_id": item.event_id,
                                                                 "user_id": value,
                                                                 "rating": rating
+                                                            }).then((res)=>{
+                                                                console.log(res);
+                                                                
+                                                            }).catch((error)=>{
+                                                                console.log(error);
                                                             })
-                                                        console.log(item.event_id, rating)
+                                                        // console.log(item.event_id, rating)
+                                                        // console.log("Is event id number? ",isNaN(item.event_id))
+                                                        //         console.log("Is user id number? ",isNaN(item.user_id))
+                                                        //         console.log("Is rating id number? ",isNaN(rating))
                                                     })
                                             }} />
                                     </View>
@@ -132,12 +141,24 @@ class Event extends Component {
                                             AsyncStorage.setItem('IsRated', true);
                                             AsyncStorage.getItem('FBAccessUserID')
                                                 .then((value) => {
-                                                    axios.get(`http://35.186.155.252:4000/user/ratings`,
+                                                    axios.post(`http://35.186.155.252:4000/user/ratings`,
                                                         {
                                                             "event_id": item.event_id,
                                                             "user_id": value,
                                                             "rating": rating
                                                         })
+                                                        .then((res)=>{
+                                                            console.log(res);
+                                                            
+                                                        })
+                                                        .catch((error)=>{
+                                                            console.log(error);
+                                                        })
+
+                                                        console.log(item.event_id, rating)
+                                                        console.log("Is event id number? ",isNaN(item.event_id))
+                                                                console.log("Is user id number? ",isNaN(item.user_id))
+                                                                console.log("Is rating id number? ",isNaN(rating))
                                                     console.log(item.event_id, rating)
                                                 })
                                         }} />

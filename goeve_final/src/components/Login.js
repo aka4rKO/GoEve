@@ -19,28 +19,34 @@ export default class Login extends Component {
       });
   }
 
-  initUser(token) {
-    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
-      .then((response) => response.json())
-      .then((json) => {
-        // Some user object has been set up somewhere, build that user here
-        user.name = json.name
-        user.id = json.id
-        user.user_friends = json.friends
-        user.email = json.email
-        user.username = json.name
-        user.loading = false
-        user.loggedIn = true
-        user.avatar = setAvatar(json.id)
-      })
-      .catch(() => {
-        reject('ERROR GETTING DATA FROM FACEBOOK')
-      })
+  async initUser(token) {
+    const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(small)`);
+    const userInfo = await response.json();
+    console.log("User info ",userInfo);
   }
+    // fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     console.log("Answer ",json)
+    //     // Some user object has been set up somewhere, build that user here
+    //     // user.name = json.name
+    //     // user.id = json.id
+    //     // user.user_friends = json.friends
+    //     // user.email = json.email
+    //     // user.username = json.name
+    //     // user.loading = false
+    //     // user.loggedIn = true
+    //     // user.avatar = setAvatar(json.id)
+    //   })
+    //   .catch(() => {
+    //     reject('ERROR GETTING DATA FROM FACEBOOK')
+    //   })
+  
 
   render() {
     const { navigate } = this.props.navigation;
     if (this.state.accessToken == null) {
+      AsyncStorage.setItem("FirstTime","")
       return (
         <ImageBackground source={require('../assets/login/location_point_with_bg.jpg')} style={{ width: '100%', height: '100%' }}>
           <View style={{ alignItems: 'center', marginVertical: '50%' }}>
@@ -57,7 +63,9 @@ export default class Login extends Component {
                   } else if (result.isCancelled) {
                     console.log('login is cancelled.')
                   } else {
-                    AccessToken.getCurrentAccessToken().then((data) => {
+                    console.log("Result: ",result);
+                    AccessToken.getCurrentAccessToken()
+                    .then((data) => {
                       console.log("Data ", data)
                       AsyncStorage.setItem('FBAccessToken', data.accessToken)
                         .then((res) => {
@@ -69,7 +77,7 @@ export default class Login extends Component {
                           console.log("ID " + res)
                         })
                       navigate('Home');
-                    })
+                    }).then(()=>{this.initUser()})
                   }
                 }}
               />
@@ -79,6 +87,8 @@ export default class Login extends Component {
         </ImageBackground>
       );
     } else {
+      
+      // this.initUser(this.state.accessToken)
       return (navigate('Home'));
     }
   }
