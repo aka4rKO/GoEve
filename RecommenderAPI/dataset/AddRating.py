@@ -15,6 +15,11 @@ def addRate(userId,eventId,rating):
       ratingInt = int(rating)
       print(userInt,eventInt,ratingInt)
       
+      if( 0 > ratingInt or ratingInt > 5):
+          isList.insert(0,"invalid")
+          isList.insert(1,"invalid")
+          return tuple(isList)
+          
   except ValueError:
       isList.insert(0,"error")
       isList.insert(1,"error")
