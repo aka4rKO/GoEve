@@ -21,7 +21,7 @@ router.post('/ratings', (req, res, next) => {
             params.append('eventId', event_id);
             params.append('userId', user_id);
             params.append('rating', rating);
-            console.log("Params ",params)
+            console.log("Params ", params)
             const response = await fetch(url, {
                 method: 'POST',
                 body: params
@@ -150,6 +150,9 @@ router.patch('/:fbId', (req, res, next) => {
         .exec()
         .then((result) => {
             console.log(result);
+            if (result == null) {
+                res.status(404).json(result);
+            }
             res.status(200).json(result);
         })
         .catch(error => {
@@ -179,6 +182,9 @@ router.get('/:fbId', (req, res, next) => {
         .exec()
         .then((result) => {
             console.log(result);
+            if (result == null) {
+                res.status(404).json(result);
+            }
             res.status(201).json({
                 message: "handling POST user routes",
                 createdEvent: result
