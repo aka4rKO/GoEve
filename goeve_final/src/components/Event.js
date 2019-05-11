@@ -79,13 +79,13 @@ class Event extends Component {
                                                 AsyncStorage.getItem('FBAccessUserID')
                                                     .then((value) => {
 
-                                                        axios.get(`http://35.186.155.252:4000/user/ratings`,
+                                                        axios.get(`http://35.197.184.241:4000/user/ratings`,
                                                             {
                                                                 "event_id": item.event_id,
                                                                 "user_id": value,
                                                                 "rating": rating
                                                             }).then((res)=>{
-                                                                console.log(res);
+                                                                console.log("Rating results: ",res);
                                                                 
                                                             }).catch((error)=>{
                                                                 console.log(error);
@@ -141,7 +141,7 @@ class Event extends Component {
                                             AsyncStorage.setItem('IsRated', true);
                                             AsyncStorage.getItem('FBAccessUserID')
                                                 .then((value) => {
-                                                    axios.post(`http://35.186.155.252:4000/user/ratings`,
+                                                    axios.post(`http://35.197.184.241:4000/user/ratings`,
                                                         {
                                                             "event_id": item.event_id,
                                                             "user_id": value,

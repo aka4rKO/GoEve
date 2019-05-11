@@ -42,7 +42,7 @@ export default class InterestsCards extends Component {
                 .then((value) => {
                     console.log("Token ", value);
                     id = value;
-                    axios.patch(`http://35.186.155.252:4000/user/${id}`, [
+                    axios.patch(`http://35.197.184.241:4000/user/${id}`, [
                         { "propName": "tags", "value": pramsCat }
                     ]).then((res) => {
                         console.log("Doneee value", pramsCat);

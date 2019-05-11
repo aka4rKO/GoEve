@@ -30,7 +30,7 @@ export default class Interests extends Component {
   });
 
   getCategories() {
-    axios.get(`http://35.186.155.252:4000/categories/`)
+    axios.get(`http://35.197.184.241:4000/categories/`)
       .then(res => {
         this.setState({ data: res.data.categories, isLoading: true })
           , res.data.categories

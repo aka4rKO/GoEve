@@ -56,7 +56,7 @@ export default class Login extends Component {
             <FontAwesome.Button
               style={{ backgroundColor: '#4267B2' }}>
               <LoginButton
-                readPermissions={['public_profile']}
+                readPermissions={['public_profile', 'email']}
                 onLoginFinished={(error, result) => {
                   if (error) {
                     console.log('login has error: ', result.error)
