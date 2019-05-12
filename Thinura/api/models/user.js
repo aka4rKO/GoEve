@@ -2,11 +2,21 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    facebookId: Number,
-    name: String,
-    email: String,
-    profileImgURL:String,
-    tags: String
+    facebookId: {
+        type: Number
+    },
+    name: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    profileImgURL: {
+        type: String
+    },
+    tags: {
+        type: String
+    }
 });
 
 const User = mongoose.model('User', userSchema, process.env.DB_COLLECTION_USER_DETAILS);
