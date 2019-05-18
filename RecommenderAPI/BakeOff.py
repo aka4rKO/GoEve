@@ -41,8 +41,8 @@ def TrainModel():
     evaluator = Evaluator(evaluationData, rankings)
 
 # Just make random recommendations
-    Random = NormalPredictor()
-    evaluator.AddAlgorithm(Random, "Random")
+    # Random = NormalPredictor()
+    # evaluator.AddAlgorithm(Random, "Random")
 
 # RBM
 # Just sets the epochs,hidden layer count,Batch Size and etc
@@ -50,8 +50,8 @@ def TrainModel():
     evaluator.AddAlgorithm(RBM, "RBM")
     
 # AutoRec
-    AutoRec = AutoRecAlgorithm()
-    evaluator.AddAlgorithm(AutoRec, "AutoRec")
+    # AutoRec = AutoRecAlgorithm()
+    # evaluator.AddAlgorithm(AutoRec, "AutoRec")
     
 # Fight!
     evaluator.Evaluate(True)
