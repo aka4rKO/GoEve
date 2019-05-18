@@ -76,7 +76,7 @@ class EventData:
         rankings = defaultdict(int)
         with open(self.ratingsPath, newline='') as csvfile:
             ratingReader = csv.reader(csvfile)
-            next(ratingReader)
+            next(ratingReader, None)
             for row in ratingReader:
                 eventID = int(row[2])
                 ratings[eventID] += 1
