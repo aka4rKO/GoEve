@@ -66,7 +66,7 @@ router.get('/', (req, res, next) => {
 //getting top recommendations for a user
 router.get('/top/:fbId', (req, res, next) => {
     const fbId = req.params.fbId;
-    const url = `http://35.197.184.241:5000/rbm/user/${fbId}`;
+    const url = `http://35.244.118.239:5000/rbm/user/${fbId}`;
     let arrayRes = [];
     const getData = async url => {
         try {
@@ -97,7 +97,7 @@ router.get('/top/:fbId', (req, res, next) => {
 //getting events based on users past ratings
 router.get('/ratings/:fbId', (req, res, next) => {
     const fbId = req.params.fbId;
-    const url = `http://35.197.184.241:5000/contentrecs/user/${fbId}`;
+    const url = `http://35.244.118.239:5000/contentrecs/user/${fbId}`;
     let arrayRes = [];
     const getData = async url => {
         try {
@@ -128,7 +128,7 @@ router.get('/ratings/:fbId', (req, res, next) => {
 //getting events based on users past ratings
 router.get('/interests/:fbId', (req, res, next) => {
     const fbId = req.params.fbId;
-    const url = `http://35.197.184.241:5000/svd/user/${fbId}`;
+    const url = `http://35.244.118.239:5000/svd/user/${fbId}`;
     let arrayRes = [];
     const getData = async url => {
         try {
