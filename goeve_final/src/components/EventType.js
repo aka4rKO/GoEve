@@ -24,7 +24,7 @@ class EventType extends Component {
             console.log("EventType rated FbID ", value);
             axios
               .get(
-                `http://35.197.184.241:4000/event/${
+                `http://35.244.118.239:4000/event/${
                   this.props.eventType
                 }/${value}`
               )
@@ -40,7 +40,7 @@ class EventType extends Component {
             console.log("EventType not rated ID ", value);
             axios
               .get(
-                `http://35.197.184.241:4000/user/${
+                `http://35.244.118.239:4000/user/${
                   this.props.eventType
                 }/${value}`
               )

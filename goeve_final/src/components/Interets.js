@@ -48,7 +48,7 @@ export default class Interests extends Component {
 
   getCategories() {
     axios
-      .get(`http://35.197.184.241:4000/categories/`)
+      .get(`http://35.244.118.239:4000/categories/`)
       .then(resCat => {
         console.log(resCat.data.categories);
         let tempCat = resCat.data.categories;
