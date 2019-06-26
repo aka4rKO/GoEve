@@ -51,7 +51,7 @@ export default class InterestsCards extends Component {
           console.log("Token ", value);
           id = value;
           axios
-            .patch(`http://35.197.184.241:4000/user/${id}`, [
+            .patch(`http://35.189.6.233:4000/user/${id}`, [
               { propName: "tags", value: pramsCat }
             ])
             .then(res => {
@@ -112,7 +112,7 @@ export default class InterestsCards extends Component {
     });
     AsyncStorage.getItem("FBAccessUserID").then(value => {
       axios
-        .get(`http://35.197.184.241:4000/user/${value}`)
+        .get(`http://35.189.6.233:4000/user/${value}`)
         .then(res => {
           console.log(res.data.user.tags);
           let userTags = res.data.user.tags;

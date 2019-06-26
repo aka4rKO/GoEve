@@ -96,6 +96,7 @@ const LoginStack = createStackNavigator({
     }
   }
 });
+
 const MainContainer = createSwitchNavigator(
   {
     App: {

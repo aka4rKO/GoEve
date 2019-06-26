@@ -50,7 +50,7 @@ class Event extends Component {
     this.setState({ data: filteredData });
     AsyncStorage.getItem("FBAccessUserID").then(value => {
       axios
-        .get(`http://35.197.184.241:4000/user/ratings`, {
+        .get(`http://35.189.6.233:4000/user/ratings`, {
           event_id: item.event_id,
           user_id: value,
           rating: 1
@@ -121,7 +121,7 @@ class Event extends Component {
                         AsyncStorage.setItem("IsRated", "true");
                         AsyncStorage.getItem("FBAccessUserID").then(value => {
                           axios
-                            .get(`http://35.197.184.241:4000/user/ratings`, {
+                            .get(`http://35.189.6.233:4000/user/ratings`, {
                               event_id: item.event_id,
                               user_id: value,
                               rating: rating
@@ -201,7 +201,7 @@ class Event extends Component {
                       AsyncStorage.setItem("IsRated", "true");
                       AsyncStorage.getItem("FBAccessUserID").then(value => {
                         axios
-                          .post(`http://35.197.184.241:4000/user/ratings`, {
+                          .post(`http://35.189.6.233:4000/user/ratings`, {
                             event_id: item.event_id,
                             user_id: value,
                             rating: rating

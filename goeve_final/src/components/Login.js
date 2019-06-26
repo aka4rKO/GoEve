@@ -20,7 +20,7 @@ export default class Login extends Component {
       console.log("Past user id ", value);
       if (value != null) {
         this.setState({ userId: value });
-        axios.get(`http://35.197.184.241:4000/user/${value}`).then(res => {
+        axios.get(`http://35.189.6.233:4000/user/${value}`).then(res => {
           console.log(" Check Tags for user id", res.data.user);
           if (res.data.user.tags == null) {
             this.setState({ isSelectedTags: false });
@@ -110,7 +110,7 @@ export default class Login extends Component {
                               { accessToken: data.accessToken },
                               () => {
                                 axios
-                                  .post(`http://35.197.184.241:4000/user/`, {
+                                  .post(`http://35.189.6.233:4000/user/`, {
                                     accessToken: data.accessToken
                                   })
                                   .then(res => {

@@ -20,7 +20,7 @@ export default class CustomDrawer extends Component {
     AsyncStorage.getItem("FBAccessUserID")
       .then(value => {
         axios
-          .get(`http://35.197.184.241:4000/user/${value}`)
+          .get(`http://35.189.6.233:4000/user/${value}`)
           .then(res => {
             console.log(res.data.user);
             this.setState({ data: res.data.user });
