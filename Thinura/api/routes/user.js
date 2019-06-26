@@ -127,7 +127,7 @@ router.post('/ratings', (req, res, next) => {
     const user_id = req.body.user_id;
     const rating = req.body.rating;
     console.log(event_id, user_id, rating);
-    const url = `http://35.244.118.239:5000/rating/add`;
+    const url = `http://35.189.6.233:5000/rating/add`;
     const getData = async url => {
         try {
             params.append('eventId', event_id);
@@ -155,7 +155,7 @@ router.get('/newUser/:fbId', (req, res, next) => {
     const params = new URLSearchParams();
     const usedId = req.params.fbId;
     console.log(usedId);
-    const url = `http://35.244.118.239:5000/newuser`;
+    const url = `http://35.189.6.233:5000/newuser`;
     User.findOne({
             facebookId: usedId
         })
