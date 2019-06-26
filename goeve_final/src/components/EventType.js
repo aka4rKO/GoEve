@@ -23,11 +23,7 @@ class EventType extends Component {
           AsyncStorage.getItem("FBAccessUserID").then(value => {
             console.log("EventType rated FbID ", value);
             axios
-              .get(
-                `http://35.189.6.233:4000/event/${
-                  this.props.eventType
-                }/${value}`
-              )
+              .get(`http://35.189.6.233:4000/event/${this.props.eventType}/${value}`)
               .then(res => {
                 this.setState({ data: res.data, isLoading: true }), res.data;
               })
@@ -39,11 +35,7 @@ class EventType extends Component {
           AsyncStorage.getItem("FBAccessUserID").then(value => {
             console.log("EventType not rated ID ", value);
             axios
-              .get(
-                `http://35.189.6.233:4000/user/${
-                  this.props.eventType
-                }/${value}`
-              )
+              .get(`http://35.189.6.233:4000/user/${this.props.eventType}/${value}`)
               .then(res => {
                 console.log(res);
                 this.setState({ data: res.data, isLoading: true }), res.data;

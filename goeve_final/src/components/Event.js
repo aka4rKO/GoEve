@@ -49,8 +49,7 @@ class Event extends Component {
     );
     this.setState({ data: filteredData });
     AsyncStorage.getItem("FBAccessUserID").then(value => {
-      axios
-        .get(`http://35.189.6.233:4000/user/ratings`, {
+      axios.get(`http://35.189.6.233:4000/user/ratings`, {
           event_id: item.event_id,
           user_id: value,
           rating: 1
